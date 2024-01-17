@@ -1,0 +1,39 @@
+{
+  "name": "g4f",
+  "version": "1.0.0",
+  "description": "ChatGPT but free",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "repository": {
+    "url": "https://github.com/VictorMRojas/g4f-ts"
+  },
+  "scripts": {
+    "build": "tsup"
+  },
+  "keywords": [
+    "gpt-free",
+    "free-gpt",
+    "gpt",    
+    "gpt-3",
+    "gpt-3.5",
+    "gpt-4",
+    "bing",
+    "dalle",
+    "stable-diffusion",
+    "ai"
+  ],
+  "author": "victormrojas",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.5",
+    "debug": "^4.3.4",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@types/debug": "^4.1.12",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3"
+  }
+}
