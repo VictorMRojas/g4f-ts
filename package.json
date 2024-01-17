@@ -1,6 +1,6 @@
 {
   "name": "g4f",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "ChatGPT but free",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -21,7 +21,9 @@
     "bing",
     "dalle",
     "stable-diffusion",
-    "ai"
+    "ai",
+    "completion",
+    "chat completion"
   ],
   "author": "victormrojas",
   "license": "MIT",
