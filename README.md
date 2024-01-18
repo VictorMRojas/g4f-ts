@@ -25,12 +25,12 @@ const  text  =  await  GPT.chatCompletion(messages, {
         return  text  +  " 💕🌹";
     },
     retry: {
-		times: 3, // Run the fetch three times in a row until it's complete, or the condition function returns true.
-		condition: (text) => { // Check the text response
-			const words = text.split(" ");
-			return words.length > 10;
-		}
-	}
+        times:  3, // Run the fetch three times in a row until it's complete, or the condition function returns true.
+        condition: (text) => { // Check the text response
+            const  words  =  text.split(" ");
+            return  words.length  >  10;
+        }
+    }
 });
 
 console.log(text);
