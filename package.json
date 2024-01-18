@@ -1,6 +1,6 @@
 {
   "name": "g4f",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "ChatGPT but free",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -14,7 +14,7 @@
   "keywords": [
     "gpt-free",
     "free-gpt",
-    "gpt",    
+    "gpt",
     "gpt-3",
     "gpt-3.5",
     "gpt-4",
@@ -28,9 +28,9 @@
   "author": "victormrojas",
   "license": "MIT",
   "dependencies": {
+    "@types/signale": "^1.4.7",
     "axios": "^1.6.5",
-    "debug": "^4.3.4",
-    "dotenv": "^16.3.1"
+    "signale": "^1.4.0"
   },
   "devDependencies": {
     "@types/debug": "^4.1.12",

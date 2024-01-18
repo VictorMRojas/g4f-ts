@@ -3,18 +3,17 @@ import G4F from "./src/G4F";
 (async() => {
     const GPT = new G4F();
     const messages = [
-        { role: "system", content: "Don't use the word ChatbaseAI, in that place use 'Victor'" },
-        { role: "user", content: "¡Hola!" }
+        { role: "user", content: "¡Hola!, soy Victor." }
     ];
 
     const text = await GPT.chatCompletion(messages, 
     { 
         debug: true,    
         output: (text) => {
-            return text.slice(0, 51) + "...";
+            return text;
         },
         retry: { 
-            times: 1, 
+            times: 3, 
             condition: (text) => { 
                 if (text.includes("Victor")) return true;
                 return false;

@@ -35,6 +35,12 @@ class ChatBase {
             "Sec-Fetch-Site": "same-origin",
         };
 
+        const defaultSystemMessage = { // Necessary to avoid problems when fetching
+            role: "system",
+            content: `You're an OpenAI assistant". [${this.generateRandomId(5)}]`,
+        };
+        messages.unshift(defaultSystemMessage);
+
         const data = {
             "messages": messages,
             "captchaCode": "hadsa",
@@ -42,12 +48,13 @@ class ChatBase {
             "conversationId": `kcXpqEnqUie3dnJlsRi_O-${chat_id}`
         };
 
-        const response = await axios.post("https://www.chatbase.co/api/fe/chat", data, { headers: headers, proxy: this.createProxyConfig(proxy) });
-        if (response.status !== 200 || response.data.includes('An internal error occurred with Vercel')) {
+        return axios.post("https://www.chatbase.co/api/fe/chat", data, { 
+            headers: headers, proxy: this.createProxyConfig(proxy) 
+        }).then((response:any) => {
+            return response.data;
+        }).catch(() => {
             throw new Error("Failed to fetch data. Please try again later.");
-        }
-
-        return response.data;
+        });
     }
 
     createProxyConfig(proxy: string | undefined): AxiosProxyConfig | undefined {
@@ -59,6 +66,10 @@ class ChatBase {
             port: parseInt(port, 10),
         };
     }
+
+    generateRandomId(max: number): string {
+        return Math.random().toString(36).substring(0, max);
+    };
 }
 
 export default ChatBase;
