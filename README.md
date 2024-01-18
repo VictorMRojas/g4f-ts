@@ -32,7 +32,19 @@ const  text  =  await  GPT.chatCompletion(messages, {
 		}
 	}
 });
+
 console.log(text);
+/*
+In the realm of words, where verses dance and rhyme,
+I shall craft a poem, a moment frozen in time.
+With ink as my brush, I paint a vivid scene,
+Where dreams and emotions intertwine, serene.
+Through lines and stanzas, I'll weave a tale,
+Of love, of loss, of hope that will never fail.
+So close your eyes, and let your heart unfurl,
+As I conjure a poem, a gift for your soul to swirl. 💕🌹
+*/
+
 })();
 ```
 ## 🚀 Providers 
