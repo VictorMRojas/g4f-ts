@@ -30,7 +30,7 @@ const  text  =  await  GPT.chatCompletion(messages, {
 			const words = text.split(" ");
 			return words.length > 10;
 		}
-    }
+	}
 });
 
 console.log(text);
