@@ -2,12 +2,14 @@ import axios, { AxiosProxyConfig } from 'axios';
 import { IMessage } from '../interfaces/IMessage';
 
 class ChatBase {
+    name: string;
     url: string;
     supports_gpt_35_turbo: boolean;
     supports_message_history: boolean;
     working: boolean;
 
     constructor() {
+        this.name = "ChatBase",
         this.url = "https://www.chatbase.co";
         this.supports_gpt_35_turbo = true;
         this.supports_message_history = true;
@@ -58,9 +60,10 @@ class ChatBase {
     }
 
     createProxyConfig(proxy: string | undefined): AxiosProxyConfig | undefined {
-        if (!proxy) return undefined;
+        if (!proxy || proxy.length == 0) return undefined;
     
         const [host, port] = proxy.split(':');
+        if (!host || !port) return undefined;
         return {
             host,
             port: parseInt(port, 10),
