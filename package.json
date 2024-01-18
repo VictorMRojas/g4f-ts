@@ -1,6 +1,6 @@
 {
   "name": "g4f",
-  "version": "1.0.59",
+  "version": "1.0.6",
   "description": "ChatGPT but free",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

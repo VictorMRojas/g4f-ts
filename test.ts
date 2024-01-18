@@ -16,8 +16,12 @@ import G4F from "./src/G4F";
         output: (text) => { // Edit the text response
             return text + " 💕🌹";
         },
-        retry: { // Retry fetching the data until the condition function returns true.
-            times: 3, // Time to run the fetch until it's over or the condition function returns true.
+        retry: {
+            /*
+            Execute the fetch operation consecutively three times until 
+            it finishes, or the condition function indicates true.
+            */
+            times: 3,
             condition: (text) => { // Check the text response
                 const words = text.split(" ");
                 return words.length > 10;
