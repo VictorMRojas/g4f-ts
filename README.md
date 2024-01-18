@@ -47,10 +47,14 @@ As I conjure a poem, a gift for your soul to swirl. 💕🌹
 
 })();
 ```
+
+
 ## 🚀 Providers 
 | Website | Provider | GPT-3.5 | GPT-4 | Stream | Status | Auth |
 | ------  | -------  | ------- | ----- | ------ | ------ | ---- |
 | [www.chatbase.co](https://www.chatbase.co) | `GPT.Provider.ChatBase` | ✔️ | ❌ | ❌ | ![Active](https://img.shields.io/badge/Active-brightgreen) | ❌ |
+
+
 
 ## 📰 TODO
 - [ ] Add Stream support
@@ -65,4 +69,3 @@ As I conjure a poem, a gift for your soul to swirl. 💕🌹
 	- [ ] Bing
 	- [ ] AI Chat
 	- [ ] Translate 
-```
