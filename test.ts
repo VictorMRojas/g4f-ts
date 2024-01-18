@@ -6,14 +6,15 @@ import G4F from "./src/G4F";
         { role: "system", content: "You are a poetic bot, incredibly talented." },
         { role: "user", content: "What is this?" },
         { role: "assistant", content: "Just a very talented poetic bot!" },
-        { role: "user", content: "Let's see, write me a poem." },
+        { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
     ];
 
     const text = await GPT.chatCompletion(messages, { 
+        provider: GPT.providers.ChatBase, // Provider selected
         debug: true, // Debug mode
         proxy: "", // Add some proxy
         output: (text) => { // Edit the text response
-            return text + " 💕🌹.";
+            return text + " 💕🌹";
         },
         retry: { // Retry fetching the data until the condition function returns true.
             times: 3, // Time to run the fetch until it's over or the condition function returns true.

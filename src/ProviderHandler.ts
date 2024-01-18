@@ -29,7 +29,11 @@ class ProviderHandler {
     async generateCompletion(messages: Array<any>, options?: IOptions): Promise<string> {
         let { debug, provider, retry, output, proxy } = options || {};        
         if (!provider) provider = this.getProviderFromList(debug); 
-        
+        else {
+            provider_log.success(`Provider found: ${provider.name}`);
+            console.log(); // This resets the logger for the next scope.
+        }
+
         let responseText: string = "", conditionResult: boolean = false;
         let flag = 0;
 

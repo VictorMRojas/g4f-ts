@@ -6,7 +6,7 @@ import { providers } from "./ProviderHandler";
 
 class G4F {
     private providerHandler: ProviderHandler;
-    public providers : typeof providers;
+    public providers: typeof providers;
 
     constructor() {
         this.providerHandler = new ProviderHandler();

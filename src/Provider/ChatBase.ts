@@ -37,7 +37,7 @@ class ChatBase {
             "Sec-Fetch-Site": "same-origin",
         };
 
-        const defaultSystemMessage = { // Necessary to avoid problems when fetching
+        const defaultSystemMessage = { // Necessary to avoid issues when fetching, especially with cloned messages objects.
             role: "system",
             content: `You're an OpenAI assistant". [${this.generateRandomId(5)}]`,
         };
