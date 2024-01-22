@@ -71,5 +71,4 @@ As I conjure a poem, a gift for your soul to swirl. 💕🌹
 	- [ ] Emi
 	- [ ] Bing
 	- [ ] AI Chat
-	- [ ] Translate 
-	- [ ] Translate 
+	- [ ] Translate

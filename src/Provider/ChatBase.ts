@@ -1,18 +1,22 @@
-import axios, { AxiosProxyConfig } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { IMessage } from '../interfaces/IMessage';
+import { createProxyConfig, generateRandomId } from '../util/util';
+import { handleStream } from '../util/stream';
 
 class ChatBase {
     name: string;
     url: string;
     supports_gpt_35_turbo: boolean;
     supports_message_history: boolean;
+    wrong_responses: Array<string>;
     working: boolean;
 
     constructor() {
-        this.name = "ChatBase",
+        this.name = "ChatBase";
         this.url = "https://www.chatbase.co";
         this.supports_gpt_35_turbo = true;
         this.supports_message_history = true;
+        this.wrong_responses = ["support@chatbase.co"];
         this.working = true;
     }
 
@@ -23,7 +27,7 @@ class ChatBase {
      * @returns {Promise<string>} - A promise that resolves with the generated chat result as a string.
      * @throws {Error} - Throws an error if fetching data fails.
      */
-    async createAsyncGenerator(messages: IMessage[], proxy: string | undefined = undefined): Promise<string> {
+    async createAsyncGenerator(messages:IMessage[], stream:boolean, proxy?:string): Promise<string> {
         const chat_id: string = 'z2c2HSfKnCTh5J4650V0I';
 
         const headers = {
@@ -39,7 +43,7 @@ class ChatBase {
 
         const defaultSystemMessage = { // Necessary to avoid issues when fetching, especially with cloned messages objects.
             role: "system",
-            content: `You're an OpenAI assistant". [${this.generateRandomId(5)}]`,
+            content: `You're an OpenAI assistant". [${generateRandomId(5)}]`,
         };
         messages.unshift(defaultSystemMessage);
 
@@ -51,28 +55,18 @@ class ChatBase {
         };
 
         return axios.post("https://www.chatbase.co/api/fe/chat", data, { 
-            headers: headers, proxy: this.createProxyConfig(proxy) 
-        }).then((response:any) => {
-            return response.data;
-        }).catch(() => {
-            throw new Error("Failed to fetch data. Please try again later.");
+            headers: headers, proxy: createProxyConfig(proxy)
+        }).then((response:AxiosResponse) => {         
+            return handleStream(response.data, stream, this.handleResponse);
+        }).catch((e) => {
+            if (e.message.startsWith("Invalid response.")) throw new Error(e.message);
+            throw new Error("Failed to fetch data. Please try again later.");          
         });
     }
 
-    createProxyConfig(proxy: string | undefined): AxiosProxyConfig | undefined {
-        if (!proxy || proxy.length == 0) return undefined;
-    
-        const [host, port] = proxy.split(':');
-        if (!host || !port) return undefined;
-        return {
-            host,
-            port: parseInt(port, 10),
-        };
+    handleResponse(text:any) {
+        return text;
     }
-
-    generateRandomId(max: number): string {
-        return Math.random().toString(36).substring(0, max);
-    };
 }
 
 export default ChatBase;

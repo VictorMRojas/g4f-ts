@@ -10,7 +10,7 @@ class OptionsHandler {
      */
     static check(options?: IOptions) {
         if (!options || typeof options !== 'object') throw new Error("Options must be a valid object.");
-        if (options.provider && !(options.provider instanceof providers[Object.keys(providers)[0]].constructor)) throw new Error("Provider option must be valid. Try { provider: (new G4F()).providers.ChatBase, ... }");
+        if (options.provider && !Object.keys(providers).some(key => options.provider instanceof providers[key].constructor)) throw new Error("Provider option must be valid. Try { provider: (new G4F()).providers.ChatBase, ... }");
         if (options.retry) {
             if (!options.retry.times) throw new Error("Times option must be provided.");
             if (isNaN(options.retry.times)) throw new Error("Times option must be an integer.");
