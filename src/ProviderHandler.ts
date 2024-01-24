@@ -32,7 +32,7 @@ class ProviderHandler {
      * @returns {Promise<any>} - Promise that resolves with the chat generation result.
      */    
     async generateCompletion(messages: Array<IMessage>, options?: IOptions): Promise<any> {
-        let { debug, provider, stream, retry, output, proxy } = options || {};        
+        let { debug, provider, stream, retry, output, chunkSize, proxy } = options || {};        
         if (!provider) provider = this.getProviderFromList(debug); 
         else if (debug) this.runLog(provider_log.success, `Provider found: ${provider.name}`, true)
 
@@ -44,7 +44,7 @@ class ProviderHandler {
         }
 
         if (retry || output) text = await this.runPreprocessing(messages, options || {}, provider);        
-        if (stream) return { data: stringToStream(text), name: provider.name };
+        if (stream) return { data: await stringToStream(text, chunkSize || 5), name: "post_process" };
         return text;
     }
 

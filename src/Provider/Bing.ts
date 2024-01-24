@@ -51,14 +51,13 @@ class Bing {
 
     handleResponse(text:string) {
         if (typeof text !== "string")
-            throw new Error("Invalid response. Please try again later.");
+          throw new Error("Invalid response. Please try again later.");
         if (text.includes(`"finish":true`))
-            return "";
-        
+          return "";
         let match = text.match(/"message":"(.*?)","original":/);
         let content = match ? match[1] : null;
         return content;
-    }
+      }
 }
 
 export default Bing;

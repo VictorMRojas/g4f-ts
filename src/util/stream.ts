@@ -8,16 +8,19 @@ export function handleStream(response:any, stream:boolean, responseFunc:any) {
 export async function* chunkProcessor(stream:any, name:string) {
     let previousText = "";
     let text = "";
-    const provider = providers[name];
+    let parts_text = null;
+    const isPostprocessing = name == "post_process";
+    let provider = isPostprocessing ? null : providers[name];
     for await (const chunk of stream) {
-        if (name == "ChatBase") text += chunk.toString("utf-8");     
-        else text = chunk.toString("utf-8");            
+      text = chunk.toString("utf-8");
 
-        text = provider.handleResponse(text);
-        
-        if (previousText == text) continue; 
-        previousText = text;
-        
-        if (text && text.length != 0) yield text;
+      if (provider) text = provider.handleResponse(text);
+      if (!text) continue;
+      if (previousText == text) continue;
+      if (name == "Bing") parts_text = text.slice(previousText.length);
+      
+      previousText = text;
+      if (text && text.length != 0)
+        yield parts_text || text;
     }
 }
