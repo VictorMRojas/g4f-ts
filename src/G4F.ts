@@ -19,7 +19,7 @@ class G4F {
      * @param {Object} options - Options for chat generation (optional).
      * @returns {Promise} - Promise that resolves with the chat generation result.
      */
-    async chatCompletion(messages: IMessage[], options?: IOptions): Promise<string> {
+    async chatCompletion(messages: IMessage[], options?: IOptions): Promise<any> {
         if (options) OptionsHandler.check(options);
         return await this.providerHandler.generateCompletion(messages, options);
     }

@@ -22,10 +22,10 @@ class Bing {
      * Asynchronously generates a chat response based on input messages.
      * @param {Array} messages - An array of messages for the chat.
      * @param {string} proxy - Optional proxy string for additional configuration.
-     * @returns {Promise<string>} - A promise that resolves with the generated chat result as a string.
+     * @returns {Promise<object>} - A promise that resolves with the generated chat result as a object
      * @throws {Error} - Throws an error if fetching data fails.
      */
-    async createAsyncGenerator(messages:IMessage[], stream:boolean, proxy?:string): Promise<string> {
+    async createAsyncGenerator(messages:IMessage[], stream:boolean, proxy?:string): Promise<object> {
         const headers = {
             'Content-Type': 'application/json'
         }
@@ -42,19 +42,22 @@ class Bing {
             headers: headers, proxy: createProxyConfig(proxy),
             responseType: stream ? 'stream' : 'text'
         }).then(async response => {
-            return handleStream(response.data, stream, this.handleResponse);       
+            return handleStream({ data: response.data, name: this.name }, stream, this.handleResponse);       
+        }).catch((e) => {
+            if (e.message.startsWith("Invalid response.")) throw new Error(e.message);
+            throw new Error("Failed to fetch data. Please try again later.");          
         });
     }
 
     handleResponse(text:string) {
-        const regEXP = /\{([^}]+)\}/;
-        let matchs : RegExpMatchArray | null= text.match(regEXP);
-        if (matchs && matchs[0]) {
-            const outputString = matchs[0].replace(/\[\^[^\]]+\^\]\([^)]+\)/g, '');
-            return (JSON.parse(outputString).message).trim();    
-        }
-
-        throw new Error("Invalid response. Please try again later.");
+        if (typeof text !== "string")
+            throw new Error("Invalid response. Please try again later.");
+        if (text.includes(`"finish":true`))
+            return "";
+        
+        let match = text.match(/"message":"(.*?)","original":/);
+        let content = match ? match[1] : null;
+        return content;
     }
 }
 

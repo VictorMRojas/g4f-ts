@@ -27,7 +27,7 @@ class ChatBase {
      * @returns {Promise<string>} - A promise that resolves with the generated chat result as a string.
      * @throws {Error} - Throws an error if fetching data fails.
      */
-    async createAsyncGenerator(messages:IMessage[], stream:boolean, proxy?:string): Promise<string> {
+    async createAsyncGenerator(messages:IMessage[], stream:boolean, proxy?:string): Promise<object> {
         const chat_id: string = 'z2c2HSfKnCTh5J4650V0I';
 
         const headers = {
@@ -55,9 +55,10 @@ class ChatBase {
         };
 
         return axios.post("https://www.chatbase.co/api/fe/chat", data, { 
-            headers: headers, proxy: createProxyConfig(proxy)
+            headers: headers, proxy: createProxyConfig(proxy),
+            responseType: stream ? 'stream' : 'text'
         }).then((response:AxiosResponse) => {         
-            return handleStream(response.data, stream, this.handleResponse);
+            return handleStream({ data: response.data, name: this.name }, stream, this.handleResponse);       
         }).catch((e) => {
             if (e.message.startsWith("Invalid response.")) throw new Error(e.message);
             throw new Error("Failed to fetch data. Please try again later.");          
