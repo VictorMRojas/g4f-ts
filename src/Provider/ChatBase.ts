@@ -8,6 +8,7 @@ class ChatBase {
     url: string;
     supports_gpt_35_turbo: boolean;
     supports_message_history: boolean;
+    need_slice_text: boolean;
     wrong_responses: Array<string>;
     working: boolean;
 
@@ -16,6 +17,7 @@ class ChatBase {
         this.url = "https://www.chatbase.co";
         this.supports_gpt_35_turbo = true;
         this.supports_message_history = true;
+        this.need_slice_text = true;
         this.wrong_responses = ["support@chatbase.co"];
         this.working = true;
     }

@@ -5,22 +5,22 @@ export function handleStream(response:any, stream:boolean, responseFunc:any) {
     return response;
 }
 
-export async function* chunkProcessor(stream:any, name:string) {
+export async function* chunkProcessor(response:any) {
     let previousText = "";
     let text = "";
-    let parts_text = null;
-    const isPostprocessing = name == "post_process";
-    let provider = isPostprocessing ? null : providers[name];
-    for await (const chunk of stream) {
+    let sliceText = null;
+    const isPostprocessing = response.name == "post_process";
+    let provider = isPostprocessing ? null : providers[response.name];
+    for await (const chunk of response.data) {
       text = chunk.toString("utf-8");
 
       if (provider) text = provider.handleResponse(text);
       if (!text) continue;
       if (previousText == text) continue;
-      if (name == "Bing") parts_text = text.slice(previousText.length);
+      if (provider && provider.need_slice_text) sliceText = text.slice(previousText.length);
       
       previousText = text;
       if (text && text.length != 0)
-        yield parts_text || text;
+        yield sliceText || text;
     }
 }

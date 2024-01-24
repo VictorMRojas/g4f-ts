@@ -8,13 +8,15 @@ class Bing {
     url: string;
     supports_gpt_4_turbo: boolean;
     supports_message_history: boolean;
+    need_slice_text: boolean;
     working: boolean;
 
     constructor() {
         this.name = "Bing",
-        this.url = "https://nexra.aryahcr.cc/api/chat/complements";
+        this.url = "https://nexra.aryahcr.cc/api/chat/complements";        
         this.supports_gpt_4_turbo = true;
         this.supports_message_history = true;
+        this.need_slice_text = true;
         this.working = true;
     }
 
