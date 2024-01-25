@@ -2,6 +2,7 @@ import { IOptions } from "./interfaces/IOptions"
 import { Signale } from 'signale';
 import ChatBase from "./Provider/ChatBase";
 import Bing from "./Provider/Bing";
+import Geek from "./Provider/Geek";
 import { IMessage } from "./interfaces/IMessage";
 import { stringToStream } from "./util/util";
 
@@ -10,12 +11,13 @@ const fetch_log = new Signale({ interactive: true, scope: 'fetch' });
 const output_log = new Signale({ interactive: true, scope: 'output' });
 
 interface Providers {
-    [key: string]: ChatBase | Bing;
+    [key: string]: ChatBase | Bing | Geek;
 }
 
 const providers: Providers = {
     ChatBase: new ChatBase(),
-    Bing: new Bing()
+    Bing: new Bing(),
+    Geek: new Geek()
 };
 
 class ProviderHandler {
