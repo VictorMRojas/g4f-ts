@@ -15,7 +15,7 @@ Using yarn:
 
 ## 🎯  Examples
 
-### :tw-1f432: Basic Usage
+## ⚙️ Basic Usage
 
 #### Simple fetch
 It will capture the messages and the context, and any provider will respond with a string.
@@ -69,7 +69,7 @@ GPT.chatCompletion(messages).then(console.log);
 ```
 **Note:** GPT responses use the **assistant** role and an appropriate conversation structure alternates between the user and the assistant, as seen in the previous example.
 
-## :tw-270f: RESUME: Conversation roles
+## ✏️ RESUME: Conversation roles
 
 | Role | Description                    |
 | ------------- | ------------------------------ |
@@ -77,7 +77,7 @@ GPT.chatCompletion(messages).then(console.log);
 | `user`   | Used to identify user messages     |
 | `assistant`   | Used to identify GPT messages     |
 
-### :tw-1f432: Add configurable options
+## ⚙️ Add configurable options
 
 ####  Basic options
 You can select any provider, debug mode and a proxy URL if you want.
@@ -151,12 +151,115 @@ I hope it brings you joy
 And your heart it does employ 💕🌹
 */
 ```
-**Note:** Retry will execute the fetch operation consecutively three times until it finishes, or the condition function indicates true. The output function only edits the final response.
+**Note:** Retry will execute the fetch operation consecutively N times until it finishes, or the condition function indicates true. The output function only edits the final response.
 
 ### What is the difference between basic options and advanced options?
 If you decide to use the retry, output option, or both, keep in mind that these options involve preprocessing before delivering the ultimate response. The impact on performance and response times may vary depending on the functions you employ.
 
-## :tw-270f: RESUME: Options
+## ⚙️ Streaming
+When using the stream option, the chatCompletion function will return an object with the streamable data and the name of the provider.
+
+####  Basic usage
+```js
+const { G4F } = require("g4f");
+const GPT = new G4F();
+const messages = [
+	{ role: "system", content: "You're an expert bot in poetry."},
+    { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
+];
+const options = {
+    provider: GPT.providers.Bing,
+    stream: true
+};
+
+(async() => {
+	const response = await GPT.chatCompletion(messages, options);	
+	console.log(response);
+})();
+/*
+	{ 
+		data: <ref *1> BrotliDecompress { ... }, 
+		name: "Bing" 
+	}
+	*/
+```
+
+## So, how you should handle the streamable data?
+I **highly recommend** you to use the integrated chunkProcessor function so that you don't have to format each chunk into a single string format response.
+```js
+const { G4F, chunkProcessor } = require("g4f");
+const GPT = new G4F();
+const messages = [
+	{ role: "system", content: "You're an expert bot in poetry."},
+    { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
+];
+const options = {
+    provider: GPT.providers.Bing,
+    stream: true
+};
+
+(async() => {
+	const response = await GPT.chatCompletion(messages, options);	
+	let text = "";
+    for await (const chunk of chunkProcessor(response)) {
+        text += chunk;
+    }
+    console.log(text);
+})();
+/* 
+I'll try to create that.
+To keep your worries at bay.
+A smile on your face,
+And a heart full of grace.
+*/
+```
+
+####  Stream on postprocessing
+When employing retry, output option, or both, you have the flexibility to select the size of each streamed chunk.
+```js
+const { G4F, chunkProcessor } = require("g4f");
+const GPT = new G4F();
+const messages = [
+	{ role: "system", content: "You're an expert bot in poetry."},
+    { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
+];
+const options = {
+    provider: GPT.providers.Bing,
+    stream: true,
+    chunkSize: 15,
+    retry: {
+        times: 3,
+        condition: (text) => {
+            const words = text.split(" ");
+            return words.length > 10;
+        }
+    },
+    output: (text) => {
+        return text + " 💕🌹";
+    }
+};
+
+(async() => {
+	const response = await GPT.chatCompletion(messages, options);	
+	for await (const chunk of chunkProcessor(response)) {
+        console.log(chunk);    
+    }
+})();
+/*
+I'll try to cre
+ate that. 
+  Is what you a
+sked me to say
+n    I hope it
+brings you joy
+n    And makes
+your heart feel
+ gay 💕🌹
+*/
+```
+**Note:** The chunkSize feature is effective only when the stream option is activated along with the retry/output option.
+
+## ✏️ RESUME: Configurable Options
 | Option | Type | Description                    |
 | ------------- |------------------------------ |------------------------------ |
 | `provider`    | G4F.providers.any | Choose the provider to use for chat completions.      |
@@ -168,3 +271,23 @@ If you decide to use the retry, output option, or both, keep in mind that these 
 | `output`      | function: string | Callback function that receives a string as the final text response so you can edit it. This function executes after the retry fetch operations. This function should return a string. |
 | `stream` | boolean | Determine if the data should be streamed in parts or not. |
 | `chunkSize` | number | Determine the size of chunks streamed. This only works if the stream option is true and if using retry or condition. |
+
+<br></br>
+## 🚀 Providers 
+| Website | Provider | GPT-3.5 | GPT-4 | Stream | Status | Auth |
+| ------  | -------  | ------- | ----- | ------ | ------ | ---- |
+| [www.chatbase.co](https://www.chatbase.co) | `GPT.Provider.ChatBase` | ✔️ | ❌ | ✔️ | ![Active](https://img.shields.io/badge/Active-brightgreen) | ❌ |
+| [bing.com](https://bing.com/chat) | `g4f.Provider.Bing` | ❌ | ✔️ | ✔️ | ![Active](https://img.shields.io/badge/Active-brightgreen) | ❌ |
+
+<br></br>
+## 📰 TODO
+- [ ] Improve Stream support
+- [ ] Implement WEB-UI
+- [ ] Implement more providers
+	- [ ] Stable-diffusion
+	- [ ] Pixart
+	- [ ] DALLE-E
+	- [ ] Prodia
+	- [ ] Emi
+	- [ ] AI Chat
+	- [ ] Translate 
