@@ -153,7 +153,7 @@ And your heart it does employ 💕🌹
 ```
 **Note:** Retry will execute the fetch operation consecutively three times until it finishes, or the condition function indicates true. The output function only edits the final response.
 
-### What is the differencie between basic options and advanced options?
+### What is the difference between basic options and advanced options?
 If you decide to use the retry, output option, or both, keep in mind that these options involve preprocessing before delivering the ultimate response. The impact on performance and response times may vary depending on the functions you employ.
 
 ## :tw-270f: RESUME: Options
