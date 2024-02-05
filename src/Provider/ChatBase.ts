@@ -26,11 +26,11 @@ class ChatBase {
     /**
      * Asynchronously generates a chat response based on input messages.
      * @param {Array} messages - An array of messages for the chat.
-     * @param {string} proxy - Optional proxy string for additional configuration.
+     * @param {IOptions} options - Options for chat generation (optional).
      * @returns {Promise<string>} - A promise that resolves with the generated chat result as a string.
      * @throws {Error} - Throws an error if fetching data fails.
      */
-    async createAsyncGenerator(messages:IMessage[], options:IOptions, proxy?:string): Promise<object> {
+    async createAsyncGenerator(messages:IMessage[], options:IOptions): Promise<object> {
         const chat_id: string = 'z2c2HSfKnCTh5J4650V0I';
 
         const headers = {

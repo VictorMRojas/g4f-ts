@@ -44,7 +44,7 @@ class ProviderHandler {
     async getText(messages:Array<IMessage>, options:any, provider:any) {
         const { debug, stream, proxy } = options || {};
         if (debug) runLog(provider_log.await, `Fetching data from the provider: ${provider.name}`);
-        const text = await provider.createAsyncGenerator(messages, options, proxy);
+        const text = await provider.createAsyncGenerator(messages, options);
         if (debug) runLog(provider_log.success, `Data was successfully fetched from the ${provider.name} provider`, true);            
         return text;
     }
@@ -69,7 +69,7 @@ class ProviderHandler {
             const NoStreamOptions = { ...options };            
             NoStreamOptions.stream = false;
             
-            responseText = await provider.createAsyncGenerator(messages, NoStreamOptions, proxy);            
+            responseText = await provider.createAsyncGenerator(messages, NoStreamOptions);            
             conditionResult = await Promise.resolve(this.attemptOperation(retry.condition, responseText));
             flag++;
 

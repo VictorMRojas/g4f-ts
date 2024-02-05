@@ -22,7 +22,8 @@ const data = `{
         body: data,
     });
 
-    const text:any = await response.text();
+    let text:any = await response.text();
+    text = text.substring(text.indexOf('{'), text.length);
 
     let img = JSON.parse(text);
     img = img.images[0];
