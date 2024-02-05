@@ -37,7 +37,7 @@ class GPT {
             messages,
             "prompt": messages[messages.length - 1].content,
             model: options.model || "gpt-4",
-            markdown: options.markdown
+            markdown: false
         };
         
         return axios.post(this.url, data, {

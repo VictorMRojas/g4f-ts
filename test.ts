@@ -11,12 +11,11 @@ import { chunkProcessor } from "./src/util/stream";
     ];
 
     const text = await GPT.chatCompletion(messages, { 
-        //provider: GPT.providers.ChatBase, // Provider selected
-        model: "gpt-4",
+        provider: GPT.providers.GPT, // Provider selected
+        //model: "gpt-3.5-turbo",
         debug: true, // Debug mode
-        stream: true,
         proxy: "", // Add some proxy
-        /*
+        
         output: (text) => { // Edit the text response
             return text + " 💕🌹";
         },
@@ -27,12 +26,15 @@ import { chunkProcessor } from "./src/util/stream";
                 return words.length > 10;
             }
         }
-        */
+        
     });
 
-    
+    console.log(text)
+
+    /*
     for await(const item of chunkProcessor(text)) {
         console.log(item);
         console.log("\n");
-    };    
+    };
+    */    
 })();

@@ -4,8 +4,7 @@ import { IMessage } from "./interfaces/IMessage";
 import { runLog, stringToStream } from "./util/util";
 import { providers, models } from './ProviderList';
 
-const signale = new Signale();
-
+const model_log = new Signale({ interactive: true, scope: 'model' });
 const provider_log = new Signale({ interactive: true, scope: 'provider' });
 const fetch_log = new Signale({ interactive: true, scope: 'fetch' });
 const output_log = new Signale({ interactive: true, scope: 'output' });
@@ -28,6 +27,8 @@ class ProviderHandler {
         if (!provider) provider = this.getProviderFromList(debug, model); 
         else if (debug) runLog(provider_log.success, `Provider found: ${provider.name}`, true)
 
+        if (debug) runLog(model_log.success, `Using the model: ${model || provider.default_model}`, true);
+
         let text = "";        
 
         if (!retry && !output) {
@@ -42,9 +43,9 @@ class ProviderHandler {
 
     async getText(messages:Array<IMessage>, options:any, provider:any) {
         const { debug, stream, proxy } = options || {};
-        if (debug) runLog(provider_log.await, `Fetching data for the provider: ${provider.name}`);
+        if (debug) runLog(provider_log.await, `Fetching data from the provider: ${provider.name}`);
         const text = await provider.createAsyncGenerator(messages, options, proxy);
-        if (debug) runLog(provider_log.success, `Data fetched succesfully for the ${provider.name} provider`, true);            
+        if (debug) runLog(provider_log.success, `Data was successfully fetched from the ${provider.name} provider`, true);            
         return text;
     }
 
@@ -104,7 +105,6 @@ class ProviderHandler {
 
         if (debug) {
             runLog(provider_log.success, `Provider found: ${providerWorking.name}`, true);
-            signale.success(`Using the model: ${model || providerWorking.default_model}`);
         }
 
         return providerWorking;
