@@ -177,11 +177,11 @@ const options = {
 	console.log(response);
 })();
 /*
-	{ 
-		data: <ref *1> BrotliDecompress { ... }, 
-		name: "ChatBase" 
-	}
-	*/
+{ 
+    data: <ref *1> BrotliDecompress { ... }, 
+    name: "ChatBase" 
+}
+*/
 ```
 
 ## So, how you should handle the streamable data?
