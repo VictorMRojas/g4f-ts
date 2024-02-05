@@ -1,6 +1,11 @@
 const { Readable } = require('stream');
 import { AxiosProxyConfig } from 'axios';
 
+export function runLog(logger:any, msg:string, reset?:boolean) {
+    logger(msg)
+    if (reset) console.log(); // This resets the logger for the next scope.
+}
+
 export function createProxyConfig(proxy: string | undefined): AxiosProxyConfig | undefined {
     if (!proxy || proxy.length == 0) return undefined;
 

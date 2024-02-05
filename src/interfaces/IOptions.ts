@@ -1,5 +1,6 @@
 export interface IOptions {
     debug?: boolean;
+    model?: string;
     provider?: any;
     stream?: boolean;
     retry?: { condition?: (text: string) => boolean, times?: number };
