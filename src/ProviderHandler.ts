@@ -1,22 +1,14 @@
 import { IOptions } from "./interfaces/IOptions"
 import { Signale } from 'signale';
-import ChatBase from "./Provider/ChatBase";
-import Bing from "./Provider/Bing";
 import { IMessage } from "./interfaces/IMessage";
-import { stringToStream } from "./util/util";
+import { runLog, stringToStream } from "./util/util";
+import { providers, models } from './ProviderList';
+
+const signale = new Signale();
 
 const provider_log = new Signale({ interactive: true, scope: 'provider' });
 const fetch_log = new Signale({ interactive: true, scope: 'fetch' });
 const output_log = new Signale({ interactive: true, scope: 'output' });
-
-interface Providers {
-    [key: string]: ChatBase | Bing;
-}
-
-const providers: Providers = {
-    ChatBase: new ChatBase(),
-    Bing: new Bing()
-};
 
 class ProviderHandler {
     providersList: typeof providers;
@@ -32,9 +24,9 @@ class ProviderHandler {
      * @returns {Promise<any>} - Promise that resolves with the chat generation result.
      */    
     async generateCompletion(messages: Array<IMessage>, options?: IOptions): Promise<any> {
-        let { debug, provider, stream, retry, output, chunkSize, proxy } = options || {};        
-        if (!provider) provider = this.getProviderFromList(debug); 
-        else if (debug) this.runLog(provider_log.success, `Provider found: ${provider.name}`, true)
+        let { debug, model, provider, stream, retry, output, chunkSize } = options || {};        
+        if (!provider) provider = this.getProviderFromList(debug, model); 
+        else if (debug) runLog(provider_log.success, `Provider found: ${provider.name}`, true)
 
         let text = "";        
 
@@ -50,9 +42,9 @@ class ProviderHandler {
 
     async getText(messages:Array<IMessage>, options:any, provider:any) {
         const { debug, stream, proxy } = options || {};
-        if (debug) this.runLog(provider_log.await, `Fetching data for the provider: ${provider.name}`);
-        const text = await provider.createAsyncGenerator(messages, stream, proxy);
-        if (debug) this.runLog(provider_log.success, `Data fetched succesfully for the ${provider.name} provider`, true);            
+        if (debug) runLog(provider_log.await, `Fetching data for the provider: ${provider.name}`);
+        const text = await provider.createAsyncGenerator(messages, options, proxy);
+        if (debug) runLog(provider_log.success, `Data fetched succesfully for the ${provider.name} provider`, true);            
         return text;
     }
 
@@ -71,16 +63,20 @@ class ProviderHandler {
         let stayInLoop = false, flag = 0;
 
         do {
-            if (debug) this.runLog(fetch_log.await, `[${flag+1}/${retry.times}] - Retry #${flag+1}`)            
-            responseText = await provider.createAsyncGenerator(messages, false, proxy);            
+            if (debug) runLog(fetch_log.await, `[${flag+1}/${retry.times}] - Retry #${flag+1}`)
+
+            const NoStreamOptions = { ...options };            
+            NoStreamOptions.stream = false;
+            
+            responseText = await provider.createAsyncGenerator(messages, NoStreamOptions, proxy);            
             conditionResult = await Promise.resolve(this.attemptOperation(retry.condition, responseText));
             flag++;
 
             stayInLoop = retry && retry.condition && !(conditionResult || flag == retry.times); 
             
             if (debug) {
-                if (conditionResult) this.runLog(fetch_log.success, `[${flag}/${retry.times}] - Retry #${flag}`, !stayInLoop);
-                else this.runLog(fetch_log.error, `[${flag}/${retry.times}] - Retry #${flag}`, !stayInLoop);
+                if (conditionResult) runLog(fetch_log.success, `[${flag}/${retry.times}] - Retry #${flag}`, !stayInLoop);
+                else runLog(fetch_log.error, `[${flag}/${retry.times}] - Retry #${flag}`, !stayInLoop);
             }
         } while(stayInLoop);
 
@@ -90,34 +86,47 @@ class ProviderHandler {
     async runOutput(text:string, messages:Array<IMessage>, options:any, provider:any) {
         const { debug, output } = options || {};        
         if (!text || text.length == 0) text = await this.getText(messages, options, provider);        
-        if (debug) this.runLog(output_log.await, `Running the output function...`);
+        if (debug) runLog(output_log.await, `Running the output function...`);
         text = await Promise.resolve(output(text));
-        if (debug) this.runLog(output_log.success, `Output function runtime finalized.`, true);
+        if (debug) runLog(output_log.success, `Output function runtime finalized.`, true);
         return text;
     }
-
-    runLog(logger:any, msg:string, reset?:boolean) {
-        logger(msg)
-        if (reset) console.log(); // This resets the logger for the next scope.
-    }
     
-    getProviderFromList(debug?: boolean) {
-        if (debug) provider_log.await("Picking a provider from the working list...");
+    getProviderFromList(debug?: boolean, model?: string) {
+        if (debug) runLog(provider_log.await, "Picking a provider from the working list...");
 
-        let providerWorking
-        for(const provider of Object.values(this.providersList)) {
-            if (provider.working) {                
-                providerWorking = provider;                 
-            } 
-        }
+        let providerWorking = this.lookForProvider(model);        
 
         if (!providerWorking) {
-            if (debug) provider_log.error("Provider not found.");
+            if (debug) runLog(provider_log.error, "Provider not found.");
             throw Error("Provider not found");
         }
 
-        if (debug) provider_log.success(`Provider found: ${providerWorking.name}`);
-        console.log(); // This resets the logger for the next scope.
+        if (debug) {
+            runLog(provider_log.success, `Provider found: ${providerWorking.name}`, true);
+            signale.success(`Using the model: ${model || providerWorking.default_model}`);
+        }
+
+        return providerWorking;
+    }
+
+    lookForProvider(model?: string) {
+        let providerWorking;
+        
+        for(const provider of Object.values(this.providersList)) {
+            if (!model && provider.working) {
+                providerWorking = provider;
+                break;
+            } 
+            
+            if (model && models[provider.name].includes(model)) {
+                if (provider.working) {
+                    providerWorking = provider;
+                    break;
+                }
+            }
+        }
+
         return providerWorking;
     }
 
