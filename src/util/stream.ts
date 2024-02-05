@@ -1,4 +1,4 @@
-import { providers } from '../ProviderHandler'
+import { providers } from '../ProviderList'
 
 export function handleStream(response:any, stream:boolean, responseFunc:any) {
     if (!stream) return responseFunc(response.data);
@@ -13,8 +13,7 @@ export async function* chunkProcessor(response:any) {
     let provider = isPostprocessing ? null : providers[response.name];
     for await (const chunk of response.data) {
       text = chunk.toString("utf-8");
-
-      if (provider) text = provider.handleResponse(text);
+      if (provider) text = provider.handleResponse(text);      
       if (!text) continue;
       if (previousText == text) continue;
       if (provider && provider.need_slice_text) sliceText = text.slice(previousText.length);

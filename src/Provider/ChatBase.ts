@@ -2,11 +2,12 @@ import axios, { AxiosResponse } from 'axios';
 import { IMessage } from '../interfaces/IMessage';
 import { createProxyConfig, generateRandomId } from '../util/util';
 import { handleStream } from '../util/stream';
+import { IOptions } from '../interfaces/IOptions';
 
 class ChatBase {
     name: string;
     url: string;
-    supports_gpt_35_turbo: boolean;
+    default_model: string;
     supports_message_history: boolean;
     need_slice_text: boolean;
     wrong_responses: Array<string>;
@@ -15,7 +16,7 @@ class ChatBase {
     constructor() {
         this.name = "ChatBase";
         this.url = "https://www.chatbase.co";
-        this.supports_gpt_35_turbo = true;
+        this.default_model = "gpt-3.5-turbo",
         this.supports_message_history = true;
         this.need_slice_text = true;
         this.wrong_responses = ["support@chatbase.co"];
@@ -29,7 +30,7 @@ class ChatBase {
      * @returns {Promise<string>} - A promise that resolves with the generated chat result as a string.
      * @throws {Error} - Throws an error if fetching data fails.
      */
-    async createAsyncGenerator(messages:IMessage[], stream:boolean, proxy?:string): Promise<object> {
+    async createAsyncGenerator(messages:IMessage[], options:IOptions, proxy?:string): Promise<object> {
         const chat_id: string = 'z2c2HSfKnCTh5J4650V0I';
 
         const headers = {
@@ -58,9 +59,9 @@ class ChatBase {
 
         return axios.post("https://www.chatbase.co/api/fe/chat", data, { 
             headers: headers, proxy: createProxyConfig(proxy),
-            responseType: stream ? 'stream' : 'text'
+            responseType: options.stream ? 'stream' : 'text'
         }).then((response:AxiosResponse) => {         
-            return handleStream({ data: response.data, name: this.name }, stream, this.handleResponse);       
+            return handleStream({ data: response.data, name: this.name }, options.stream || false, this.handleResponse);       
         }).catch((e) => {
             if (e.message.startsWith("Invalid response.")) throw new Error(e.message);
             throw new Error("Failed to fetch data. Please try again later.");          
@@ -68,6 +69,9 @@ class ChatBase {
     }
 
     handleResponse(text:any) {
+        if (this.wrong_responses.some(elemento => text.includes(elemento))) 
+            throw new Error("Invalid response. Please try again later.");
+        
         return text;
     }
 }

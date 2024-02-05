@@ -17,7 +17,7 @@ Using yarn:
 
 ## ⚙️ Basic Usage
 
-#### Simple fetch
+## Simple fetch
 It will capture the messages and the context, and any provider will respond with a string.
 ```js
 const { G4F } = require("g4f");
@@ -30,7 +30,7 @@ GPT.chatCompletion(messages).then(console.log);
 ```
 **Note:** The conversation needs to include at least one message with the role **user** to provide a proper answer.
 
-#### Give your instructions
+## Give your instructions
 You can provide your own instructions for the conversation before it starts using the **system** role.
 ```js
 const { G4F } = require("g4f");
@@ -51,7 +51,7 @@ And help you thrive.
 */
 ```
 
-#### Follow up on the conversation context
+## Follow up on the conversation context
 ```js
 const { G4F } = require("g4f");
 const GPT = new G4F();
@@ -79,7 +79,7 @@ GPT.chatCompletion(messages).then(console.log);
 
 ## ⚙️ Add configurable options
 
-####  Basic options
+##  Basic options
 You can select any provider, debug mode and a proxy URL if you want.
 ```js
 const { G4F } = require("g4f");
@@ -113,7 +113,7 @@ As I conjure a poem, a gift for your soul to swirl. 💕🌹
 ```
 **Note:** You can specify the provider, debug, and proxy options according to your needs; they are entirely optional.
 
-####  Advanced options
+##  Advanced options
 You can force an expected response using retry, and manipulate the final response using output.
 ```js
 const { G4F } = require("g4f");
@@ -141,7 +141,7 @@ const options = {
 	console.log(text);
 })();
 /* 
-[provider] » √  success   Provider found: Bing
+[provider] » √  success   Provider found: GPT
 [fetch] » √  success   [1/3] - Retry #1
 [output] » √  success   Output function runtime finalized.
 
@@ -153,13 +153,13 @@ And your heart it does employ 💕🌹
 ```
 **Note:** Retry will execute the fetch operation consecutively N times until it finishes, or the condition function indicates true. The output function only edits the final response.
 
-### What is the difference between basic options and advanced options?
+## What is the difference between basic options and advanced options?
 If you decide to use the retry, output option, or both, keep in mind that these options involve preprocessing before delivering the ultimate response. The impact on performance and response times may vary depending on the functions you employ.
 
 ## ⚙️ Streaming
 When using the stream option, the chatCompletion function will return an object with the streamable data and the name of the provider.
 
-####  Basic usage
+##  Basic usage
 ```js
 const { G4F } = require("g4f");
 const GPT = new G4F();
@@ -168,7 +168,7 @@ const messages = [
     { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
 ];
 const options = {
-    provider: GPT.providers.Bing,
+    provider: GPT.providers.ChatBase,
     stream: true
 };
 
@@ -177,11 +177,11 @@ const options = {
 	console.log(response);
 })();
 /*
-	{ 
-		data: <ref *1> BrotliDecompress { ... }, 
-		name: "Bing" 
-	}
-	*/
+{ 
+    data: <ref *1> BrotliDecompress { ... }, 
+    name: "ChatBase" 
+}
+*/
 ```
 
 ## So, how you should handle the streamable data?
@@ -194,7 +194,7 @@ const messages = [
     { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
 ];
 const options = {
-    provider: GPT.providers.Bing,
+    provider: GPT.providers.ChatBase,
     stream: true
 };
 
@@ -214,7 +214,7 @@ And a heart full of grace.
 */
 ```
 
-####  Stream on postprocessing
+##  Stream on postprocessing
 When employing retry, output option, or both, you have the flexibility to select the size of each streamed chunk.
 ```js
 const { G4F, chunkProcessor } = require("g4f");
@@ -224,7 +224,7 @@ const messages = [
     { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
 ];
 const options = {
-    provider: GPT.providers.Bing,
+    provider: GPT.providers.ChatBase,
     stream: true,
     chunkSize: 15,
     retry: {
@@ -260,28 +260,57 @@ your heart feel
 **Note:** The chunkSize feature is effective only when the stream option is activated along with the retry/output option.
 
 ## ✏️ RESUME: Configurable Options
-| Option | Type | Description                    |
-| ------------- |------------------------------ |------------------------------ |
+| Option        | Type                          | Description                    |
+| ------------- | ------------------------------ | -------------------------------- |
 | `provider`    | G4F.providers.any | Choose the provider to use for chat completions.      |
+| `model`       | G4F.models.any | Choose the model to use by a provider that supports it |
 | `debug`       | boolean | Enable or disable debug mode.     |
-| `proxy`        | string | Specify a proxy as a URL with a string in the host:port format.     |
-|  `retry`        | object | Execute the fetch operation N times in a row until it finishes or the callback function returns true. |
+| `proxy`       | string | Specify a proxy as a URL with a string in the host:port format.     |
+|  `retry`      | object | Execute the fetch operation N times in a row until it finishes or the callback function returns true. |
 | `retry.times` | number | Specify the number of times the fetch operation will execute as a limit. |
 | `retry.condition` | function: boolean | Callback function that receives a string as the text for each instance the fetch operation is running. This function should return a boolean. |
 | `output`      | function: string | Callback function that receives a string as the final text response so you can edit it. This function executes after the retry fetch operations. This function should return a string. |
 | `stream` | boolean | Determine if the data should be streamed in parts or not. |
 | `chunkSize` | number | Determine the size of chunks streamed. This only works if the stream option is true and if using retry or condition. |
 
+## 📚 Models
+| Model                  | Providers that support it                   |
+| ---------------------- | ------------------------------------------- |
+| gpt-4                  | `G4F.provider.GPT`, `G4F.provider.Bing`     |
+| gpt-4-0613             | `G4F.provider.GPT`                          |
+| gpt-4-32k              | `G4F.provider.GPT`                          |
+| gpt-4-0314             | `G4F.provider.GPT`                          |
+| gpt-4-32k-0314         | `G4F.provider.GPT`                          |
+| gpt-3.5-turbo          | `G4F.provider.GPT`, `G4F.provider.ChatBase` |
+| gpt-3.5-turbo-16k      | `G4F.provider.GPT`                          |
+| gpt-3.5-turbo-0613     | `G4F.provider.GPT`                          |
+| gpt-3.5-turbo-16k-0613 | `G4F.provider.GPT`                          |
+| gpt-3.5-turbo-0301     | `G4F.provider.GPT`                          |
+| text-davinci-003       | `G4F.provider.GPT`                          |
+| text-davinci-002       | `G4F.provider.GPT`                          |
+| code-davinci-002       | `G4F.provider.GPT`                          |
+| gpt-3                  | `G4F.provider.GPT`                          |
+| text-curie-001         | `G4F.provider.GPT`                          |
+| text-babbage-001       | `G4F.provider.GPT`                          |
+| text-ada-001           | `G4F.provider.GPT`                          |
+| davinci                | `G4F.provider.GPT`                          |
+| curie                  | `G4F.provider.GPT`                          |
+| babbage                | `G4F.provider.GPT`                          |
+| ada                    | `G4F.provider.GPT`                          |
+| babbage-002            | `G4F.provider.GPT`                          |
+| davinci-002            | `G4F.provider.GPT`                          |
+
 <br></br>
 ## 🚀 Providers 
 | Website | Provider | GPT-3.5 | GPT-4 | Stream | Status | Auth |
 | ------  | -------  | ------- | ----- | ------ | ------ | ---- |
+| [GPT](https://chatgpt.ai) | `g4f.Provider.GPT` | ✔️ | ✔️ | ❌ | ![Active](https://img.shields.io/badge/Active-brightgreen) | ❌ |
 | [www.chatbase.co](https://www.chatbase.co) | `GPT.Provider.ChatBase` | ✔️ | ❌ | ✔️ | ![Active](https://img.shields.io/badge/Active-brightgreen) | ❌ |
-| [bing.com](https://bing.com/chat) | `g4f.Provider.Bing` | ❌ | ✔️ | ✔️ | ![Active](https://img.shields.io/badge/Active-brightgreen) | ❌ |
+| [bing.com](https://bing.com/chat) | `g4f.Provider.Bing` | ❌ | ✔️ | ✔️ | ![Inactive](https://img.shields.io/badge/Inactive-red) | ❌ |
 
 <br></br>
 ## 📰 TODO
-- [ ] Improve Stream support
+- [ ] Add stream support to providers that don't have it natively
 - [ ] Implement WEB-UI
 - [ ] Implement more providers
 	- [ ] Stable-diffusion
@@ -290,4 +319,4 @@ your heart feel
 	- [ ] Prodia
 	- [ ] Emi
 	- [ ] AI Chat
-	- [ ] Translate 
+	- [ ] Translate
