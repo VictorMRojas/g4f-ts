@@ -8,8 +8,10 @@ import { chunkProcessor } from "./src/util/stream";
         { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
     ];
     const options = {
-        model: "gpt-4",
-        debug: true,
+        model: "davinci-002",
+        provider: GPT.providers.GPT,
+        debug: false,
+        /*
         retry: {
             times: 3,
             condition: (text:any) => {
@@ -20,6 +22,7 @@ import { chunkProcessor } from "./src/util/stream";
         output: (text:any) => {
             return text + " 💕🌹";
         }
+        */
     };
 
     const text = await GPT.chatCompletion(messages, options);	

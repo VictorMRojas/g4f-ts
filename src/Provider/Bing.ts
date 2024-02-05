@@ -42,7 +42,7 @@ class Bing {
         };
         
         return axios.post(this.url, data, {
-            headers: headers, proxy: createProxyConfig(proxy),
+            headers: headers, proxy: createProxyConfig(options.proxy),
             responseType: options.stream ? 'stream' : 'text'
         }).then(async response => {
             return handleStream({ data: response.data, name: this.name }, options.stream || false, this.handleResponse);       

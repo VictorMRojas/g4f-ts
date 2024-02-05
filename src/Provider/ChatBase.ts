@@ -58,7 +58,7 @@ class ChatBase {
         };
 
         return axios.post("https://www.chatbase.co/api/fe/chat", data, { 
-            headers: headers, proxy: createProxyConfig(proxy),
+            headers: headers, proxy: createProxyConfig(options.proxy),
             responseType: options.stream ? 'stream' : 'text'
         }).then((response:AxiosResponse) => {         
             return handleStream({ data: response.data, name: this.name }, options.stream || false, this.handleResponse);       

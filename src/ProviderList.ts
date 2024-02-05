@@ -9,7 +9,7 @@ interface Providers {
 const providers: Providers = {
     GPT: new GPT(),
     ChatBase: new ChatBase(),
-    Bing: new Bing()    
+    Bing: new Bing()
 };
 
 const models: { [key in keyof Providers]: string[] } = {
