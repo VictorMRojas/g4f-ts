@@ -80,7 +80,7 @@ GPT.chatCompletion(messages).then(console.log);
 ## ⚙️ Add configurable options
 
 ##  Basic options
-You can select any provider, debug mode and a proxy URL if you want.
+You can select any provider, model, debug mode and a proxy URL if you want.
 ```js
 const { G4F } = require("g4f");
 const GPT = new G4F();
@@ -88,8 +88,9 @@ const messages = [
 	{ role: "user", content: "Hi, what's up?"}
 ];
 const options = {
-	provider: GPT.providers.ChatBase,
-	debug: true, 
+	provider: GPT.providers.GPT,
+    model: "gpt-3.5-turbo"
+	debug: true,
 	proxy: ""
 };
 
@@ -111,7 +112,7 @@ So close your eyes, and let your heart unfurl,
 As I conjure a poem, a gift for your soul to swirl. 💕🌹
 */
 ```
-**Note:** You can specify the provider, debug, and proxy options according to your needs; they are entirely optional.
+**Note:** You can specify the provider, model, debug, and proxy options according to your needs; they are entirely optional.
 
 ##  Advanced options
 You can force an expected response using retry, and manipulate the final response using output.
@@ -123,6 +124,7 @@ const messages = [
     { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
 ];
 const options = {
+    model: "gpt-4",
     debug: true,
 	retry: {
         times: 3,
@@ -263,7 +265,7 @@ your heart feel
 | Option        | Type                          | Description                    |
 | ------------- | ------------------------------ | -------------------------------- |
 | `provider`    | G4F.providers.any | Choose the provider to use for chat completions.      |
-| `model`       | G4F.models.any | Choose the model to use by a provider that supports it |
+| `model`       | string | Choose the model to use by a provider that supports it |
 | `debug`       | boolean | Enable or disable debug mode.     |
 | `proxy`       | string | Specify a proxy as a URL with a string in the host:port format.     |
 |  `retry`      | object | Execute the fetch operation N times in a row until it finishes or the callback function returns true. |

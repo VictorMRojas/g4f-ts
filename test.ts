@@ -4,32 +4,26 @@ import { chunkProcessor } from "./src/util/stream";
 (async() => {
     const GPT = new G4F();
     const messages = [
-        { role: "system", content: "You are a poetic bot, incredibly talented." },
-        { role: "user", content: "What is this?" },
-        { role: "assistant", content: "Just a very talented poetic bot!" },
+        { role: "system", content: "You're an expert bot in poetry."},
         { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
     ];
-
-    const text = await GPT.chatCompletion(messages, { 
-        provider: GPT.providers.GPT, // Provider selected
-        //model: "gpt-3.5-turbo",
-        debug: true, // Debug mode
-        proxy: "", // Add some proxy
-        
-        output: (text) => { // Edit the text response
-            return text + " 💕🌹";
-        },
+    const options = {
+        model: "gpt-4",
+        debug: true,
         retry: {
             times: 3,
-            condition: (text) => { // Check the text response
+            condition: (text:any) => {
                 const words = text.split(" ");
                 return words.length > 10;
             }
+        },
+        output: (text:any) => {
+            return text + " 💕🌹";
         }
-        
-    });
+    };
 
-    console.log(text)
+    const text = await GPT.chatCompletion(messages, options);	
+    console.log(text);
 
     /*
     for await(const item of chunkProcessor(text)) {
