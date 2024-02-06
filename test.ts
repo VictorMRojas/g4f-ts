@@ -27,7 +27,7 @@ import { chunkProcessor } from "./src/util/stream";
     };
 
     const text = await GPT.translation(options);	
-    console.log(text);
+    console.log(text);;
 
     /*
     for await(const item of chunkProcessor(text)) {
