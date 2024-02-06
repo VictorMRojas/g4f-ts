@@ -1,5 +1,9 @@
-const { Readable } = require('stream');
+import { Readable } from 'stream';
 import { AxiosProxyConfig } from 'axios';
+import { Providers } from '../Providers/ProviderList'
+import { models } from '../Providers/ProviderList';
+import ChatCompletionHandler from '../handlers/ChatCompletionHandler';
+import TranslationHandler from '../handlers/TranslationHandler';
 
 export function runLog(logger:any, msg:string, reset?:boolean) {
     logger(msg)
@@ -35,4 +39,45 @@ export function stringToStream(text:string, chunkSize:number) {
             }
         }
     });
+}
+
+export function getProviderFromList(
+    providersList:ChatCompletionHandler["providersList"] | TranslationHandler["providersList"],
+    model?: string, debug?: boolean, logger?:any) {
+    if (debug) runLog(logger.await, "Picking a provider from the working list...");
+
+    let providerWorking = lookForProvider(providersList, model);        
+
+    if (!providerWorking) {
+        if (debug) runLog(logger.error, "Provider not found.");
+        throw Error("Provider not found");
+    }
+
+    if (debug) {
+        runLog(logger.success, `Provider found: ${providerWorking.name}`, true);
+    }
+
+    return providerWorking;
+}
+
+function lookForProvider(
+    providersList:ChatCompletionHandler["providersList"] | TranslationHandler["providersList"], 
+    model?: string) 
+{
+    let providerWorking;
+    
+    for(const provider of Object.values(providersList)) {
+        if (!model && provider && provider.working) {
+            providerWorking = provider;
+            break;77
+        } 
+        
+        if (model && models[provider.name].includes(model)) {
+            if (provider.working) {
+                providerWorking = provider;
+                break;
+            }
+        }
+    }
+    return providerWorking;
 }

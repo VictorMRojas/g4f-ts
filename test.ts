@@ -8,8 +8,9 @@ import { chunkProcessor } from "./src/util/stream";
         { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
     ];
     const options = {
-        model: "davinci-002",
-        provider: GPT.providers.GPT,
+        text: "hola, como estas?",
+        source: "es",
+        target: "ko",
         debug: false,
         /*
         retry: {
@@ -25,7 +26,7 @@ import { chunkProcessor } from "./src/util/stream";
         */
     };
 
-    const text = await GPT.chatCompletion(messages, options);	
+    const text = await GPT.translation(options);	
     console.log(text);
 
     /*

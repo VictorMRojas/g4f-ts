@@ -1,4 +1,4 @@
-import { providers } from '../ProviderList'
+import { providers } from '../Providers/ProviderList'
 
 export function handleStream(response:any, stream:boolean, responseFunc:any) {
     if (!stream) return responseFunc(response.data);

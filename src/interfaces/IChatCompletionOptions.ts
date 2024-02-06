@@ -1,4 +1,4 @@
-export interface IOptions {
+export interface IChatCompletionOptions {
     debug?: boolean;
     model?: string;
     provider?: any;

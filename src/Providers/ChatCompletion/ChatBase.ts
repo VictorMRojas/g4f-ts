@@ -1,11 +1,12 @@
 import axios, { AxiosResponse } from 'axios';
-import { IMessage } from '../interfaces/IMessage';
-import { createProxyConfig, generateRandomId } from '../util/util';
-import { handleStream } from '../util/stream';
-import { IOptions } from '../interfaces/IOptions';
+import { IMessage } from '../../interfaces/IMessage';
+import { createProxyConfig, generateRandomId } from '../../util/util';
+import { handleStream } from '../../util/stream';
+import { IChatCompletionOptions } from '../../interfaces/IChatCompletionOptions';
 
 class ChatBase {
     name: string;
+    type: string;
     url: string;
     default_model: string;
     supports_message_history: boolean;
@@ -15,6 +16,7 @@ class ChatBase {
 
     constructor() {
         this.name = "ChatBase";
+        this.type = "ChatCompletion";
         this.url = "https://www.chatbase.co";
         this.default_model = "gpt-3.5-turbo",
         this.supports_message_history = true;
@@ -26,11 +28,11 @@ class ChatBase {
     /**
      * Asynchronously generates a chat response based on input messages.
      * @param {Array} messages - An array of messages for the chat.
-     * @param {IOptions} options - Options for chat generation (optional).
+     * @param {IChatCompletionOptions} options - Options for chat generation (optional).
      * @returns {Promise<string>} - A promise that resolves with the generated chat result as a string.
      * @throws {Error} - Throws an error if fetching data fails.
      */
-    async createAsyncGenerator(messages:IMessage[], options:IOptions): Promise<object> {
+    async fetchData(messages:IMessage[], options:IChatCompletionOptions): Promise<object> {
         const chat_id: string = 'z2c2HSfKnCTh5J4650V0I';
 
         const headers = {

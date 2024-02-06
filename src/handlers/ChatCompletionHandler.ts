@@ -1,19 +1,22 @@
-import { IOptions } from "./interfaces/IOptions"
+import { IChatCompletionOptions } from "../interfaces/IChatCompletionOptions"
 import { Signale } from 'signale';
-import { IMessage } from "./interfaces/IMessage";
-import { runLog, stringToStream } from "./util/util";
-import { providers, models } from './ProviderList';
+import { IMessage } from "../interfaces/IMessage";
+import { getProviderFromList, runLog, stringToStream } from "../util/util";
+import { providers, models } from '../Providers/ProviderList';
 
 const model_log = new Signale({ interactive: true, scope: 'model' });
 const provider_log = new Signale({ interactive: true, scope: 'provider' });
 const fetch_log = new Signale({ interactive: true, scope: 'fetch' });
 const output_log = new Signale({ interactive: true, scope: 'output' });
 
-class ProviderHandler {
+class ChatCompletionHandler {
     providersList: typeof providers;
 
     constructor() {
-        this.providersList = providers;
+        this.providersList = Object.fromEntries(
+            Object.entries(providers)
+                .filter(([_, provider]: [string, any]) => provider.type === "ChatCompletion")
+            );
     }
 
     /**
@@ -22,9 +25,9 @@ class ProviderHandler {
      * @param {Options} options - Options for chat generation (optional).
      * @returns {Promise<any>} - Promise that resolves with the chat generation result.
      */    
-    async generateCompletion(messages: Array<IMessage>, options?: IOptions): Promise<any> {
+    async generateCompletion(messages: Array<IMessage>, options?: IChatCompletionOptions): Promise<any> {
         let { debug, model, provider, stream, retry, output, chunkSize } = options || {};        
-        if (!provider) provider = this.getProviderFromList(debug, model); 
+        if (!provider) provider = getProviderFromList(this.providersList, model, debug, provider_log); 
         else if (debug) runLog(provider_log.success, `Provider found: ${provider.name}`, true)
 
         if (debug) runLog(model_log.success, `Using the model: ${model || provider.default_model}`, true);
@@ -42,9 +45,9 @@ class ProviderHandler {
     }
 
     async getText(messages:Array<IMessage>, options:any, provider:any) {
-        const { debug, stream, proxy } = options || {};
+        const { debug } = options || {};
         if (debug) runLog(provider_log.await, `Fetching data from the provider: ${provider.name}`);
-        const text = await provider.createAsyncGenerator(messages, options);
+        const text = await provider.fetchData(messages, options);
         if (debug) runLog(provider_log.success, `Data was successfully fetched from the ${provider.name} provider`, true);            
         return text;
     }
@@ -58,7 +61,7 @@ class ProviderHandler {
     }
 
     async retryOperations(messages:Array<IMessage>, options:any, provider:any) {
-        let { debug, retry, proxy } = options || {};
+        let { debug, retry } = options || {};
 
         let responseText: string = "", conditionResult: boolean = false;
         let stayInLoop = false, flag = 0;
@@ -69,7 +72,7 @@ class ProviderHandler {
             const NoStreamOptions = { ...options };            
             NoStreamOptions.stream = false;
             
-            responseText = await provider.createAsyncGenerator(messages, NoStreamOptions);            
+            responseText = await provider.fetchData(messages, NoStreamOptions);            
             conditionResult = await Promise.resolve(this.attemptOperation(retry.condition, responseText));
             flag++;
 
@@ -92,43 +95,6 @@ class ProviderHandler {
         if (debug) runLog(output_log.success, `Output function runtime finalized.`, true);
         return text;
     }
-    
-    getProviderFromList(debug?: boolean, model?: string) {
-        if (debug) runLog(provider_log.await, "Picking a provider from the working list...");
-
-        let providerWorking = this.lookForProvider(model);        
-
-        if (!providerWorking) {
-            if (debug) runLog(provider_log.error, "Provider not found.");
-            throw Error("Provider not found");
-        }
-
-        if (debug) {
-            runLog(provider_log.success, `Provider found: ${providerWorking.name}`, true);
-        }
-
-        return providerWorking;
-    }
-
-    lookForProvider(model?: string) {
-        let providerWorking;
-        
-        for(const provider of Object.values(this.providersList)) {
-            if (!model && provider.working) {
-                providerWorking = provider;
-                break;
-            } 
-            
-            if (model && models[provider.name].includes(model)) {
-                if (provider.working) {
-                    providerWorking = provider;
-                    break;
-                }
-            }
-        }
-
-        return providerWorking;
-    }
 
     async attemptOperation(condition: Function, text: string) {
         try {
@@ -140,4 +106,4 @@ class ProviderHandler {
     };
 }
 
-export { providers, ProviderHandler as default };
+export { providers, ChatCompletionHandler as default };

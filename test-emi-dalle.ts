@@ -28,6 +28,6 @@ const data = `{
           console.error('Error al escribir el archivo:', err);
       } else {
           console.log('La imagen se ha guardado correctamente en imagen.jpg');
-      }      
+      }
   });
 })();
