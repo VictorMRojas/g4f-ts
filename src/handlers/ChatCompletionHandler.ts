@@ -2,7 +2,7 @@ import { IChatCompletionOptions } from "../interfaces/IChatCompletionOptions"
 import { Signale } from 'signale';
 import { IMessage } from "../interfaces/IMessage";
 import { getProviderFromList, runLog, stringToStream } from "../util/util";
-import { providers, models } from '../Providers/ProviderList';
+import { providers } from '../Providers/ProviderList';
 
 const model_log = new Signale({ interactive: true, scope: 'model' });
 const provider_log = new Signale({ interactive: true, scope: 'provider' });
