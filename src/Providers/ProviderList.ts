@@ -1,18 +1,16 @@
 import Bing from "./ChatCompletion/Bing";
 import ChatBase from "./ChatCompletion/ChatBase";
 import GPT from "./ChatCompletion/GPT";
-import Geek from "./ChatCompletion/Geek";
 import Translate from "./Translation/Translate";
 
 interface Providers {
-    [key: string]: ChatBase | Bing | GPT | Geek | Translate;
+    [key: string]: ChatBase | Bing | GPT | Translate;
 }
 
 const providers: Providers = {
     GPT: new GPT(),
     ChatBase: new ChatBase(),
     Bing: new Bing(),
-    Geek: new Geek(),
     Translate: new Translate()
 };
 
