@@ -17,7 +17,7 @@ class Geek {
         this.supports_gpt_4_turbo = true;
         this.supports_message_history = true;
         this.need_slice_text = true;
-        this.working = true;
+        this.working = false;
     }
 
     /**
@@ -28,9 +28,7 @@ class Geek {
      * @throws {Error} - Throws an error if fetching data fails.
      */
     async createAsyncGenerator(messages:IMessage[], stream:boolean, proxy?:string): Promise<object> {
-
         const model = "gpt-4";
-
         const headers = {
             'authority': 'ai.fakeopen.com',
             'accept': '*/*',
@@ -62,16 +60,14 @@ class Geek {
             headers: headers, proxy: createProxyConfig(proxy),
             responseType: stream ? 'stream' : 'text'
         }).then(async response => {
-                  return handleStream({ data: response.data, name: this.name }, stream, this.handleResponse);       
+            return handleStream({ data: response.data, name: this.name }, stream, this.handleResponse);       
         }).catch((e) => {
-                console.log(e);
             if (e.message.startsWith("Invalid response.")) throw new Error(e.message);
             throw new Error("Failed to fetch data. Please try again later.");          
         });
     }
 
     handleResponse(text:string) {
-        console.log(text);
         const jsonObject = JSON.parse(text);
         const lastChoice = jsonObject.choices[jsonObject.choices.length - 1].message.content;
         return lastChoice;
