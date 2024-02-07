@@ -7,7 +7,7 @@ This package can be used in both Typescript and CommonJS/ModuleJS environments.
 - [🛠️ Installation](#installation)
     + [Using NPM](#using-npm)
     + [Using yarn](#using-yarn)
-- [Chat Completion](#chat-completion)
+- [📤 Chat Completion](#chat-completion)
     + [🎯 Examples](#examples)
         - [⚙️ Basic usage](#basic-usage)
             + [Simple fetch](#simple-fetch)
