@@ -47,13 +47,11 @@ class GPT {
             responseType: options?.stream ? 'stream' : 'text'
         }).then(async response => {
             return handleStream({ data: response.data, name: this.name }, options?.stream || false, this.handleResponse.bind(this));       
-        }).catch((e) => {
-            if (e.message.startsWith("Invalid response.")) throw new Error(e.message);
-            throw new Error("Failed to fetch data. Please try again later.");
-        });
+        })
     }
 
     handleResponse(text:any) {
+        text = text.substring(text.indexOf('{'), text.length);
         const obj = JSON.parse(text);
         if (!obj || !obj.gpt) throw new Error("Invalid response.");
         return obj.gpt;
