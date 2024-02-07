@@ -23,7 +23,7 @@ It will capture the messages and the context, and any provider will respond with
 const { G4F } = require("g4f");
 const GPT = new G4F();
 const messages = [
-	{ role: "user", content: "Hi, what's up?"}
+    { role: "user", content: "Hi, what's up?"}
 ];
 GPT.chatCompletion(messages).then(console.log);
 // Hello! I'm here to help you with anything you need. What can I do for you today? 😊
@@ -36,8 +36,8 @@ You can provide your own instructions for the conversation before it starts usin
 const { G4F } = require("g4f");
 const GPT = new G4F();
 const messages = [
-	{ role: "system", content: "You're an expert bot in poetry."},
-	{ role: "user", content: "Hi, write me something."}
+    { role: "system", content: "You're an expert bot in poetry."},
+    { role: "user", content: "Hi, write me something."}
 ];
 GPT.chatCompletion(messages).then(console.log);
 /*
@@ -56,8 +56,8 @@ And help you thrive.
 const { G4F } = require("g4f");
 const GPT = new G4F();
 const messages = [
-	{ role: "system", content: "You're a math teacher."},
-	{ role: "user", content: "How much is 2 plus 2?" },
+    { role: "system", content: "You're a math teacher."},
+    { role: "user", content: "How much is 2 plus 2?" },
     { role: "assistant", content: "2 plus 2 equals 4." },
     { role: "user", content: "You're really good at math!" },
     { role: "assistant", content: "Thank you! I'm glad I could help you with your math question." },
@@ -85,7 +85,7 @@ You can select any provider, model, debug mode and a proxy URL if you want.
 const { G4F } = require("g4f");
 const GPT = new G4F();
 const messages = [
-	{ role: "user", content: "Hi, what's up?"}
+    { role: "user", content: "Hi, what's up?"}
 ];
 const options = {
 	provider: GPT.providers.GPT,
@@ -120,7 +120,7 @@ You can force an expected response using retry, and manipulate the final respons
 const { G4F } = require("g4f");
 const GPT = new G4F();
 const messages = [
-	{ role: "system", content: "You're an expert bot in poetry."},
+    { role: "system", content: "You're an expert bot in poetry."},
     { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
 ];
 const options = {
@@ -139,8 +139,8 @@ const options = {
 };
 
 (async() => {
-	const text = await GPT.chatCompletion(messages, options);	
-	console.log(text);
+    const text = await GPT.chatCompletion(messages, options);	
+    console.log(text);
 })();
 /* 
 [provider] » √  success   Provider found: GPT
@@ -166,7 +166,7 @@ When using the stream option, the chatCompletion function will return an object 
 const { G4F } = require("g4f");
 const GPT = new G4F();
 const messages = [
-	{ role: "system", content: "You're an expert bot in poetry."},
+    { role: "system", content: "You're an expert bot in poetry."},
     { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
 ];
 const options = {
@@ -175,8 +175,8 @@ const options = {
 };
 
 (async() => {
-	const response = await GPT.chatCompletion(messages, options);	
-	console.log(response);
+    const response = await GPT.chatCompletion(messages, options);	
+    console.log(response);
 })();
 /*
 { 
@@ -192,7 +192,7 @@ I **highly recommend** you to use the integrated chunkProcessor function so that
 const { G4F, chunkProcessor } = require("g4f");
 const GPT = new G4F();
 const messages = [
-	{ role: "system", content: "You're an expert bot in poetry."},
+    { role: "system", content: "You're an expert bot in poetry."},
     { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
 ];
 const options = {
@@ -201,8 +201,8 @@ const options = {
 };
 
 (async() => {
-	const response = await GPT.chatCompletion(messages, options);	
-	let text = "";
+    const response = await GPT.chatCompletion(messages, options);
+    let text = "";
     for await (const chunk of chunkProcessor(response)) {
         text += chunk;
     }
@@ -222,7 +222,7 @@ When employing retry, output option, or both, you have the flexibility to select
 const { G4F, chunkProcessor } = require("g4f");
 const GPT = new G4F();
 const messages = [
-	{ role: "system", content: "You're an expert bot in poetry."},
+    { role: "system", content: "You're an expert bot in poetry."},
     { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
 ];
 const options = {
@@ -242,8 +242,8 @@ const options = {
 };
 
 (async() => {
-	const response = await GPT.chatCompletion(messages, options);	
-	for await (const chunk of chunkProcessor(response)) {
+    const response = await GPT.chatCompletion(messages, options);
+    for await (const chunk of chunkProcessor(response)) {
         console.log(chunk);    
     }
 })();
