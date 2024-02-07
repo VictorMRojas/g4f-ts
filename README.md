@@ -13,15 +13,15 @@ This package can be used in both Typescript and CommonJS/ModuleJS environments.
         + [Give your instructions](#-give-your-instructions)
         + [Follow up on the conversation context](#-follow-up-on-the-conversation-context)
     + [✏️ RESUME: Conversation roles](#-resume:-conversation-roles)
-    + [⚙️ Add configurable options](#-configurable-options)
+    + [⚙️ Add configurable options](#-add-configurable-options)
 
 ## 🛠️ Installation
 
-# Using npm:
+### Using npm:
 
 `npm install g4f`
 
-# Using yarn:
+### Using yarn:
 
 `yarn add g4f`
 
