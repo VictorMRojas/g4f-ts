@@ -42,6 +42,9 @@ This package can be used in both Typescript and CommonJS/ModuleJS environments.
 
 `yarn add g4f`
 
+<a id="chat-completion"></a>
+# 📤 Chat Completion
+
 <a id="examples"></a>
 ## 🎯 Examples
 
