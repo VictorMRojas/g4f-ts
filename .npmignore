@@ -5,3 +5,8 @@
 
 tsconfig.json
 tsup.config.ts
+
+examples.test.ts
+.babelrc
+jest.config.js
+main.ts

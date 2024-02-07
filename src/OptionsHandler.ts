@@ -36,6 +36,7 @@ class OptionsHandler {
         if (!options || typeof options !== 'object') throw new Error("Options must be a valid object.");
         if (options.provider && !Object.keys(providers).some(key => options.provider instanceof providers[key].constructor)) throw new Error("Provider option must be valid. Try { provider: (new G4F()).providers.Translate, ... }");
         if (options.provider && options.provider.type != "Translation") throw new Error("The provider type should be 'Translation'")
+        if (!options.text || options.text && options.text.trim().length == 0) throw new Error("You need to include a text for the translation.");        
         return true;
     }
 }

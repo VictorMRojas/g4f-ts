@@ -16,7 +16,7 @@ class TranslationHandler {
     }
 
     /**
-     * Translate text to a target language.
+     * Translates text to a target language.
      * @param {Options} options - Options for translation.
      * @returns {Promise<any>} - Promise that resolves with a object with the translated data.
      */

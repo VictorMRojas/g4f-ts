@@ -38,15 +38,15 @@ class GPT {
         const data = {
             messages,
             "prompt": messages[messages.length - 1].content,
-            model: options.model || "gpt-4",
+            model: options?.model || "gpt-4",
             markdown: false
         };
         
         return axios.post(this.url, data, {
-            headers: headers, proxy: createProxyConfig(options.proxy),
-            responseType: options.stream ? 'stream' : 'text'
+            headers: headers, proxy: createProxyConfig(options?.proxy),
+            responseType: options?.stream ? 'stream' : 'text'
         }).then(async response => {
-            return handleStream({ data: response.data, name: this.name }, options.stream || false, this.handleResponse);       
+            return handleStream({ data: response.data, name: this.name }, options?.stream || false, this.handleResponse.bind(this));       
         }).catch((e) => {
             if (e.message.startsWith("Invalid response.")) throw new Error(e.message);
             throw new Error("Failed to fetch data. Please try again later.");

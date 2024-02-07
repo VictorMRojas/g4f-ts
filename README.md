@@ -7,8 +7,8 @@ This package can be used in both Typescript and CommonJS/ModuleJS environments.
 - [🛠️ Installation](#installation)
     + [Using NPM](#using-npm)
     + [Using yarn](#using-yarn)
-- [📤 Chat Completion](#chat-completion)
-    + [🎯 Examples](#examples)
+- [🎯 Examples](#examples)
+    + [📤 Chat Completion](#chat-completion)    
         - [⚙️ Basic usage](#basic-usage)
             + [Simple fetch](#simple-fetch)
             + [Give your instructions](#give-your-instructions)
@@ -24,7 +24,9 @@ This package can be used in both Typescript and CommonJS/ModuleJS environments.
             + [Stream on postprocessing](#stream-on-postprocessing)
         - [✏️ RESUME: Configurable options](#resume-configurable-options)
 - [📡 Translation](#translation)
-    + Coming soon...
+    + [Usage](#translation-usage)
+    + [Options](#translation-options)
+    + [Languages supported](#translation-options)
 - [📷 Image Generation](#image-generation)
     + Coming soon...
 - [📚 Models](#models)
@@ -44,11 +46,14 @@ This package can be used in both Typescript and CommonJS/ModuleJS environments.
 
 `yarn add g4f`
 
-<a id="chat-completion"></a>
-# 📤 Chat Completion
+<br>
 
 <a id="examples"></a>
-## 🎯 Examples
+# 🎯 Examples
+
+<a id="chat-completion"></a>
+## 📤 Chat Completion
+With the chatCompletion function, you will be able to obtain a textual response to a conversation with some context, using providers and models designed for this task. In addition, you will be able to manipulate the answer before converting it to a stream or force the AI to give you a certain answer by generating several retries.
 
 <a id="basic-usage"></a>
 ## ⚙️ Basic Usage
@@ -59,11 +64,11 @@ This package can be used in both Typescript and CommonJS/ModuleJS environments.
 It will capture the messages and the context, and any provider will respond with a string.
 ```js
 const { G4F } = require("g4f");
-const GPT = new G4F();
+const g4f = new G4F();
 const messages = [
     { role: "user", content: "Hi, what's up?"}
 ];
-GPT.chatCompletion(messages).then(console.log);
+g4f.chatCompletion(messages).then(console.log);
 // Hello! I'm here to help you with anything you need. What can I do for you today? 😊
 ```
 **Note:** The conversation needs to include at least one message with the role **user** to provide a proper answer.
@@ -74,12 +79,12 @@ GPT.chatCompletion(messages).then(console.log);
 You can provide your own instructions for the conversation before it starts using the **system** role.
 ```js
 const { G4F } = require("g4f");
-const GPT = new G4F();
+const g4f = new G4F();
 const messages = [
     { role: "system", content: "You're an expert bot in poetry."},
     { role: "user", content: "Hi, write me something."}
 ];
-GPT.chatCompletion(messages).then(console.log);
+g4f.chatCompletion(messages).then(console.log);
 /*
 Sure, I can write you a poem. Here is a short one: 
 The Wind:
@@ -95,7 +100,7 @@ And help you thrive.
 ## Follow up on the conversation context
 ```js
 const { G4F } = require("g4f");
-const GPT = new G4F();
+const g4f = new G4F();
 const messages = [
     { role: "system", content: "You're a math teacher."},
     { role: "user", content: "How much is 2 plus 2?" },
@@ -105,20 +110,20 @@ const messages = [
     { role: "user", content: "What was the first question I asked you?" }
 ];
 
-GPT.chatCompletion(messages).then(console.log);
+g4f.chatCompletion(messages).then(console.log);
 // The first question you asked me was "How much is 2 plus 2?".
 ```
-**Note:** GPT responses use the **assistant** role and an appropriate conversation structure alternates between the user and the assistant, as seen in the previous example.
+**Note:** AI responses use the **assistant** role and an appropriate conversation structure alternates between the user and the assistant, as seen in the previous example.
 
 <a id="resume-conversation-roles"></a>
 
 ## ✏️ RESUME: Conversation roles
 
-| Role | Description                    |
-| ------------- | ------------------------------ |
-| `system`      | Used for providing instructions and context prior to the conversation.       |
-| `user`   | Used to identify user messages     |
-| `assistant`   | Used to identify GPT messages     |
+| Role          | Description                                                            |
+| ------------- | ---------------------------------------------------------------------- |
+| `system`      | Used for providing instructions and context prior to the conversation. |
+| `user`        | Used to identify user messages                                         |
+| `assistant`   | Used to identify AI messages                                           |
 
 <a id="add-configurable-options"></a>
 
@@ -130,24 +135,25 @@ GPT.chatCompletion(messages).then(console.log);
 You can select any provider, model, debug mode and a proxy URL if you want.
 ```js
 const { G4F } = require("g4f");
-const GPT = new G4F();
+const g4f = new G4F();
 const messages = [
     { role: "user", content: "Hi, what's up?"}
 ];
 const options = {
-    provider: GPT.providers.GPT,
+    provider: g4f.providers.GPT,
     model: "gpt-3.5-turbo",
     debug: true,
     proxy: ""
 };
 
 (async() => {
-	const text = await GPT.chatCompletion(messages, options);	
+	const text = await g4f.chatCompletion(messages, options);	
 	console.log(text);
 })();
 /*
-[provider] » √  success   Provider found: ChatBase
-[provider] » √  success   Data fetched succesfully for the ChatBase provider
+[provider] » √  success   Provider found: GPT
+[model] » √  success   Using the model: gpt-3.5-turbo
+[provider] » √  success   Data was successfully fetched from the GPT provider
 
 In the realm of words, where verses dance and rhyme,
 I shall craft a poem, a moment frozen in time.
@@ -167,7 +173,7 @@ As I conjure a poem, a gift for your soul to swirl. 💕🌹
 You can force an expected response using retry, and manipulate the final response using output.
 ```js
 const { G4F } = require("g4f");
-const GPT = new G4F();
+const g4f = new G4F();
 const messages = [
     { role: "system", content: "You're an expert bot in poetry."},
     { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
@@ -188,11 +194,12 @@ const options = {
 };
 
 (async() => {
-    const text = await GPT.chatCompletion(messages, options);	
+    const text = await g4f.chatCompletion(messages, options);	
     console.log(text);
 })();
 /* 
 [provider] » √  success   Provider found: GPT
+[model] » √  success   Using the model: gpt-4
 [fetch] » √  success   [1/3] - Retry #1
 [output] » √  success   Output function runtime finalized.
 
@@ -219,18 +226,18 @@ When using the stream option, the chatCompletion function will return an object 
 ##  Basic usage
 ```js
 const { G4F } = require("g4f");
-const GPT = new G4F();
+const g4f = new G4F();
 const messages = [
     { role: "system", content: "You're an expert bot in poetry."},
     { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
 ];
 const options = {
-    provider: GPT.providers.ChatBase,
+    provider: g4f.providers.ChatBase,
     stream: true
 };
 
 (async() => {
-    const response = await GPT.chatCompletion(messages, options);	
+    const response = await g4f.chatCompletion(messages, options);	
     console.log(response);
 })();
 /*
@@ -247,18 +254,18 @@ const options = {
 I **highly recommend** you to use the integrated chunkProcessor function so that you don't have to format each chunk into a single string format response.
 ```js
 const { G4F, chunkProcessor } = require("g4f");
-const GPT = new G4F();
+const g4f = new G4F();
 const messages = [
     { role: "system", content: "You're an expert bot in poetry."},
     { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
 ];
 const options = {
-    provider: GPT.providers.ChatBase,
+    provider: g4f.providers.ChatBase,
     stream: true
 };
 
 (async() => {
-    const response = await GPT.chatCompletion(messages, options);
+    const response = await g4f.chatCompletion(messages, options);
     let text = "";
     for await (const chunk of chunkProcessor(response)) {
         text += chunk;
@@ -279,13 +286,13 @@ And a heart full of grace.
 When employing retry, output option, or both, you have the flexibility to select the size of each streamed chunk.
 ```js
 const { G4F, chunkProcessor } = require("g4f");
-const GPT = new G4F();
+const g4f = new G4F();
 const messages = [
     { role: "system", content: "You're an expert bot in poetry."},
     { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
 ];
 const options = {
-    provider: GPT.providers.ChatBase,
+    provider: g4f.providers.ChatBase,
     stream: true,
     chunkSize: 15,
     retry: {
@@ -301,7 +308,7 @@ const options = {
 };
 
 (async() => {
-    const response = await GPT.chatCompletion(messages, options);
+    const response = await g4f.chatCompletion(messages, options);
     for await (const chunk of chunkProcessor(response)) {
         console.log(chunk);    
     }
@@ -337,8 +344,52 @@ your heart feel
 | `chunkSize` | number | Determine the size of chunks streamed. This only works if the stream option is true and if using retry or condition. |
 
 <a id="translation"></a>
+
 # 📡 Translation
-Coming soon...
+With the translation function, you can convert a text to a target language using AI.
+
+<a id="translation-usage"></a>
+
+## Usage
+```js
+const { G4F } = require("g4f");
+
+const g4f = new G4F();
+const options = {
+    text: "Hello World",
+    source: "en",
+    target: "ko"
+};
+
+const text = await g4f.translation(options);
+console.log(text);
+/* 
+{
+  source: { code: 'en', lang: 'English' },
+  target: { code: 'ko', lang: '한국어' },
+  translation: { parts: [ [Object] ], result: '안녕하세요 세계' }
+}
+*/
+```
+**Note:** You need to identify the language source ID and included it by your own, in the future
+this will be solved with AI, and you wouldn't need to specify it.
+
+<a id="translation-options"></a>
+
+## ✏️ RESUME: Translation options
+| Option         | Type    | Description                               |
+| -------------- | ------- | ----------------------------------------- |
+| `text`         | string  | Specify the text to translate             |
+| `source`       | string  | Specify the source text language.         |
+| `target`       | string  | Specify the target language to translate. |
+
+<a id="translation-langs"></a>
+
+## 🌏 Languages available
+| Provider    | Languages supported        |
+| ----------- | -------------------------- |
+| TranslateAI | https://rentry.co/3qi3wqnr |
+
 <a id="image-generation"></a>
 # 📷 Image Generation
 Coming soon...
@@ -348,29 +399,29 @@ Coming soon...
 ## 📚 Models
 | Model                  | Providers that support it                   |
 | ---------------------- | ------------------------------------------- |
-| gpt-4                  | `G4F.provider.GPT`, `G4F.provider.Bing`     |
-| gpt-4-0613             | `G4F.provider.GPT`                          |
-| gpt-4-32k              | `G4F.provider.GPT`                          |
-| gpt-4-0314             | `G4F.provider.GPT`                          |
-| gpt-4-32k-0314         | `G4F.provider.GPT`                          |
-| gpt-3.5-turbo          | `G4F.provider.GPT`, `G4F.provider.ChatBase` |
-| gpt-3.5-turbo-16k      | `G4F.provider.GPT`                          |
-| gpt-3.5-turbo-0613     | `G4F.provider.GPT`                          |
-| gpt-3.5-turbo-16k-0613 | `G4F.provider.GPT`                          |
-| gpt-3.5-turbo-0301     | `G4F.provider.GPT`                          |
-| text-davinci-003       | `G4F.provider.GPT`                          |
-| text-davinci-002       | `G4F.provider.GPT`                          |
-| code-davinci-002       | `G4F.provider.GPT`                          |
-| gpt-3                  | `G4F.provider.GPT`                          |
-| text-curie-001         | `G4F.provider.GPT`                          |
-| text-babbage-001       | `G4F.provider.GPT`                          |
-| text-ada-001           | `G4F.provider.GPT`                          |
-| davinci                | `G4F.provider.GPT`                          |
-| curie                  | `G4F.provider.GPT`                          |
-| babbage                | `G4F.provider.GPT`                          |
-| ada                    | `G4F.provider.GPT`                          |
-| babbage-002            | `G4F.provider.GPT`                          |
-| davinci-002            | `G4F.provider.GPT`                          |
+| gpt-4                  | `g4f.provider.GPT`, `g4f.provider.Bing`     |
+| gpt-4-0613             | `g4f.provider.GPT`                          |
+| gpt-4-32k              | `g4f.provider.GPT`                          |
+| gpt-4-0314             | `g4f.provider.GPT`                          |
+| gpt-4-32k-0314         | `g4f.provider.GPT`                          |
+| gpt-3.5-turbo          | `g4f.provider.GPT`, `g4f.provider.ChatBase` |
+| gpt-3.5-turbo-16k      | `g4f.provider.GPT`                          |
+| gpt-3.5-turbo-0613     | `g4f.provider.GPT`                          |
+| gpt-3.5-turbo-16k-0613 | `g4f.provider.GPT`                          |
+| gpt-3.5-turbo-0301     | `g4f.provider.GPT`                          |
+| text-davinci-003       | `g4f.provider.GPT`                          |
+| text-davinci-002       | `g4f.provider.GPT`                          |
+| code-davinci-002       | `g4f.provider.GPT`                          |
+| gpt-3                  | `g4f.provider.GPT`                          |
+| text-curie-001         | `g4f.provider.GPT`                          |
+| text-babbage-001       | `g4f.provider.GPT`                          |
+| text-ada-001           | `g4f.provider.GPT`                          |
+| davinci                | `g4f.provider.GPT`                          |
+| curie                  | `g4f.provider.GPT`                          |
+| babbage                | `g4f.provider.GPT`                          |
+| ada                    | `g4f.provider.GPT`                          |
+| babbage-002            | `g4f.provider.GPT`                          |
+| davinci-002            | `g4f.provider.GPT`                          |
 
 <a id="providers"></a>
 
