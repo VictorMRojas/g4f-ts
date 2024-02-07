@@ -161,8 +161,6 @@ describe('Chat Completion examples', () => {
 
 describe('Translation examples', () => { 
     test('Usage', async() => {
-        const { G4F } = require("g4f");
-
         const g4f = new G4F();
         const options = {
             text: "Hello World",

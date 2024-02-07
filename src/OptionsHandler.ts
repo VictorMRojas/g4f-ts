@@ -1,6 +1,7 @@
 import { providers } from "./Providers/ProviderList";
 import { IChatCompletionOptions } from "./interfaces/IChatCompletionOptions";
 import { ITranslationOptions } from "./interfaces/ITranslationOptions";
+import { models } from "./Providers/ProviderList";
 
 class OptionsHandler {
     /**
@@ -13,6 +14,7 @@ class OptionsHandler {
         if (!options || typeof options !== 'object') throw new Error("Options must be a valid object.");
         if (options.provider && !Object.keys(providers).some(key => options.provider instanceof providers[key].constructor)) throw new Error("Provider option must be valid. Try { provider: (new G4F()).providers.GPT, ... }");
         if (options.provider && options.provider.type != "ChatCompletion") throw new Error("The provider type should be 'ChatCompletion'")
+        if (options.provider && options.model && !models[options.provider.name].some(model => model == options.model)) throw new Error("You need to include a model that is compatible with the selected provider.");
         if (options.retry) {
             if (!options.retry.times) throw new Error("Times option must be provided.");
             if (isNaN(options.retry.times)) throw new Error("Times option must be an integer.");
