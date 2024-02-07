@@ -24,7 +24,9 @@ This package can be used in both Typescript and CommonJS/ModuleJS environments.
             + [Stream on postprocessing](#stream-on-postprocessing)
         - [✏️ RESUME: Configurable options](#resume-configurable-options)
 - [📡 Translation](#translation)
+    + Coming soon...
 - [📷 Image Generation](#image-generation)
+    + Coming soon...
 - [📚 Models](#models)
 - [🚀 Providers](#providers)
 - [📰 TO-DO](#to-do)
