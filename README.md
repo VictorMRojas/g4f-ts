@@ -23,8 +23,8 @@ This package can be used in both Typescript and CommonJS/ModuleJS environments.
             + [How to handle streamable data?](#how-to-handle-streamable-data)
             + [Stream on postprocessing](#stream-on-postprocessing)
         - [✏️ RESUME: Configurable options](#resume-configurable-options)
-- [Translation](#translation)
-- [Image Generation](#image-generation)
+- [📡 Translation](#translation)
+- [📷 Image Generation](#image-generation)
 - [📚 Models](#models)
 - [🚀 Providers](#providers)
 - [📰 TO-DO](#to-do)
@@ -333,6 +333,13 @@ your heart feel
 | `output`      | function: string | Callback function that receives a string as the final text response so you can edit it. This function executes after the retry fetch operations. This function should return a string. |
 | `stream` | boolean | Determine if the data should be streamed in parts or not. |
 | `chunkSize` | number | Determine the size of chunks streamed. This only works if the stream option is true and if using retry or condition. |
+
+<a id="translation"></a>
+# 📡 Translation
+Coming soon...
+<a id="image-generation"></a>
+# 📷 Image Generation
+Coming soon...
 
 <a id="models"></a>
 
