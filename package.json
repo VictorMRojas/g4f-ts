@@ -1,7 +1,7 @@
 {
   "name": "g4f",
   "version": "1.3.0",
-  "description": "ChatGPT but free",
+  "description": "GPT4 for free, No API key, no auth.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -13,6 +13,7 @@
     "test": "jest"
   },
   "keywords": [
+    "gpt4free",
     "gpt-free",
     "free-gpt",
     "gpt",
