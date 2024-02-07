@@ -27,7 +27,7 @@ This package can be used in both Typescript and CommonJS/ModuleJS environments.
 - [📡 Translation](#translation)
     + [Usage](#translation-usage)
     + [Options](#translation-options)
-    + [Languages supported](#translation-options)
+    + [Languages supported](#translation-langs)
 - [📷 Image Generation](#image-generation)
     + Coming soon...
 - [📚 Models](#models)
