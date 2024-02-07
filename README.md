@@ -3,17 +3,29 @@ GPT4FREE is a package that simplifies interaction with various Artificial Intell
 
 This package can be used in both Typescript and CommonJS/ModuleJS environments.
 
-### Installation
+## 📚 Table of Contents
+- [🛠️ Installation](#-installation)
+    + [Using NPM](#-using-npm)
+    + [Using yarn](#-using-yarn)
+- [🎯 Examples](#-🎯-examples)
+    + [⚙️ Basic usage](#-⚙️-basic-usage)
+        + [Simple fetch](#-simple-fetch)
+        + [Give your instructions](#-give-your-instructions)
+        + [Follow up on the conversation context](#-follow-up-on-the-conversation-context)
+    + [✏️ RESUME: Conversation roles](#-✏️-resume:-conversation-roles)
+    + [⚙️ Add configurable options]("#-⚙️-add-configurable-options)
 
-Using npm:
+## 🛠️ Installation
+
+# Using npm:
 
 `npm install g4f`
 
-Using yarn:
+# Using yarn:
 
 `yarn add g4f`
 
-## 🎯  Examples
+## 🎯 Examples
 
 ## ⚙️ Basic Usage
 
@@ -79,7 +91,7 @@ GPT.chatCompletion(messages).then(console.log);
 
 ## ⚙️ Add configurable options
 
-##  Basic options
+## Basic options
 You can select any provider, model, debug mode and a proxy URL if you want.
 ```js
 const { G4F } = require("g4f");
