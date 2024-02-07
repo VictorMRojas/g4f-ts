@@ -345,14 +345,43 @@ your heart feel
 
 <a id="chat-completion-providers"></a>
 
-<br></br>
 ## 🚀 Chat completion providers 
 | Website | Provider | GPT-3.5 | GPT-4 | Stream | Status | Auth |
 | ------  | -------  | ------- | ----- | ------ | ------ | ---- |
-| [GPT](https://chatgpt.ai) | `g4f.provider.GPT` | ✔️ | ✔️ | ❌ | ![Active](https://img.shields.io/badge/Active-brightgreen) | ❌ |
-| [www.chatbase.co](https://www.chatbase.co) | `g4f.provider.ChatBase` | ✔️ | ❌ | ✔️ | ![Active](https://img.shields.io/badge/Active-brightgreen) | ❌ |
+| [GPT.ai](https://chatgpt.ai) | `g4f.provider.GPT` | ✔️ | ✔️ | ❌ | ![Active](https://img.shields.io/badge/Active-brightgreen) | ❌ |
+| [chatbase.co](https://www.chatbase.co) | `g4f.provider.ChatBase` | ✔️ | ❌ | ✔️ | ![Active](https://img.shields.io/badge/Active-brightgreen) | ❌ |
 | [bing.com](https://bing.com/chat) | `g4f.provider.Bing` | ❌ | ✔️ | ✔️ | ![Inactive](https://img.shields.io/badge/Inactive-red) | ❌ |
 
+<a id="models"></a>
+
+## 📚 Models
+| Model                  | Providers that support it                   |
+| ---------------------- | ------------------------------------------- |
+| gpt-4                  | `g4f.provider.GPT`, `g4f.provider.Bing`     |
+| gpt-4-0613             | `g4f.provider.GPT`                          |
+| gpt-4-32k              | `g4f.provider.GPT`                          |
+| gpt-4-0314             | `g4f.provider.GPT`                          |
+| gpt-4-32k-0314         | `g4f.provider.GPT`                          |
+| gpt-3.5-turbo          | `g4f.provider.GPT`, `g4f.provider.ChatBase` |
+| gpt-3.5-turbo-16k      | `g4f.provider.GPT`                          |
+| gpt-3.5-turbo-0613     | `g4f.provider.GPT`                          |
+| gpt-3.5-turbo-16k-0613 | `g4f.provider.GPT`                          |
+| gpt-3.5-turbo-0301     | `g4f.provider.GPT`                          |
+| text-davinci-003       | `g4f.provider.GPT`                          |
+| text-davinci-002       | `g4f.provider.GPT`                          |
+| code-davinci-002       | `g4f.provider.GPT`                          |
+| gpt-3                  | `g4f.provider.GPT`                          |
+| text-curie-001         | `g4f.provider.GPT`                          |
+| text-babbage-001       | `g4f.provider.GPT`                          |
+| text-ada-001           | `g4f.provider.GPT`                          |
+| davinci                | `g4f.provider.GPT`                          |
+| curie                  | `g4f.provider.GPT`                          |
+| babbage                | `g4f.provider.GPT`                          |
+| ada                    | `g4f.provider.GPT`                          |
+| babbage-002            | `g4f.provider.GPT`                          |
+| davinci-002            | `g4f.provider.GPT`                          |
+
+<br><br>
 <a id="translation"></a>
 
 # 📡 Translation
@@ -402,42 +431,15 @@ this will be solved with AI, and you wouldn't need to specify it.
 | ----------- | -------------------------- |
 | TranslateAI | https://rentry.co/3qi3wqnr |
 
+<br><br>
 <a id="image-generation"></a>
+
 # 📷 Image Generation
 Coming soon...
 
-<a id="models"></a>
-
-## 📚 Models
-| Model                  | Providers that support it                   |
-| ---------------------- | ------------------------------------------- |
-| gpt-4                  | `g4f.provider.GPT`, `g4f.provider.Bing`     |
-| gpt-4-0613             | `g4f.provider.GPT`                          |
-| gpt-4-32k              | `g4f.provider.GPT`                          |
-| gpt-4-0314             | `g4f.provider.GPT`                          |
-| gpt-4-32k-0314         | `g4f.provider.GPT`                          |
-| gpt-3.5-turbo          | `g4f.provider.GPT`, `g4f.provider.ChatBase` |
-| gpt-3.5-turbo-16k      | `g4f.provider.GPT`                          |
-| gpt-3.5-turbo-0613     | `g4f.provider.GPT`                          |
-| gpt-3.5-turbo-16k-0613 | `g4f.provider.GPT`                          |
-| gpt-3.5-turbo-0301     | `g4f.provider.GPT`                          |
-| text-davinci-003       | `g4f.provider.GPT`                          |
-| text-davinci-002       | `g4f.provider.GPT`                          |
-| code-davinci-002       | `g4f.provider.GPT`                          |
-| gpt-3                  | `g4f.provider.GPT`                          |
-| text-curie-001         | `g4f.provider.GPT`                          |
-| text-babbage-001       | `g4f.provider.GPT`                          |
-| text-ada-001           | `g4f.provider.GPT`                          |
-| davinci                | `g4f.provider.GPT`                          |
-| curie                  | `g4f.provider.GPT`                          |
-| babbage                | `g4f.provider.GPT`                          |
-| ada                    | `g4f.provider.GPT`                          |
-| babbage-002            | `g4f.provider.GPT`                          |
-| davinci-002            | `g4f.provider.GPT`                          |
-
+<br></br>
 <a id="to-do"></a>
 
-<br></br>
 ## 📰 TO-DO
 - [ ] Add stream support to providers that don't have it natively
 - [ ] Implement WEB-UI
