@@ -23,6 +23,7 @@ This package can be used in both Typescript and CommonJS/ModuleJS environments.
             + [How to handle streamable data?](#how-to-handle-streamable-data)
             + [Stream on postprocessing](#stream-on-postprocessing)
         - [✏️ RESUME: Configurable options](#resume-configurable-options)
+        - [🚀 Chat completion providers](#chat-completion-providers)
 - [📡 Translation](#translation)
     + [Usage](#translation-usage)
     + [Options](#translation-options)
@@ -30,7 +31,6 @@ This package can be used in both Typescript and CommonJS/ModuleJS environments.
 - [📷 Image Generation](#image-generation)
     + Coming soon...
 - [📚 Models](#models)
-- [🚀 Providers](#providers)
 - [📰 TO-DO](#to-do)
 
 <a id="installation"></a>
@@ -332,7 +332,7 @@ your heart feel
 ## ✏️ RESUME: Configurable Options
 | Option        | Type                          | Description                    |
 | ------------- | ------------------------------ | -------------------------------- |
-| `provider`    | G4F.providers.any | Choose the provider to use for chat completions.      |
+| `provider`    | g4f.providers.any | Choose the provider to use for chat completions.      |
 | `model`       | string | Choose the model to use by a provider that supports it |
 | `debug`       | boolean | Enable or disable debug mode.     |
 | `proxy`       | string | Specify a proxy as a URL with a string in the host:port format.     |
@@ -342,6 +342,16 @@ your heart feel
 | `output`      | function: string | Callback function that receives a string as the final text response so you can edit it. This function executes after the retry fetch operations. This function should return a string. |
 | `stream` | boolean | Determine if the data should be streamed in parts or not. |
 | `chunkSize` | number | Determine the size of chunks streamed. This only works if the stream option is true and if using retry or condition. |
+
+<a id="chat-completion-providers"></a>
+
+<br></br>
+## 🚀 Chat completion providers 
+| Website | Provider | GPT-3.5 | GPT-4 | Stream | Status | Auth |
+| ------  | -------  | ------- | ----- | ------ | ------ | ---- |
+| [GPT](https://chatgpt.ai) | `g4f.provider.GPT` | ✔️ | ✔️ | ❌ | ![Active](https://img.shields.io/badge/Active-brightgreen) | ❌ |
+| [www.chatbase.co](https://www.chatbase.co) | `g4f.provider.ChatBase` | ✔️ | ❌ | ✔️ | ![Active](https://img.shields.io/badge/Active-brightgreen) | ❌ |
+| [bing.com](https://bing.com/chat) | `g4f.provider.Bing` | ❌ | ✔️ | ✔️ | ![Inactive](https://img.shields.io/badge/Inactive-red) | ❌ |
 
 <a id="translation"></a>
 
@@ -377,11 +387,13 @@ this will be solved with AI, and you wouldn't need to specify it.
 <a id="translation-options"></a>
 
 ## ✏️ RESUME: Translation options
-| Option         | Type    | Description                               |
-| -------------- | ------- | ----------------------------------------- |
-| `text`         | string  | Specify the text to translate             |
-| `source`       | string  | Specify the source text language.         |
-| `target`       | string  | Specify the target language to translate. |
+| Option         | Type              | Required | Description                                  |
+| -------------- | ----------------- | -------- | -------------------------------------------- |
+| `provider`     | g4f.providers.any |    ❌    | Choose the provider to use for translations. |
+| `debug`        | boolean           |    ❌    | Enable or disable debug mode.                |
+| `text`         | string            |    ✔️    | Specify the text to translate                |
+| `source`       | string            |    ✔️    | Specify the source text language.            |
+| `target`       | string            |    ✔️    | Specify the target language to translate.    |
 
 <a id="translation-langs"></a>
 
@@ -422,16 +434,6 @@ Coming soon...
 | ada                    | `g4f.provider.GPT`                          |
 | babbage-002            | `g4f.provider.GPT`                          |
 | davinci-002            | `g4f.provider.GPT`                          |
-
-<a id="providers"></a>
-
-<br></br>
-## 🚀 Providers 
-| Website | Provider | GPT-3.5 | GPT-4 | Stream | Status | Auth |
-| ------  | -------  | ------- | ----- | ------ | ------ | ---- |
-| [GPT](https://chatgpt.ai) | `g4f.Provider.GPT` | ✔️ | ✔️ | ❌ | ![Active](https://img.shields.io/badge/Active-brightgreen) | ❌ |
-| [www.chatbase.co](https://www.chatbase.co) | `GPT.Provider.ChatBase` | ✔️ | ❌ | ✔️ | ![Active](https://img.shields.io/badge/Active-brightgreen) | ❌ |
-| [bing.com](https://bing.com/chat) | `g4f.Provider.Bing` | ❌ | ✔️ | ✔️ | ![Inactive](https://img.shields.io/badge/Inactive-red) | ❌ |
 
 <a id="to-do"></a>
 
