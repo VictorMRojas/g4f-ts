@@ -5,30 +5,47 @@ This package can be used in both Typescript and CommonJS/ModuleJS environments.
 
 ## 📚 Table of Contents
 - [🛠️ Installation](#installation)
-    + [Using NPM](#-using-npm)
-    + [Using yarn](#-using-yarn)
-- [🎯 Examples](#-examples)
-    + [⚙️ Basic usage](#-⚙️-basic-usage)
-        + [Simple fetch](#-simple-fetch)
-        + [Give your instructions](#-give-your-instructions)
-        + [Follow up on the conversation context](#-follow-up-on-the-conversation-context)
-    + [✏️ RESUME: Conversation roles](#-resume:-conversation-roles)
-    + [⚙️ Add configurable options](#-add-configurable-options)
+    + [Using NPM](#using-npm)
+    + [Using yarn](#using-yarn)
+- [🎯 Examples](#examples)
+    + [⚙️ Basic usage](#basic-usage)
+        + [Simple fetch](#simple-fetch)
+        + [Give your instructions](#give-your-instructions)
+        + [Follow up on the conversation context](#follow-up-on-the-conversation-context)
+    + [✏️ RESUME: Conversation roles](#resume-conversation-roles)
+    + [🔩 Add configurable options](#add-configurable-options)
+        - [Basic Options](#basic-options)
+        - [Advanced Options](#advanced-options)
+        - [What's the difference?](#whats-the-difference)
+    + [📝 Streaming](#streaming)
+        - [Basic usage](#basic-streaming-usage)
+        - [How to handle streamable data?](#how-to-handle-streamable-data)
+        - [Stream on postprocessing](#stream-on-postprocessing)
+    + [✏️ RESUME: Configurable options](#resume-configurable-options)
+    + [📚 Models](#models)
+    + [🚀 Providers](#providers)
+    + [📰 TO-DO](#to-do)
 
 <a id="installation"></a>
 ## 🛠️ Installation
 
+<a id="using-npm"></a>
 ### Using npm:
 
 `npm install g4f`
 
+<a id="using-yarn"></a>
 ### Using yarn:
 
 `yarn add g4f`
 
+<a id="examples"></a>
 ## 🎯 Examples
 
+<a id="basic-usage"></a>
 ## ⚙️ Basic Usage
+
+<a id="simple-fetch"></a>
 
 ## Simple fetch
 It will capture the messages and the context, and any provider will respond with a string.
@@ -42,6 +59,8 @@ GPT.chatCompletion(messages).then(console.log);
 // Hello! I'm here to help you with anything you need. What can I do for you today? 😊
 ```
 **Note:** The conversation needs to include at least one message with the role **user** to provide a proper answer.
+
+<a id="give-your-instructions"></a>
 
 ## Give your instructions
 You can provide your own instructions for the conversation before it starts using the **system** role.
@@ -63,6 +82,7 @@ And help you thrive.
 ...
 */
 ```
+<a id="follow-up-on-the-conversation-context"></a>
 
 ## Follow up on the conversation context
 ```js
@@ -82,6 +102,8 @@ GPT.chatCompletion(messages).then(console.log);
 ```
 **Note:** GPT responses use the **assistant** role and an appropriate conversation structure alternates between the user and the assistant, as seen in the previous example.
 
+<a id="resume-conversation-roles"></a>
+
 ## ✏️ RESUME: Conversation roles
 
 | Role | Description                    |
@@ -90,7 +112,11 @@ GPT.chatCompletion(messages).then(console.log);
 | `user`   | Used to identify user messages     |
 | `assistant`   | Used to identify GPT messages     |
 
-## ⚙️ Add configurable options
+<a id="add-configurable-options"></a>
+
+## 🔩 Add configurable options
+
+<a id="basic-options"></a>
 
 ## Basic options
 You can select any provider, model, debug mode and a proxy URL if you want.
@@ -126,6 +152,8 @@ As I conjure a poem, a gift for your soul to swirl. 💕🌹
 */
 ```
 **Note:** You can specify the provider, model, debug, and proxy options according to your needs; they are entirely optional.
+
+<a id="advanced-options"></a>
 
 ##  Advanced options
 You can force an expected response using retry, and manipulate the final response using output.
@@ -168,11 +196,17 @@ And your heart it does employ 💕🌹
 ```
 **Note:** Retry will execute the fetch operation consecutively N times until it finishes, or the condition function indicates true. The output function only edits the final response.
 
+<a id="whats-the-difference"></a>
+
 ## What is the difference between basic options and advanced options?
 If you decide to use the retry, output option, or both, keep in mind that these options involve preprocessing before delivering the ultimate response. The impact on performance and response times may vary depending on the functions you employ.
 
-## ⚙️ Streaming
+<a id="streaming"></a>
+
+## 📝 Streaming
 When using the stream option, the chatCompletion function will return an object with the streamable data and the name of the provider.
+
+<a id="basic-streaming-usage"></a>
 
 ##  Basic usage
 ```js
@@ -198,6 +232,8 @@ const options = {
 }
 */
 ```
+
+<a id="how-to-handle-streamable-data"></a>
 
 ## So, how you should handle the streamable data?
 I **highly recommend** you to use the integrated chunkProcessor function so that you don't have to format each chunk into a single string format response.
@@ -228,6 +264,8 @@ A smile on your face,
 And a heart full of grace.
 */
 ```
+
+<a id="stream-on-postprocessing"></a>
 
 ##  Stream on postprocessing
 When employing retry, output option, or both, you have the flexibility to select the size of each streamed chunk.
@@ -274,6 +312,8 @@ your heart feel
 ```
 **Note:** The chunkSize feature is effective only when the stream option is activated along with the retry/output option.
 
+<a id="resume-configurable-options"></a>
+
 ## ✏️ RESUME: Configurable Options
 | Option        | Type                          | Description                    |
 | ------------- | ------------------------------ | -------------------------------- |
@@ -287,6 +327,8 @@ your heart feel
 | `output`      | function: string | Callback function that receives a string as the final text response so you can edit it. This function executes after the retry fetch operations. This function should return a string. |
 | `stream` | boolean | Determine if the data should be streamed in parts or not. |
 | `chunkSize` | number | Determine the size of chunks streamed. This only works if the stream option is true and if using retry or condition. |
+
+<a id="models"></a>
 
 ## 📚 Models
 | Model                  | Providers that support it                   |
@@ -315,6 +357,8 @@ your heart feel
 | babbage-002            | `G4F.provider.GPT`                          |
 | davinci-002            | `G4F.provider.GPT`                          |
 
+<a id="providers"></a>
+
 <br></br>
 ## 🚀 Providers 
 | Website | Provider | GPT-3.5 | GPT-4 | Stream | Status | Auth |
@@ -323,8 +367,10 @@ your heart feel
 | [www.chatbase.co](https://www.chatbase.co) | `GPT.Provider.ChatBase` | ✔️ | ❌ | ✔️ | ![Active](https://img.shields.io/badge/Active-brightgreen) | ❌ |
 | [bing.com](https://bing.com/chat) | `g4f.Provider.Bing` | ❌ | ✔️ | ✔️ | ![Inactive](https://img.shields.io/badge/Inactive-red) | ❌ |
 
+<a id="to-do"></a>
+
 <br></br>
-## 📰 TODO
+## 📰 TO-DO
 - [ ] Add stream support to providers that don't have it natively
 - [ ] Implement WEB-UI
 - [ ] Implement more providers
