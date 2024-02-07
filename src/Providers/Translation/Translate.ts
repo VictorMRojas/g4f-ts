@@ -1,10 +1,12 @@
 import axios from 'axios';
 import { ITranslationOptions } from '../../interfaces/ITranslationOptions';
+import { supported_langs } from '../../assets/translate_supported_langs'
 
 class Translate {
     name: string;
     type: string;
     url: string;
+    supported_langs: string[];
     need_slice_text: boolean;
     working: boolean;
 
@@ -12,6 +14,7 @@ class Translate {
         this.name = "Translate",
         this.type = "Translation";
         this.url = "https://nexra.aryahcr.cc/api/translate/";
+        this.supported_langs = supported_langs;
         this.need_slice_text = false;        
         this.working = true;
     }
@@ -25,8 +28,8 @@ class Translate {
     async fetchData(options:ITranslationOptions): Promise<object> {
         const headers = {
             'Content-Type': 'application/json'
-        }
-          
+        }            
+
         const data = {
             text: options.text,
             source: options.source,
@@ -43,8 +46,8 @@ class Translate {
     }
 
     handleResponse(data:any) {
-        if (!data) throw new Error("Invalid response.");
-        return data;
+        if (!data) throw new Error("Invalid response.");        
+        return { source: data.source, target: data.target, translate: data.translate };
     }
 }
 

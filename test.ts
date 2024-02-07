@@ -11,7 +11,7 @@ import { chunkProcessor } from "./src/util/stream";
         text: "hola, como estas?",
         source: "es",
         target: "ko",
-        debug: false,
+        debug: true,
         /*
         retry: {
             times: 3,

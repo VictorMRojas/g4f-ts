@@ -24,7 +24,10 @@ class TranslationHandler {
         let { debug, provider } = options;
         if (!provider) provider = getProviderFromList(this.providersList, undefined, debug, provider_log); 
         else if (debug) runLog(provider_log.success, `Provider found: ${provider.name}`, true)
-    
+
+        if (!provider.supported_langs.includes(options.source)) throw new Error("The source language ID is not included in the provider's list of supported IDs.");
+        if (!provider.supported_langs.includes(options.target)) throw new Error("The target language ID is not included in the provider's list of supported IDs.");
+
         if (debug) runLog(provider_log.await, `Fetching data from the provider: ${provider.name}`);
         const data = await provider.fetchData(options);
         if (debug) runLog(provider_log.success, `Data was successfully fetched from the ${provider.name} provider`, true);            
