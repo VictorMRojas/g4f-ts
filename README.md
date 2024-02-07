@@ -88,10 +88,10 @@ const messages = [
     { role: "user", content: "Hi, what's up?"}
 ];
 const options = {
-	provider: GPT.providers.GPT,
+    provider: GPT.providers.GPT,
     model: "gpt-3.5-turbo"
-	debug: true,
-	proxy: ""
+    debug: true,
+    proxy: ""
 };
 
 (async() => {
