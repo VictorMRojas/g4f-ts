@@ -89,7 +89,7 @@ const messages = [
 ];
 const options = {
     provider: GPT.providers.GPT,
-    model: "gpt-3.5-turbo"
+    model: "gpt-3.5-turbo",
     debug: true,
     proxy: ""
 };
