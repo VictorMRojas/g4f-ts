@@ -7,13 +7,13 @@ This package can be used in both Typescript and CommonJS/ModuleJS environments.
 - [🛠️ Installation](#-installation)
     + [Using NPM](#-using-npm)
     + [Using yarn](#-using-yarn)
-- [🎯 Examples](#-🎯-examples)
+- [🎯 Examples](#-examples)
     + [⚙️ Basic usage](#-⚙️-basic-usage)
         + [Simple fetch](#-simple-fetch)
         + [Give your instructions](#-give-your-instructions)
         + [Follow up on the conversation context](#-follow-up-on-the-conversation-context)
-    + [✏️ RESUME: Conversation roles](#-✏️-resume:-conversation-roles)
-    + [⚙️ Add configurable options]("#-⚙️-add-configurable-options)
+    + [✏️ RESUME: Conversation roles](#resume:-conversation-roles)
+    + [⚙️ Add configurable options](#add-configurable-options)
 
 ## 🛠️ Installation
 
