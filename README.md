@@ -4,7 +4,7 @@ GPT4FREE is a package that simplifies interaction with various Artificial Intell
 This package can be used in both Typescript and CommonJS/ModuleJS environments.
 
 ## 📚 Table of Contents
-- [🛠️ Installation](#-installation)
+- [🛠️ Installation](#installation)
     + [Using NPM](#-using-npm)
     + [Using yarn](#-using-yarn)
 - [🎯 Examples](#-examples)
@@ -15,6 +15,7 @@ This package can be used in both Typescript and CommonJS/ModuleJS environments.
     + [✏️ RESUME: Conversation roles](#-resume:-conversation-roles)
     + [⚙️ Add configurable options](#-add-configurable-options)
 
+<a id="installation"></a>
 ## 🛠️ Installation
 
 ### Using npm:
