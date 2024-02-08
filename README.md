@@ -24,13 +24,13 @@ This package can be used in both Typescript and CommonJS/ModuleJS environments.
             + [Stream on postprocessing](#stream-on-postprocessing)
         - [✏️ RESUME: Configurable options](#resume-configurable-options)
         - [🚀 Chat completion providers](#chat-completion-providers)
-- [📡 Translation](#translation)
-    + [Usage](#translation-usage)
-    + [Options](#translation-options)
-    + [Languages supported](#translation-langs)
-- [📷 Image Generation](#image-generation)
-    + Coming soon...
-- [📚 Models](#models)
+        - [📚 Chat completion models](#models)
+    + [📡 Translation](#translation)
+        - [Usage](#translation-usage)
+        - [Options](#translation-options)
+        - [Languages supported](#translation-langs)
+    + [📷 Image Generation](#image-generation)  
+        - Coming soon...
 - [📰 TO-DO](#to-do)
 
 <a id="installation"></a>
