@@ -1,7 +1,13 @@
 /src
 /node_modules
+/imagesTest
 
 .DS_Store
 
 tsconfig.json
 tsup.config.ts
+
+examples.test.ts
+jest.config.js
+.babelrc
+main.ts

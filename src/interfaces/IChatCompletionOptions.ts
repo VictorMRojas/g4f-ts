@@ -4,7 +4,7 @@ export interface IChatCompletionOptions {
     provider?: any;
     stream?: boolean;
     retry?: { condition?: (text: string) => boolean, times?: number };
-    output?: (text: string) => string;
+    output?: ( text: string ) => string;
     chunkSize?: number;
     proxy?: string;
 }

@@ -1,5 +1,5 @@
 import CompletionHandler from "./handlers/ChatCompletionHandler";
-import TranslateHandler from "./handlers/TranslationHandler";
+import TranslationHandler from "./handlers/TranslationHandler";
 import OptionsHandler from "./OptionsHandler";
 import { IMessage } from "./interfaces/IMessage";
 import { IChatCompletionOptions } from "./interfaces/IChatCompletionOptions";
@@ -8,12 +8,12 @@ import { providers } from "./Providers/ProviderList";
 
 class G4F {
     private completionHandler: CompletionHandler;
-    private translateHandler: TranslateHandler;
+    private translationHandler: TranslationHandler;
     public providers: typeof providers;
 
     constructor() {
         this.completionHandler = new CompletionHandler();
-        this.translateHandler = new TranslateHandler();
+        this.translationHandler = new TranslationHandler();
         this.providers = providers;
     }
 
@@ -35,9 +35,9 @@ class G4F {
      * @throws {Error} - Throw an error if the options are invalid or the provider fails at any point
      * @returns {Promise} - Promise that resolves with the translation result.
      */
-    async translation(options: ITranslationOptions) {
+    async translation(options: ITranslationOptions): Promise<any> {
         if (options) OptionsHandler.checkTranslationOptions(options);
-        return await this.translateHandler.generateTranslation(options);   
+        return await this.translationHandler.generateTranslation(options);   
     }
 }
 

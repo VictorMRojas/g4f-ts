@@ -1,17 +1,17 @@
 import Bing from "./ChatCompletion/Bing";
 import ChatBase from "./ChatCompletion/ChatBase";
 import GPT from "./ChatCompletion/GPT";
-import Translate from "./Translation/Translate";
+import TranslateAI from "./Translation/TranslateAI";
 
 interface Providers {
-    [key: string]: ChatBase | Bing | GPT | Translate;
+    [key: string]: ChatBase | Bing | GPT | TranslateAI;
 }
 
 const providers: Providers = {
     GPT: new GPT(),
     ChatBase: new ChatBase(),
     Bing: new Bing(),
-    Translate: new Translate()
+    TranslateAI: new TranslateAI()
 };
 
 const models: { [key in keyof Providers]: string[] } = {

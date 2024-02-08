@@ -60,14 +60,16 @@ class ChatBase {
         };
 
         return axios.post("https://www.chatbase.co/api/fe/chat", data, { 
-            headers: headers, proxy: createProxyConfig(options.proxy),
-            responseType: options.stream ? 'stream' : 'text'
+            headers: headers, proxy: createProxyConfig(options?.proxy),
+            responseType: options?.stream ? 'stream' : 'text'
         }).then((response:AxiosResponse) => {         
-            return handleStream({ data: response.data, name: this.name }, options.stream || false, this.handleResponse);       
-        }).catch((e) => {
+            return handleStream({ data: response.data, name: this.name }, options?.stream || false, this.handleResponse.bind(this));       
+        })
+        /*.catch((e) => {
             if (e.message.startsWith("Invalid response.")) throw new Error(e.message);
             throw new Error("Failed to fetch data. Please try again later.");          
         });
+        */
     }
 
     handleResponse(text:any) {
