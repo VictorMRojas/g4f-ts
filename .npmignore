@@ -10,4 +10,5 @@ tsup.config.ts
 examples.test.ts
 jest.config.js
 .babelrc
+imagen.jpg
 main.ts

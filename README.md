@@ -8,7 +8,7 @@ This package can be used in both Typescript and CommonJS/ModuleJS environments.
     + [Using NPM](#using-npm)
     + [Using yarn](#using-yarn)
 - [🎯 Examples](#examples)
-    + [📤 Chat Completion](#chat-completion)    
+    + [📤 Chat completion](#chat-completion)    
         - [⚙️ Basic usage](#basic-usage)
             + [Simple fetch](#simple-fetch)
             + [Give your instructions](#give-your-instructions)
@@ -29,8 +29,19 @@ This package can be used in both Typescript and CommonJS/ModuleJS environments.
         - [Usage](#translation-usage)
         - [Options](#translation-options)
         - [Languages supported](#translation-langs)
-    + [📷 Image Generation](#image-generation)  
-        - Coming soon...
+    + [📷 Image Generation (BETA)](#image-generation)
+        - [Cartoon style example](#cartoon-style-example)  
+        - [Paint style example](#paint-style-example)
+        - [Realistic style example](#realistic-style-example)
+        - [✏️ RESUME: Image generation options](#image-generation-options)
+        - [✏️ RESUME: Image generation provider options](#image-generation-provider-options)
+        - [🤖 Image generation models](#image-generation-models)
+        - [🎨 Image generation styles](#image-generation-styles)
+        - [✒️ Image generation sampling methods](#image-generation-sampling-methods)
+        - [🧮 Number type options](#image-generation-number-type-options)
+        - [⚠️ Advice](#image-generation-advice)
+        - [🖼️ Image generation providers](#list-providers-image-generation)
+    + [🤝 Contribute](#contribute)
 - [📰 TO-DO](#to-do)
 
 <a id="installation"></a>
@@ -52,11 +63,11 @@ This package can be used in both Typescript and CommonJS/ModuleJS environments.
 # 🎯 Examples
 
 <a id="chat-completion"></a>
-## 📤 Chat Completion
+## 📤 Chat completion
 With the chatCompletion function, you will be able to obtain a textual response to a conversation with some context, using providers and models designed for this task. In addition, you will be able to manipulate the answer before converting it to a stream or force the AI to give you a certain answer by generating several retries.
 
 <a id="basic-usage"></a>
-## ⚙️ Basic Usage
+## ⚙️ Basic usage
 
 <a id="simple-fetch"></a>
 
@@ -329,7 +340,7 @@ your heart feel
 
 <a id="resume-configurable-options"></a>
 
-## ✏️ RESUME: Configurable Options
+## ✏️ RESUME: Configurable options
 | Option        | Type                          | Description                    |
 | ------------- | ------------------------------ | -------------------------------- |
 | `provider`    | g4f.providers.any | Choose the provider to use for chat completions.      |
@@ -346,40 +357,40 @@ your heart feel
 <a id="chat-completion-providers"></a>
 
 ## 🚀 Chat completion providers 
-| Website | Provider | GPT-3.5 | GPT-4 | Stream | Status | Auth |
-| ------  | -------  | ------- | ----- | ------ | ------ | ---- |
-| [GPT.ai](https://chatgpt.ai) | `g4f.provider.GPT` | ✔️ | ✔️ | ❌ | ![Active](https://img.shields.io/badge/Active-brightgreen) | ❌ |
-| [chatbase.co](https://www.chatbase.co) | `g4f.provider.ChatBase` | ✔️ | ❌ | ✔️ | ![Active](https://img.shields.io/badge/Active-brightgreen) | ❌ |
-| [bing.com](https://bing.com/chat) | `g4f.provider.Bing` | ❌ | ✔️ | ✔️ | ![Inactive](https://img.shields.io/badge/Inactive-red) | ❌ |
+| Website | Provider | GPT-3.5 | GPT-4 | Stream | Status |
+| ------  | -------  | ------- | ----- | ------ | ------ |
+| [GPT.ai](https://chatgpt.ai) | `g4f.providers.GPT` | ✔️ | ✔️ | ❌ | ![Active](https://img.shields.io/badge/Active-brightgreen) |
+| [chatbase.co](https://www.chatbase.co) | `g4f.providers.ChatBase` | ✔️ | ❌ | ✔️ | ![Active](https://img.shields.io/badge/Active-brightgreen) |
+| [bing.com](https://bing.com/chat) | `g4f.providers.Bing` | ❌ | ✔️ | ✔️ | ![Inactive](https://img.shields.io/badge/Inactive-red) |
 
 <a id="models"></a>
 
-## 📚 Models
+## 📚 Chat completion models
 | Model                  | Providers that support it                   |
 | ---------------------- | ------------------------------------------- |
-| gpt-4                  | `g4f.provider.GPT`, `g4f.provider.Bing`     |
-| gpt-4-0613             | `g4f.provider.GPT`                          |
-| gpt-4-32k              | `g4f.provider.GPT`                          |
-| gpt-4-0314             | `g4f.provider.GPT`                          |
-| gpt-4-32k-0314         | `g4f.provider.GPT`                          |
-| gpt-3.5-turbo          | `g4f.provider.GPT`, `g4f.provider.ChatBase` |
-| gpt-3.5-turbo-16k      | `g4f.provider.GPT`                          |
-| gpt-3.5-turbo-0613     | `g4f.provider.GPT`                          |
-| gpt-3.5-turbo-16k-0613 | `g4f.provider.GPT`                          |
-| gpt-3.5-turbo-0301     | `g4f.provider.GPT`                          |
-| text-davinci-003       | `g4f.provider.GPT`                          |
-| text-davinci-002       | `g4f.provider.GPT`                          |
-| code-davinci-002       | `g4f.provider.GPT`                          |
-| gpt-3                  | `g4f.provider.GPT`                          |
-| text-curie-001         | `g4f.provider.GPT`                          |
-| text-babbage-001       | `g4f.provider.GPT`                          |
-| text-ada-001           | `g4f.provider.GPT`                          |
-| davinci                | `g4f.provider.GPT`                          |
-| curie                  | `g4f.provider.GPT`                          |
-| babbage                | `g4f.provider.GPT`                          |
-| ada                    | `g4f.provider.GPT`                          |
-| babbage-002            | `g4f.provider.GPT`                          |
-| davinci-002            | `g4f.provider.GPT`                          |
+| gpt-4                  | `g4f.providers.GPT`, `g4f.providers.Bing`     |
+| gpt-4-0613             | `g4f.providers.GPT`                          |
+| gpt-4-32k              | `g4f.providers.GPT`                          |
+| gpt-4-0314             | `g4f.providers.GPT`                          |
+| gpt-4-32k-0314         | `g4f.providers.GPT`                          |
+| gpt-3.5-turbo          | `g4f.providers.GPT`, `g4f.providers.ChatBase` |
+| gpt-3.5-turbo-16k      | `g4f.providers.GPT`                          |
+| gpt-3.5-turbo-0613     | `g4f.providers.GPT`                          |
+| gpt-3.5-turbo-16k-0613 | `g4f.providers.GPT`                          |
+| gpt-3.5-turbo-0301     | `g4f.providers.GPT`                          |
+| text-davinci-003       | `g4f.providers.GPT`                          |
+| text-davinci-002       | `g4f.providers.GPT`                          |
+| code-davinci-002       | `g4f.providers.GPT`                          |
+| gpt-3                  | `g4f.providers.GPT`                          |
+| text-curie-001         | `g4f.providers.GPT`                          |
+| text-babbage-001       | `g4f.providers.GPT`                          |
+| text-ada-001           | `g4f.providers.GPT`                          |
+| davinci                | `g4f.providers.GPT`                          |
+| curie                  | `g4f.providers.GPT`                          |
+| babbage                | `g4f.providers.GPT`                          |
+| ada                    | `g4f.providers.GPT`                          |
+| babbage-002            | `g4f.providers.GPT`                          |
+| davinci-002            | `g4f.providers.GPT`                          |
 
 <br><br>
 <a id="translation"></a>
@@ -400,8 +411,10 @@ const options = {
     target: "ko"
 };
 
-const text = await g4f.translation(options);
-console.log(text);
+(async() => {
+    const text = await g4f.translation(options);
+    console.log(text);
+})();
 /* 
 {
   source: { code: 'en', lang: 'English' },
@@ -427,27 +440,179 @@ this will be solved with AI, and you wouldn't need to specify it.
 <a id="translation-langs"></a>
 
 ## 🌏 Languages available
-| Provider    | Languages supported        |
-| ----------- | -------------------------- |
-| TranslateAI | https://rentry.co/3qi3wqnr |
+| Provider    | Status                                                     | Languages supported        |
+| ----------- | ---------------------------------------------------------- | -------------------------- |
+| `g4f.providers.TranslateAI` | ![Active](https://img.shields.io/badge/Active-brightgreen) | https://rentry.co/3qi3wqnr |
 
 <br><br>
 <a id="image-generation"></a>
 
-# 📷 Image Generation
-Coming soon...
+# 📷 Image generation (BETA)
+With the imageGeneration function, you will be able to generate images from a text input and optional parameters that will provide you with millions of combinations to stylize each of the images.
 
-<br></br>
-<a id="to-do"></a>
+<a id="cartoon-style-example"></a>
 
-## 📰 TO-DO
-- [ ] Add stream support to providers that don't have it natively
-- [ ] Implement WEB-UI
-- [ ] Implement more providers
-	- [ ] Stable-diffusion
-	- [ ] Pixart
-	- [ ] DALLE-E
-	- [ ] Prodia
-	- [ ] Emi
-	- [ ] AI Chat
-	- [ ] Translate
+## Cartoon style example
+```js
+const { G4F } = require("g4f");
+const fs = require("fs");
+
+const g4f = new G4F();
+(async() => {
+    const base64Image = await g4f.imageGeneration("An squirrel", { 
+        debug: true,
+        provider: g4f.providers.Emi
+    });	
+    fs.writeFile('image.jpg', base64Image, { encoding: 'base64' }, function(err) {
+      if (err) return console.error('Error writing the file: ', err);
+      console.log('The image has been successfully saved as image.jpg.');
+    });
+})();
+```
+![An squirrel cartoon style from the Emi provider](https://i.imgur.com/6tdGNys.jpeg)
+
+<a id="paint-style-example"></a>
+
+## Paint style example
+```js
+const { G4F } = require("g4f");
+const fs = require("fs");
+
+const g4f = new G4F();
+(async() => {
+    const base64Image = await g4f.imageGeneration("A village", { 
+        debug: true,
+        provider: g4f.providers.Pixart,
+        providerOptions: {
+            height: 512,
+            width: 512,
+            samplingMethod: "SA-Solver"
+        }
+    });	
+    fs.writeFile('image.jpg', base64Image, { encoding: 'base64' }, function(err) {
+      if (err) return console.error('Error writing the file: ', err);
+      console.log('The image has been successfully saved as image.jpg.');
+    });
+})();
+```
+![A village paint from the Pixart provider](https://i.imgur.com/pNor1oU.jpg)
+
+<a id="realistic-style-example"></a>
+
+## Realistic style example
+```js
+const { G4F } = require("g4f");
+const fs = require("fs");
+
+const g4f = new G4F();
+(async() => {
+    const base64Image = await g4f.imageGeneration("A colorfull photo of a young lady", { 
+        debug: true,
+        provider: g4f.providers.Prodia,
+        providerOptions: {
+            model: "ICantBelieveItsNotPhotography_seco.safetensors [4e7a3dfd]",
+            samplingSteps: 15,
+            cfgScale: 30
+        }
+    });	
+    fs.writeFile('image.jpg', base64Image, { encoding: 'base64' }, function(err) {
+      if (err) return console.error('Error writing the file: ', err);
+      console.log('The image has been successfully saved as image.jpg.');
+    });
+})();
+```
+![A photo of a young lady in realistic style from the Prodia provider](https://i.imgur.com/Kc3qRiA.png)
+
+<a id="image-generation-options"></a>
+
+## ✏️ RESUME: Image generation options
+| Option          | Type              | Description                                       |
+| --------------- | ----------------- | ------------------------------------------------- |
+| debug           | boolean           | Enable or disable debug mode.                     |
+| provider        | g4f.providers.any | Choose the provider to use for image generations. |
+| providerOptions | object            | Use provider options supported by any provider    |
+
+**Note:** The value of providerOptions should be an object containing instructions for image generation, such as the base model, image style, sampling methods, among others. **Not all providers support the same instructions, so refer to the following list.**
+
+<a id="image-generation-provider-options"></a>
+
+## ✏️ RESUME: Image generation provider options
+| Option            | Type    | Description | Limits | Providers that support it                         |
+| ---------------   | ------- | ------ | ---- |------------------------------------------------- |
+| model             | string  | Choose a model as a base for generation. | [🤖 Check lists](#image-generation-models) |`g4f.providers.Prodia`, `g4f.providers.ProdiaStableDiffusion`, `g4f.providers.ProdiaStableDiffusionXL` |
+| negativePrompt    | string  | Indicate the provider of what not to do. | None | `g4f.providers.Pixart`, `g4f.providers.PixartLCM`, `g4f.providers.Prodia`, `g4f.providers.ProdiaStableDiffusion`, `g4f.providers.ProdiaStableDiffusionXL` |
+| imageStyle        | string  | Specify the draw style.  | [🎨 Check lists](#image-generation-styles) | `g4f.providers.Pixart`, `g4f.providers.PixartLCM` |
+| height            | number  | Specify the image height. | [🧮 Check lists](#image-generation-number-type-options) |`g4f.providers.Pixart`, `g4f.providers.PixartLCM`, `g4f.providers.ProdiaStableDiffusion`, `g4f.providers.ProdiaStableDiffusionXL` |
+| width             | number  | Specify the image width. | [🧮 Check lists](#image-generation-number-type-options) | `g4f.providers.Pixart`, `g4f.providers.PixartLCM`, `g4f.providers.ProdiaStableDiffusion`, `g4f.providers.ProdiaStableDiffusionXL` |
+| samplingSteps     | number  | Specify the number of iterations. A higher number results in more quality. | [🧮 Check lists](#image-generation-number-type-options) | `g4f.providers.Prodia`, `g4f.providers.ProdiaStableDiffusion`, `g4f.providers.ProdiaStableDiffusionXL` |
+| samplingMethod    | string  | Choose a sampling method to control the diversity, quality, and coherence of images. | [✒️ Check lists](#image-generation-sampling-methods) | `g4f.providers.Pixart`, `g4f.providers.Prodia`, `g4f.providers.ProdiaStableDiffusion`, `g4f.providers.ProdiaStableDiffusionXL` |
+| cfgScale          | number  | Specify the Classifier-Free Guidance to control how closely the generated image adheres to the given text prompt. | [🧮 Check lists](#image-generation-number-type-options) | `g4f.providers.Pixart` `g4f.providers.Prodia`, `g4f.providers.ProdiaStableDiffusion`, `g4f.providers.ProdiaStableDiffusionXL` |
+| dpmInferenceSteps | number  | Specify the DPM Inference Steps for refining object detection accuracy  | [🧮 Check lists](#image-generation-number-type-options) | `g4f.providers.Pixart` |
+| saGuidanceScale   | number  | Specify the Style-Aware Guidance Scale for fine-tuning style and composition | [🧮 Check lists](#image-generation-number-type-options) | `g4f.providers.Pixart` |
+| saInferenceSteps  | number  | Specify the Style-Aware Inference Steps for refining or adjusting the generated image during style transfer or style-based image synthesis. |  [🧮 Check lists](#image-generation-number-type-options) | `g4f.providers.Pixart` |
+| lcmInferenceSteps | number  | Specify the LCM Inference Steps for enhancing the generation of images with AI by leveraging latent consistency models | [🧮 Check lists](#image-generation-number-type-options) | `g4f.providers.PixartLCM` |
+| useGpu            | boolean | Determine whether to use the GPU for generation | None | `g4f.providers.Dalle2` |
+| promptImprovement | boolean | Determine whether the prompt should be enhanced using AI. |None | `g4f.providers.Dalle2` |
+
+<a id="image-generation-models"></a>
+
+## 🤖 Image generation models
+| Provider                                 | Models supported           |
+| ---------------------------------------- | -------------------------- |
+| `g4f.providers.Prodia`                   | https://rentry.co/b6i53fnm |
+| `g4f.providers.ProdiaStableDiffusion`    | https://rentry.co/pfwmx6y5 |
+| `g4f.providers.ProdiaStableDiffusionXL`  | https://rentry.co/wfhsk8sv |
+
+<a id="image-generation-styles"></a>
+
+## 🎨 Image generation styles
+| Provider  | Image styles supported     |
+| --------- | -------------------------- |
+| `g4f.providers.Pixart`    | https://rentry.co/hcggg36n |
+| `g4f.providers.PixartLCM` | https://rentry.co/gzxa3wv2 |
+
+<a id="image-generation-sampling-methods"></a>
+
+## ✒️ Image generation sampling methods
+| Provider                               | Sampling methods supported |
+| -------------------------------------- | -------------------------- |
+| `g4f.providers.Pixart`                  | https://rentry.co/x7i8gko9 |
+| `g4f.providers.Prodia`                  | https://rentry.co/8bwtqeh9 |
+| `g4f.providers.ProdiaStableDiffusion`   | https://rentry.co/iyrkxmzr |
+| `g4f.providers.ProdiaStableDiffusionXL` | https://rentry.co/p2ad6y3f |
+
+<a id="image-generation-number-type-options"></a>
+
+## 🧮 Number type options
+| Provider                                | Number type options and values supported |
+| --------------------------------------- | ---------------- |
+| `g4f.providers.Pixart`                  | <table><tr>    <th>Option</th>    <th style="text-align: center;">Default</th>    <th style="text-align: center;">Min</th>    <th style="text-align: center;">Max</th></tr><tr>    <td>height</td>    <td style="text-align: center;">1024</td>    <td style="text-align: center;">256</td>    <td style="text-align: center;">2048</td></tr><tr>    <td>width</td>    <td style="text-align: center;">1024</td>    <td style="text-align: center;">256</td>    <td style="text-align: center;">2048</td></tr><tr>    <td>dpmInferenceSteps</td>    <td style="text-align: center;">14</td>    <td style="text-align: center;">5</td>    <td style="text-align: center;">40</td></tr><tr>    <td>saGuidanceScale</td>    <td style="text-align: center;">3</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">10</td></tr><tr>    <td>saInferenceSteps</td>    <td style="text-align: center;">25</td>    <td style="text-align: center;">10</td>    <td style="text-align: center;">40</td></tr> <tr>    <td>cfgScale</td>    <td style="text-align: center;">4.5</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">10</td></tr></table> |
+| `g4f.providers.PixartLCM`               | <table><tr>    <th>Option</th>    <th style="text-align: center;">Default</th>    <th style="text-align: center;">Min</th>    <th style="text-align: center;">Max</th></tr><tr>    <td>height</td>    <td style="text-align: center;">1024</td>    <td style="text-align: center;">256</td>    <td style="text-align: center;">2048</td></tr><tr>    <td>width</td>    <td style="text-align: center;">1024</td>    <td style="text-align: center;">256</td>    <td style="text-align: center;">2048</td></tr><tr>    <td>lcmInferenceSteps</td>    <td style="text-align: center;">9</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">30</td></tr></table> |
+| `g4f.providers.Prodia`                  | <table><tr>    <th>Option</th>    <th style="text-align: center;">Default</th>    <th style="text-align: center;">Min</th>    <th style="text-align: center;">Max</th></tr><tr>    <td>samplingSteps</td>    <td style="text-align: center;">7</td>    <td style="text-align: center;">0</td>    <td style="text-align: center;">20</td></tr><tr>    <td>cfgScale</td>    <td style="text-align: center;">25</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">30</td></tr></table> |
+| `g4f.providers.ProdiaStableDiffusion`   | <table><tr>    <th>Option</th>    <th style="text-align: center;">Default</th>    <th style="text-align: center;">Min</th>    <th style="text-align: center;">Max</th></tr><tr>    <td>height</td>    <td style="text-align: center;">512</td>    <td style="text-align: center;">50</td>    <td style="text-align: center;">1024</td></tr><tr>    <td>width</td>    <td style="text-align: center;">512</td>    <td style="text-align: center;">50</td>    <td style="text-align: center;">1024</td></tr><tr>    <td>samplingSteps</td>    <td style="text-align: center;">25</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">30</td></tr><tr>    <td>cfgScale</td>    <td style="text-align: center;">7</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">20</td></tr></table> |
+| `g4f.providers.ProdiaStableDiffusionXL` | <table><tr>    <th>Option</th>    <th style="text-align: center;">Default</th>    <th style="text-align: center;">Min</th>    <th style="text-align: center;">Max</th></tr><tr>    <td>height</td>    <td style="text-align: center;">1024</td>    <td style="text-align: center;">512</td>    <td style="text-align: center;">1536</td></tr><tr>    <td>width</td>    <td style="text-align: center;">1024</td>    <td style="text-align: center;">512</td>    <td style="text-align: center;">1536</td></tr><tr>    <td>samplingSteps</td>    <td style="text-align: center;">25</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">30</td></tr><tr>    <td>cfgScale</td>    <td style="text-align: center;">7</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">20</td></tr></table> |
+
+<a id="list-providers-image-generation"></a>
+
+## 🖼️ Image generation providers
+| Provider                               | Status   | Default style |
+| -------------------------------------- | :------: | ------------- |
+| `g4f.providers.Pixart`                  | ![Active](https://img.shields.io/badge/Active-brightgreen) | Realistic with a touch of exaggeration, characterized by detailed textures, vibrant colors, and enhanced features. | 
+| `g4f.providers.PixartLCM`               | ![Active](https://img.shields.io/badge/Active-brightgreen) | Exhibits a detailed and vibrant use of color, creating a visually rich and textured representation. It’s a blend of realism with a touch of artistic interpretation. |
+| `g4f.providers.Emi`                     | ![Active](https://img.shields.io/badge/Active-brightgreen) | Characterized by a colorful and whimsical animation, reminiscent of a children’s storybook illustration. |
+| `g4f.providers.Dalle`                   | ![Active](https://img.shields.io/badge/Active-brightgreen) | Realistic, capturing intricate details and textures to depict a lifelike representation. |
+| `g4f.providers.DalleMini`               | ![Active](https://img.shields.io/badge/Active-brightgreen) | Leans towards the abstract, with a digital artistry touch that emphasizes detailed textures and vibrant colors. It captures the essence of the subject through the use of shape, color, and form rather than attempting to represent it accurately. |
+| `g4f.providers.Dalle2`                  | ![Active](https://img.shields.io/badge/Active-brightgreen) | Characterized by its semi-realism, with a focus on fine details, vivid colors, and natural lighting. |
+| `g4f.providers.Prodia`                  | ![Active](https://img.shields.io/badge/Active-brightgreen) | Can be described as “photorealistic”. This term refers to artwork that is extremely detailed and lifelike, closely resembling a high-resolution photograph. |
+| `g4f.providers.ProdiaStableDiffusion`   | ![Active](https://img.shields.io/badge/Active-brightgreen) | Photorealistic, capturing intricate details and textures to mimic the appearance of a real-life scene. |
+| `g4f.providers.ProdiaStableDiffusionXL` | ![Active](https://img.shields.io/badge/Active-brightgreen) | Semi-realistic, meticulously incorporating fine details and textures to emulate the semblance of a real-world scenario. |
+
+<a id="image-generation-advice"></a>
+
+# ⚠️ Advice
+It's important to review the possibilities that each provider offers within their limitations, in order to access more detailed creations. However, it's possible that at some point you might combine options that are not supported by the provider you're using at that moment. In such cases (and as long as you're using the debug option), the image generation won't stop; instead, you'll receive a warning alerting you to the error.
+
+<a id="contribute"></a>
+
+# 🤝 Contribute
+If you want to add your touch to this project, you can do so by contributing directly to the [GitHub](https://github.com/VictorMRojas/g4f-ts). Also, if you ever encounter an error that prevents you from using any functionality of the project, [be the first to report it](https://github.com/VictorMRojas/g4f-ts/issues), and that will help this community that seeks to access AI for free!

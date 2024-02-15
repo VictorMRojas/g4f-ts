@@ -1,9 +1,9 @@
 import { Readable } from 'stream';
 import { AxiosProxyConfig } from 'axios';
-import { Providers } from '../Providers/ProviderList'
 import { models } from '../Providers/ProviderList';
 import ChatCompletionHandler from '../handlers/ChatCompletionHandler';
 import TranslationHandler from '../handlers/TranslationHandler';
+import ImageGenerationHandler from '../handlers/ImageGenerationHandler';
 
 export function runLog(logger:any, msg:string, reset?:boolean) {
     logger(msg)
@@ -42,18 +42,18 @@ export function stringToStream(text:string, chunkSize:number) {
 }
 
 export function getProviderFromList(
-    providersList:ChatCompletionHandler["providersList"] | TranslationHandler["providersList"],
-    model?: string, debug?: boolean, logger?:any) {
-    if (debug) runLog(logger.await, "Picking a provider from the working list...");
+    providersList:ChatCompletionHandler["providersList"] | TranslationHandler["providersList"] | ImageGenerationHandler["providersList"],
+    logger?:any, options?:any) {
+    if (options?.debug) runLog(logger.await, "Picking a provider from the working list...");
 
-    let providerWorking = lookForProvider(providersList, model);        
+    let providerWorking = lookForProvider(providersList, options);        
 
     if (!providerWorking) {
-        if (debug) runLog(logger.error, "Provider not found.");
+        if (options?.debug) runLog(logger.error, "Provider not found.");
         throw Error("Provider not found");
     }
 
-    if (debug) {
+    if (options?.debug) {
         runLog(logger.success, `Provider found: ${providerWorking.name}`, true);
     }
 
@@ -61,18 +61,19 @@ export function getProviderFromList(
 }
 
 function lookForProvider(
-    providersList:ChatCompletionHandler["providersList"] | TranslationHandler["providersList"], 
-    model?: string) 
+    providersList:ChatCompletionHandler["providersList"] | TranslationHandler["providersList"] | ImageGenerationHandler["providersList"], 
+    options?: any
+    )
 {
+
     let providerWorking;
-    
     for(const provider of Object.values(providersList)) {
-        if (!model && provider && provider.working) {
+        if (!options?.model && provider && provider.working) {
             providerWorking = provider;
-            break;77
+            break;
         } 
         
-        if (model && models[provider.name].includes(model)) {
+        if (options?.model && models[provider.name].includes(options?.model)) {
             if (provider.working) {
                 providerWorking = provider;
                 break;
