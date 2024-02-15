@@ -39,10 +39,9 @@ This package can be used in both Typescript and CommonJS/ModuleJS environments.
         - [🎨 Image generation styles](#image-generation-styles)
         - [✒️ Image generation sampling methods](#image-generation-sampling-methods)
         - [🧮 Number type options](#image-generation-number-type-options)
-        - [⚠️ Advice](#image-generation-advice)
         - [🖼️ Image generation providers](#list-providers-image-generation)
-    + [🤝 Contribute](#contribute)
-- [📰 TO-DO](#to-do)
+        - [⚠️ Advice](#image-generation-advice)        
++ [🤝 Contribute](#contribute)
 
 <a id="installation"></a>
 ## 🛠️ Installation
@@ -459,7 +458,7 @@ const fs = require("fs");
 
 const g4f = new G4F();
 (async() => {
-    const base64Image = await g4f.imageGeneration("An squirrel", { 
+    const base64Image = await g4f.imageGeneration("A squirrel", { 
         debug: true,
         provider: g4f.providers.Emi
     });	
@@ -539,78 +538,78 @@ const g4f = new G4F();
 ## ✏️ RESUME: Image generation provider options
 | Option            | Type    | Description | Limits | Providers that support it                         |
 | ---------------   | ------- | ------ | ---- |------------------------------------------------- |
-| model             | string  | Choose a model as a base for generation. | [🤖 Check lists](#image-generation-models) |`g4f.providers.Prodia`, `g4f.providers.ProdiaStableDiffusion`, `g4f.providers.ProdiaStableDiffusionXL` |
-| negativePrompt    | string  | Indicate the provider of what not to do. | None | `g4f.providers.Pixart`, `g4f.providers.PixartLCM`, `g4f.providers.Prodia`, `g4f.providers.ProdiaStableDiffusion`, `g4f.providers.ProdiaStableDiffusionXL` |
-| imageStyle        | string  | Specify the draw style.  | [🎨 Check lists](#image-generation-styles) | `g4f.providers.Pixart`, `g4f.providers.PixartLCM` |
-| height            | number  | Specify the image height. | [🧮 Check lists](#image-generation-number-type-options) |`g4f.providers.Pixart`, `g4f.providers.PixartLCM`, `g4f.providers.ProdiaStableDiffusion`, `g4f.providers.ProdiaStableDiffusionXL` |
-| width             | number  | Specify the image width. | [🧮 Check lists](#image-generation-number-type-options) | `g4f.providers.Pixart`, `g4f.providers.PixartLCM`, `g4f.providers.ProdiaStableDiffusion`, `g4f.providers.ProdiaStableDiffusionXL` |
-| samplingSteps     | number  | Specify the number of iterations. A higher number results in more quality. | [🧮 Check lists](#image-generation-number-type-options) | `g4f.providers.Prodia`, `g4f.providers.ProdiaStableDiffusion`, `g4f.providers.ProdiaStableDiffusionXL` |
-| samplingMethod    | string  | Choose a sampling method to control the diversity, quality, and coherence of images. | [✒️ Check lists](#image-generation-sampling-methods) | `g4f.providers.Pixart`, `g4f.providers.Prodia`, `g4f.providers.ProdiaStableDiffusion`, `g4f.providers.ProdiaStableDiffusionXL` |
-| cfgScale          | number  | Specify the Classifier-Free Guidance to control how closely the generated image adheres to the given text prompt. | [🧮 Check lists](#image-generation-number-type-options) | `g4f.providers.Pixart` `g4f.providers.Prodia`, `g4f.providers.ProdiaStableDiffusion`, `g4f.providers.ProdiaStableDiffusionXL` |
-| dpmInferenceSteps | number  | Specify the DPM Inference Steps for refining object detection accuracy  | [🧮 Check lists](#image-generation-number-type-options) | `g4f.providers.Pixart` |
-| saGuidanceScale   | number  | Specify the Style-Aware Guidance Scale for fine-tuning style and composition | [🧮 Check lists](#image-generation-number-type-options) | `g4f.providers.Pixart` |
-| saInferenceSteps  | number  | Specify the Style-Aware Inference Steps for refining or adjusting the generated image during style transfer or style-based image synthesis. |  [🧮 Check lists](#image-generation-number-type-options) | `g4f.providers.Pixart` |
-| lcmInferenceSteps | number  | Specify the LCM Inference Steps for enhancing the generation of images with AI by leveraging latent consistency models | [🧮 Check lists](#image-generation-number-type-options) | `g4f.providers.PixartLCM` |
-| useGpu            | boolean | Determine whether to use the GPU for generation | None | `g4f.providers.Dalle2` |
-| promptImprovement | boolean | Determine whether the prompt should be enhanced using AI. |None | `g4f.providers.Dalle2` |
+| model             | string  | Choose a model as a base for generation. | [🤖 Check lists](#image-generation-models) |`Prodia`, `ProdiaStableDiffusion`, `ProdiaStableDiffusionXL` |
+| negativePrompt    | string  | Indicate the provider of what not to do. | None | `Pixart`, `PixartLCM`, `Prodia`, `ProdiaStableDiffusion`, `ProdiaStableDiffusionXL` |
+| imageStyle        | string  | Specify the draw style.  | [🎨 Check lists](#image-generation-styles) | `Pixart`, `PixartLCM` |
+| height            | number  | Specify the image height. | [🧮 Check lists](#image-generation-number-type-options) |`Pixart`, `PixartLCM`, `ProdiaStableDiffusion`, `ProdiaStableDiffusionXL` |
+| width             | number  | Specify the image width. | [🧮 Check lists](#image-generation-number-type-options) | `Pixart`, `PixartLCM`, `ProdiaStableDiffusion`, `ProdiaStableDiffusionXL` |
+| samplingSteps     | number  | Specify the number of iterations. A higher number results in more quality. | [🧮 Check lists](#image-generation-number-type-options) | `Prodia`, `ProdiaStableDiffusion`, `ProdiaStableDiffusionXL` |
+| samplingMethod    | string  | Choose a sampling method to control the diversity, quality, and coherence of images. | [✒️ Check lists](#image-generation-sampling-methods) | `Pixart`, `Prodia`, `ProdiaStableDiffusion`, `ProdiaStableDiffusionXL` |
+| cfgScale          | number  | Specify the Classifier-Free Guidance to control how closely the generated image adheres to the given text prompt. | [🧮 Check lists](#image-generation-number-type-options) | `Pixart` `Prodia`, `ProdiaStableDiffusion`, `ProdiaStableDiffusionXL` |
+| dpmInferenceSteps | number  | Specify the DPM Inference Steps for refining object detection accuracy  | [🧮 Check lists](#image-generation-number-type-options) | `Pixart` |
+| saGuidanceScale   | number  | Specify the Style-Aware Guidance Scale for fine-tuning style and composition | [🧮 Check lists](#image-generation-number-type-options) | `Pixart` |
+| saInferenceSteps  | number  | Specify the Style-Aware Inference Steps for refining or adjusting the generated image during style transfer or style-based image synthesis. |  [🧮 Check lists](#image-generation-number-type-options) | `Pixart` |
+| lcmInferenceSteps | number  | Specify the LCM Inference Steps for enhancing the generation of images with AI by leveraging latent consistency models | [🧮 Check lists](#image-generation-number-type-options) | `PixartLCM` |
+| useGpu            | boolean | Determine whether to use the GPU for generation | None | `Dalle2` |
+| promptImprovement | boolean | Determine whether the prompt should be enhanced using AI. |None | `Dalle2` |
 
 <a id="image-generation-models"></a>
 
 ## 🤖 Image generation models
 | Provider                                 | Models supported           |
 | ---------------------------------------- | -------------------------- |
-| `g4f.providers.Prodia`                   | https://rentry.co/b6i53fnm |
-| `g4f.providers.ProdiaStableDiffusion`    | https://rentry.co/pfwmx6y5 |
-| `g4f.providers.ProdiaStableDiffusionXL`  | https://rentry.co/wfhsk8sv |
+| `Prodia`                   | https://rentry.co/b6i53fnm |
+| `ProdiaStableDiffusion`    | https://rentry.co/pfwmx6y5 |
+| `ProdiaStableDiffusionXL`  | https://rentry.co/wfhsk8sv |
 
 <a id="image-generation-styles"></a>
 
 ## 🎨 Image generation styles
 | Provider  | Image styles supported     |
 | --------- | -------------------------- |
-| `g4f.providers.Pixart`    | https://rentry.co/hcggg36n |
-| `g4f.providers.PixartLCM` | https://rentry.co/gzxa3wv2 |
+| `Pixart`    | https://rentry.co/hcggg36n |
+| `PixartLCM` | https://rentry.co/gzxa3wv2 |
 
 <a id="image-generation-sampling-methods"></a>
 
 ## ✒️ Image generation sampling methods
 | Provider                               | Sampling methods supported |
 | -------------------------------------- | -------------------------- |
-| `g4f.providers.Pixart`                  | https://rentry.co/x7i8gko9 |
-| `g4f.providers.Prodia`                  | https://rentry.co/8bwtqeh9 |
-| `g4f.providers.ProdiaStableDiffusion`   | https://rentry.co/iyrkxmzr |
-| `g4f.providers.ProdiaStableDiffusionXL` | https://rentry.co/p2ad6y3f |
+| `Pixart`                  | https://rentry.co/x7i8gko9 |
+| `Prodia`                  | https://rentry.co/8bwtqeh9 |
+| `ProdiaStableDiffusion`   | https://rentry.co/iyrkxmzr |
+| `ProdiaStableDiffusionXL` | https://rentry.co/p2ad6y3f |
 
 <a id="image-generation-number-type-options"></a>
 
 ## 🧮 Number type options
 | Provider                                | Number type options and values supported |
 | --------------------------------------- | ---------------- |
-| `g4f.providers.Pixart`                  | <table><tr>    <th>Option</th>    <th style="text-align: center;">Default</th>    <th style="text-align: center;">Min</th>    <th style="text-align: center;">Max</th></tr><tr>    <td>height</td>    <td style="text-align: center;">1024</td>    <td style="text-align: center;">256</td>    <td style="text-align: center;">2048</td></tr><tr>    <td>width</td>    <td style="text-align: center;">1024</td>    <td style="text-align: center;">256</td>    <td style="text-align: center;">2048</td></tr><tr>    <td>dpmInferenceSteps</td>    <td style="text-align: center;">14</td>    <td style="text-align: center;">5</td>    <td style="text-align: center;">40</td></tr><tr>    <td>saGuidanceScale</td>    <td style="text-align: center;">3</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">10</td></tr><tr>    <td>saInferenceSteps</td>    <td style="text-align: center;">25</td>    <td style="text-align: center;">10</td>    <td style="text-align: center;">40</td></tr> <tr>    <td>cfgScale</td>    <td style="text-align: center;">4.5</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">10</td></tr></table> |
-| `g4f.providers.PixartLCM`               | <table><tr>    <th>Option</th>    <th style="text-align: center;">Default</th>    <th style="text-align: center;">Min</th>    <th style="text-align: center;">Max</th></tr><tr>    <td>height</td>    <td style="text-align: center;">1024</td>    <td style="text-align: center;">256</td>    <td style="text-align: center;">2048</td></tr><tr>    <td>width</td>    <td style="text-align: center;">1024</td>    <td style="text-align: center;">256</td>    <td style="text-align: center;">2048</td></tr><tr>    <td>lcmInferenceSteps</td>    <td style="text-align: center;">9</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">30</td></tr></table> |
-| `g4f.providers.Prodia`                  | <table><tr>    <th>Option</th>    <th style="text-align: center;">Default</th>    <th style="text-align: center;">Min</th>    <th style="text-align: center;">Max</th></tr><tr>    <td>samplingSteps</td>    <td style="text-align: center;">7</td>    <td style="text-align: center;">0</td>    <td style="text-align: center;">20</td></tr><tr>    <td>cfgScale</td>    <td style="text-align: center;">25</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">30</td></tr></table> |
-| `g4f.providers.ProdiaStableDiffusion`   | <table><tr>    <th>Option</th>    <th style="text-align: center;">Default</th>    <th style="text-align: center;">Min</th>    <th style="text-align: center;">Max</th></tr><tr>    <td>height</td>    <td style="text-align: center;">512</td>    <td style="text-align: center;">50</td>    <td style="text-align: center;">1024</td></tr><tr>    <td>width</td>    <td style="text-align: center;">512</td>    <td style="text-align: center;">50</td>    <td style="text-align: center;">1024</td></tr><tr>    <td>samplingSteps</td>    <td style="text-align: center;">25</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">30</td></tr><tr>    <td>cfgScale</td>    <td style="text-align: center;">7</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">20</td></tr></table> |
-| `g4f.providers.ProdiaStableDiffusionXL` | <table><tr>    <th>Option</th>    <th style="text-align: center;">Default</th>    <th style="text-align: center;">Min</th>    <th style="text-align: center;">Max</th></tr><tr>    <td>height</td>    <td style="text-align: center;">1024</td>    <td style="text-align: center;">512</td>    <td style="text-align: center;">1536</td></tr><tr>    <td>width</td>    <td style="text-align: center;">1024</td>    <td style="text-align: center;">512</td>    <td style="text-align: center;">1536</td></tr><tr>    <td>samplingSteps</td>    <td style="text-align: center;">25</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">30</td></tr><tr>    <td>cfgScale</td>    <td style="text-align: center;">7</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">20</td></tr></table> |
+| `Pixart`                  | <table><tr>    <th>Option</th>    <th style="text-align: center;">Default</th>    <th style="text-align: center;">Min</th>    <th style="text-align: center;">Max</th></tr><tr>    <td>height</td>    <td style="text-align: center;">1024</td>    <td style="text-align: center;">256</td>    <td style="text-align: center;">2048</td></tr><tr>    <td>width</td>    <td style="text-align: center;">1024</td>    <td style="text-align: center;">256</td>    <td style="text-align: center;">2048</td></tr><tr>    <td>dpmInferenceSteps</td>    <td style="text-align: center;">14</td>    <td style="text-align: center;">5</td>    <td style="text-align: center;">40</td></tr><tr>    <td>saGuidanceScale</td>    <td style="text-align: center;">3</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">10</td></tr><tr>    <td>saInferenceSteps</td>    <td style="text-align: center;">25</td>    <td style="text-align: center;">10</td>    <td style="text-align: center;">40</td></tr> <tr>    <td>cfgScale</td>    <td style="text-align: center;">4.5</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">10</td></tr></table> |
+| `PixartLCM`               | <table><tr>    <th>Option</th>    <th style="text-align: center;">Default</th>    <th style="text-align: center;">Min</th>    <th style="text-align: center;">Max</th></tr><tr>    <td>height</td>    <td style="text-align: center;">1024</td>    <td style="text-align: center;">256</td>    <td style="text-align: center;">2048</td></tr><tr>    <td>width</td>    <td style="text-align: center;">1024</td>    <td style="text-align: center;">256</td>    <td style="text-align: center;">2048</td></tr><tr>    <td>lcmInferenceSteps</td>    <td style="text-align: center;">9</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">30</td></tr></table> |
+| `Prodia`                  | <table><tr>    <th>Option</th>    <th style="text-align: center;">Default</th>    <th style="text-align: center;">Min</th>    <th style="text-align: center;">Max</th></tr><tr>    <td>samplingSteps</td>    <td style="text-align: center;">7</td>    <td style="text-align: center;">0</td>    <td style="text-align: center;">20</td></tr><tr>    <td>cfgScale</td>    <td style="text-align: center;">25</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">30</td></tr></table> |
+| `ProdiaStableDiffusion`   | <table><tr>    <th>Option</th>    <th style="text-align: center;">Default</th>    <th style="text-align: center;">Min</th>    <th style="text-align: center;">Max</th></tr><tr>    <td>height</td>    <td style="text-align: center;">512</td>    <td style="text-align: center;">50</td>    <td style="text-align: center;">1024</td></tr><tr>    <td>width</td>    <td style="text-align: center;">512</td>    <td style="text-align: center;">50</td>    <td style="text-align: center;">1024</td></tr><tr>    <td>samplingSteps</td>    <td style="text-align: center;">25</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">30</td></tr><tr>    <td>cfgScale</td>    <td style="text-align: center;">7</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">20</td></tr></table> |
+| `ProdiaStableDiffusionXL` | <table><tr>    <th>Option</th>    <th style="text-align: center;">Default</th>    <th style="text-align: center;">Min</th>    <th style="text-align: center;">Max</th></tr><tr>    <td>height</td>    <td style="text-align: center;">1024</td>    <td style="text-align: center;">512</td>    <td style="text-align: center;">1536</td></tr><tr>    <td>width</td>    <td style="text-align: center;">1024</td>    <td style="text-align: center;">512</td>    <td style="text-align: center;">1536</td></tr><tr>    <td>samplingSteps</td>    <td style="text-align: center;">25</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">30</td></tr><tr>    <td>cfgScale</td>    <td style="text-align: center;">7</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">20</td></tr></table> |
 
 <a id="list-providers-image-generation"></a>
 
 ## 🖼️ Image generation providers
 | Provider                               | Status   | Default style |
 | -------------------------------------- | :------: | ------------- |
-| `g4f.providers.Pixart`                  | ![Active](https://img.shields.io/badge/Active-brightgreen) | Realistic with a touch of exaggeration, characterized by detailed textures, vibrant colors, and enhanced features. | 
-| `g4f.providers.PixartLCM`               | ![Active](https://img.shields.io/badge/Active-brightgreen) | Exhibits a detailed and vibrant use of color, creating a visually rich and textured representation. It’s a blend of realism with a touch of artistic interpretation. |
-| `g4f.providers.Emi`                     | ![Active](https://img.shields.io/badge/Active-brightgreen) | Characterized by a colorful and whimsical animation, reminiscent of a children’s storybook illustration. |
-| `g4f.providers.Dalle`                   | ![Active](https://img.shields.io/badge/Active-brightgreen) | Realistic, capturing intricate details and textures to depict a lifelike representation. |
-| `g4f.providers.DalleMini`               | ![Active](https://img.shields.io/badge/Active-brightgreen) | Leans towards the abstract, with a digital artistry touch that emphasizes detailed textures and vibrant colors. It captures the essence of the subject through the use of shape, color, and form rather than attempting to represent it accurately. |
-| `g4f.providers.Dalle2`                  | ![Active](https://img.shields.io/badge/Active-brightgreen) | Characterized by its semi-realism, with a focus on fine details, vivid colors, and natural lighting. |
-| `g4f.providers.Prodia`                  | ![Active](https://img.shields.io/badge/Active-brightgreen) | Can be described as “photorealistic”. This term refers to artwork that is extremely detailed and lifelike, closely resembling a high-resolution photograph. |
-| `g4f.providers.ProdiaStableDiffusion`   | ![Active](https://img.shields.io/badge/Active-brightgreen) | Photorealistic, capturing intricate details and textures to mimic the appearance of a real-life scene. |
-| `g4f.providers.ProdiaStableDiffusionXL` | ![Active](https://img.shields.io/badge/Active-brightgreen) | Semi-realistic, meticulously incorporating fine details and textures to emulate the semblance of a real-world scenario. |
+| `Pixart`                  | ![Active](https://img.shields.io/badge/Active-brightgreen) | Realistic with a touch of exaggeration, characterized by detailed textures, vibrant colors, and enhanced features. | 
+| `PixartLCM`               | ![Active](https://img.shields.io/badge/Active-brightgreen) | Exhibits a detailed and vibrant use of color, creating a visually rich and textured representation. It’s a blend of realism with a touch of artistic interpretation. |
+| `Emi`                     | ![Active](https://img.shields.io/badge/Active-brightgreen) | Characterized by a colorful and whimsical animation, reminiscent of a children’s storybook illustration. |
+| `Dalle`                   | ![Active](https://img.shields.io/badge/Active-brightgreen) | Realistic, capturing intricate details and textures to depict a lifelike representation. |
+| `DalleMini`               | ![Active](https://img.shields.io/badge/Active-brightgreen) | Leans towards the abstract, with a digital artistry touch that emphasizes detailed textures and vibrant colors. It captures the essence of the subject through the use of shape, color, and form rather than attempting to represent it accurately. |
+| `Dalle2`                  | ![Active](https://img.shields.io/badge/Active-brightgreen) | Characterized by its semi-realism, with a focus on fine details, vivid colors, and natural lighting. |
+| `Prodia`                  | ![Active](https://img.shields.io/badge/Active-brightgreen) | Can be described as “photorealistic”. This term refers to artwork that is extremely detailed and lifelike, closely resembling a high-resolution photograph. |
+| `ProdiaStableDiffusion`   | ![Active](https://img.shields.io/badge/Active-brightgreen) | Photorealistic, capturing intricate details and textures to mimic the appearance of a real-life scene. |
+| `ProdiaStableDiffusionXL` | ![Active](https://img.shields.io/badge/Active-brightgreen) | Semi-realistic, meticulously incorporating fine details and textures to emulate the semblance of a real-world scenario. |
 
 <a id="image-generation-advice"></a>
 
 # ⚠️ Advice
-It's important to review the possibilities that each provider offers within their limitations, in order to access more detailed creations. However, it's possible that at some point you might combine options that are not supported by the provider you're using at that moment. In such cases (and as long as you're using the debug option), the image generation won't stop; instead, you'll receive a warning alerting you to the error.
+It's important to review the possibilities that each provider offers within their limitations, in order to access more detailed creations. However, it's possible that at some point you might combine options that are not supported by the provider you're using at that moment. In such cases the image generation won't stop; instead (and as long as you're using the debug option), you'll receive a warning alerting you to the error.
 
 <a id="contribute"></a>
 
