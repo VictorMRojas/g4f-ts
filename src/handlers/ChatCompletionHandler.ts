@@ -27,7 +27,7 @@ class ChatCompletionHandler {
      */    
     async generateCompletion(messages: Array<IMessage>, options?: IChatCompletionOptions): Promise<any> {
         let { debug, model, provider, stream, retry, output, chunkSize } = options || {};        
-        if (!provider) provider = getProviderFromList(this.providersList, model, debug, provider_log); 
+        if (!provider) provider = getProviderFromList(this.providersList, provider_log, { model, debug }); 
         else if (debug) runLog(provider_log.success, `Provider found: ${provider.name}`, true)
 
         if (debug) runLog(model_log.success, `Using the model: ${model || provider.default_model}`, true);
@@ -48,7 +48,7 @@ class ChatCompletionHandler {
         const { debug } = options || {};
         if (debug) runLog(provider_log.await, `Fetching data from the provider: ${provider.name}`);
         const text = await provider.fetchData(messages, options);
-        if (debug) runLog(provider_log.success, `Data was successfully fetched from the ${provider.name} provider`, true);            
+        if (debug) runLog(provider_log.success, `Data was successfully fetched from the "${provider.name}" provider`, true);            
         return text;
     }
 
