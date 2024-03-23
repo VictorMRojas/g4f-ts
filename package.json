@@ -1,6 +1,6 @@
 {
   "name": "g4f",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "GPT4 for free, No API key, no auth required.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

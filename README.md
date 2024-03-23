@@ -302,7 +302,7 @@ const messages = [
     { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
 ];
 const options = {
-    provider: g4f.providers.ChatBase,
+    provider: g4f.providers.Bing,
     stream: true,
     chunkSize: 15,
     retry: {
@@ -360,7 +360,7 @@ your heart feel
 | ------  | -------  | ------- | ----- | ------ | ------ |
 | [GPT.ai](https://chatgpt.ai) | `g4f.providers.GPT` | ✔️ | ✔️ | ❌ | ![Active](https://img.shields.io/badge/Active-brightgreen) |
 | [chatbase.co](https://www.chatbase.co) | `g4f.providers.ChatBase` | ✔️ | ❌ | ✔️ | ![Active](https://img.shields.io/badge/Active-brightgreen) |
-| [bing.com](https://bing.com/chat) | `g4f.providers.Bing` | ❌ | ✔️ | ✔️ | ![Inactive](https://img.shields.io/badge/Inactive-red) |
+| [bing.com](https://bing.com/chat) | `g4f.providers.Bing` | ❌ | ✔️ | ✔️ | ![Active](https://img.shields.io/badge/Inactive-red) |
 
 <a id="models"></a>
 
@@ -450,6 +450,7 @@ this will be solved with AI, and you wouldn't need to specify it.
 With the imageGeneration function, you will be able to generate images from a text input and optional parameters that will provide you with millions of combinations to stylize each of the images.
 
 <a id="cartoon-style-example"></a>
+<br>
 
 ## Cartoon style example
 ```js
@@ -471,6 +472,7 @@ const g4f = new G4F();
 ![An squirrel cartoon style from the Emi provider](https://i.imgur.com/6tdGNys.jpeg)
 
 <a id="paint-style-example"></a>
+<br>
 
 ## Paint style example
 ```js
@@ -497,6 +499,7 @@ const g4f = new G4F();
 ![A village paint from the Pixart provider](https://i.imgur.com/pNor1oU.jpg)
 
 <a id="realistic-style-example"></a>
+<br>
 
 ## Realistic style example
 ```js
