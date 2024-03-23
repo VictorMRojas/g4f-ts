@@ -34,7 +34,7 @@ class Dalle2 {
         const data = {
             prompt,
             model: "dalle2",
-            options: {
+            data: {
                 gpu: options?.useGpu || this.default_options.useGpu,
                 prompt_improvement: options?.promptImprovement || this.default_options.promptImprovement
             }

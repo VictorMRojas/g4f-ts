@@ -20,7 +20,7 @@ class Bing {
         this.url = "https://nexra.aryahcr.cc/api/chat/complements";        
         this.supports_message_history = true;
         this.need_slice_text = true;
-        this.working = false;
+        this.working = true;
     }
 
     /**

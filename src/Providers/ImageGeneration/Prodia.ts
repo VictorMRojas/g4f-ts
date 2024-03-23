@@ -37,7 +37,7 @@ class Prodia {
         const data = {
             prompt,
             model: "prodia",
-            options: {
+            data: {
                 negative_prompt: options?.negativePrompt || this.default_options.negativePrompt,
                 model: options?.model || this.default_options.model,
                 sampler: options?.samplingMethod || this.default_options.samplingMethod,
