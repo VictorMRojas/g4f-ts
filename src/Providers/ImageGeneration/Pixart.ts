@@ -36,12 +36,12 @@ class Pixart {
      * @throws {Error} - Throws an error if fetching data fails.
      */
     async fetchData(prompt: string, options?:IImageGenerationProviderOptions): Promise<object> {
-        const headers = { 'Content-Type': 'application/json' }
-        
+        const headers = { 'Content-Type': 'application/json' }        
+
         const data = {
             prompt,
             model: "pixart-a",
-            options: {
+            data: {
                 prompt_negative: options?.negativePrompt || this.default_options.negativePrompt,
                 image_style: options?.imageStyle || this.default_options.imageStyle,
                 width: options?.width || this.default_options.width,
@@ -54,7 +54,9 @@ class Pixart {
             }
         }
 
-        return axios.post(this.url, data, { headers: headers })
+        console.log(data);
+
+        return axios.post("https://nexra.aryahcr.cc/api/image/complements", data, { headers: headers })
         .then(async response => {
             return this.handleResponse(response.data);       
         }).catch((e) => {

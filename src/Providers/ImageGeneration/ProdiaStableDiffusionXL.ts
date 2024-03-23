@@ -39,7 +39,7 @@ class ProdiaStableDiffusionXL {
         const data = {
             prompt,
             model: "prodia-stablediffusion-xl",
-            options: {
+            data: {
                 prompt_negative: options?.negativePrompt || this.default_options.negativePrompt,
                 model: options?.model || this.default_options.model,
                 width: options?.width || this.default_options.width,

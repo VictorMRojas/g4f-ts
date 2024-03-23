@@ -39,7 +39,7 @@ class ProdiaStableDiffusion {
         const data = {
             prompt,
             model: "prodia-stablediffusion",
-            options: {
+            data: {
                 prompt_negative: options?.negativePrompt || this.default_options.negativePrompt,
                 model: options?.model || this.default_options.model,
                 width: options?.width || this.default_options.width,
@@ -49,6 +49,8 @@ class ProdiaStableDiffusion {
                 cfg_scale: options?.cfgScale || this.default_options.cfgScale
             }
         }
+
+        console.log(data);
 
         return axios.post(this.url, data, { headers: headers })
         .then(async response => {

@@ -32,12 +32,12 @@ class PixartLCM {
      * @throws {Error} - Throws an error if fetching data fails.
      */
     async fetchData(prompt: string, options?:IImageGenerationProviderOptions): Promise<object> {
-        const headers = { 'Content-Type': 'application/json' }
-        
+        const headers = { 'Content-Type': 'application/json' }        
+
         const data = {
             prompt,
             model: "pixart-lcm",
-            options: {
+            data: {
                 prompt_negative: options?.negativePrompt || this.default_options.negativePrompt,
                 image_style: options?.imageStyle || this.default_options.imageStyle,
                 width: options?.width || this.default_options.width,
