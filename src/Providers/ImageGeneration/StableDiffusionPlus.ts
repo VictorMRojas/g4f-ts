@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { IImageGenerationProviderOptions } from '../../interfaces/IImageGenerationProviderOptions';
 
-class PixartLCM {
+class ProdiaStableDiffusionPlus {
     name: string;
     type: string;
     url: string;
@@ -10,18 +10,15 @@ class PixartLCM {
     working: boolean;
 
     constructor() {
-        this.name = "PixartLCM",
+        this.name = "ProdiaStableDiffusionPlus",
         this.type = "ImageGeneration";
         this.url = "https://nexra.aryahcr.cc/api/image/complements";
         this.default_options = {
             negativePrompt: "",
-            imageStyle: "(No style)",
-            width: 1024,
-            height: 1024,            
-            lcmInferenceSteps: 9
+            saGuidanceScale: 9,
         }
         this.need_slice_text = false;
-        this.working = false;
+        this.working = true;
     }
 
     /**
@@ -32,17 +29,14 @@ class PixartLCM {
      * @throws {Error} - Throws an error if fetching data fails.
      */
     async fetchData(prompt: string, options?:IImageGenerationProviderOptions): Promise<object> {
-        const headers = { 'Content-Type': 'application/json' }        
-
+        const headers = { 'Content-Type': 'application/json' }
+        
         const data = {
             prompt,
-            model: "pixart-lcm",
+            model: "stablediffusion-2.1",
             data: {
                 prompt_negative: options?.negativePrompt || this.default_options.negativePrompt,
-                image_style: options?.imageStyle || this.default_options.imageStyle,
-                width: options?.width || this.default_options.width,
-                height: options?.height || this.default_options.height,
-                lcm_inference_steps: options?.lcmInferenceSteps || this.default_options.lcmInferenceSteps
+                guidance_scale: options?.saGuidanceScale || this.default_options.saGuidanceScale
             }
         }
 
@@ -59,8 +53,8 @@ class PixartLCM {
         text = text.substring(text.indexOf('{'), text.length);
         let img = JSON.parse(text);
         img = img.images[0].split(';base64,').pop();
-        return img; 
+        return img;
     }
 }
 
-export default PixartLCM;
+export default ProdiaStableDiffusionPlus;

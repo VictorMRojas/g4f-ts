@@ -23,7 +23,7 @@ class ProdiaStableDiffusionXL {
             cfgScale: 7
         }
         this.need_slice_text = false;
-        this.working = true;
+        this.working = false;
     }
 
     /**

@@ -25,7 +25,7 @@ class Pixart {
             saInferenceSteps: 25
         }
         this.need_slice_text = false;
-        this.working = true;
+        this.working = false;
     }
 
     /**
@@ -53,8 +53,6 @@ class Pixart {
                 sa_inference_steps: options?.saInferenceSteps || this.default_options.saInferenceSteps
             }
         }
-
-        console.log(data);
 
         return axios.post("https://nexra.aryahcr.cc/api/image/complements", data, { headers: headers })
         .then(async response => {
