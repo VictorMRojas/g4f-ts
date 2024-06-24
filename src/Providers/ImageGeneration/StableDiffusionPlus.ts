@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { IImageGenerationProviderOptions } from '../../interfaces/IImageGenerationProviderOptions';
 
-class ProdiaStableDiffusionPlus {
+class StableDiffusionPlus {
     name: string;
     type: string;
     url: string;
@@ -10,7 +10,7 @@ class ProdiaStableDiffusionPlus {
     working: boolean;
 
     constructor() {
-        this.name = "ProdiaStableDiffusionPlus",
+        this.name = "StableDiffusionPlus",
         this.type = "ImageGeneration";
         this.url = "https://nexra.aryahcr.cc/api/image/complements";
         this.default_options = {
@@ -57,4 +57,4 @@ class ProdiaStableDiffusionPlus {
     }
 }
 
-export default ProdiaStableDiffusionPlus;
+export default StableDiffusionPlus;
