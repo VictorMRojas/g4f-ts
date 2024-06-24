@@ -15,7 +15,7 @@ import StableDiffusionLite from "./ImageGeneration/StableDiffusionLite";
 import StableDiffusionPlus from "./ImageGeneration/StableDiffusionPlus";
 
 interface Providers {
-    [key: string]: GPT | ChatBase | Bing | TranslateAI | Pixart | PixartLCM | Emi | Dalle | DalleMini | Dalle2 | Prodia | ProdiaStableDiffusion | ProdiaStableDiffusionXL ;
+    [key: string]: GPT | ChatBase | Bing | TranslateAI | Pixart | PixartLCM | Emi | Dalle | DalleMini | Dalle2 | Prodia | ProdiaStableDiffusion | ProdiaStableDiffusionXL | StableDiffusionLite | StableDiffusionPlus;
 }
 
 const providers: Providers = {
