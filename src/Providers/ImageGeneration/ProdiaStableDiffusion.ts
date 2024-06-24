@@ -23,7 +23,7 @@ class ProdiaStableDiffusion {
             cfgScale: 7
         }
         this.need_slice_text = false;
-        this.working = true;
+        this.working = false;
     }
 
     /**
@@ -54,6 +54,7 @@ class ProdiaStableDiffusion {
         .then(async response => {
             return this.handleResponse(response.data);       
         }).catch((e) => {
+            console.log(e);
             if (e.message.startsWith("Invalid response.")) throw new Error(e.message);
             throw new Error("Failed to fetch data. Please try again later.");
         });
