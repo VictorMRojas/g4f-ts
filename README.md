@@ -302,7 +302,7 @@ const messages = [
     { role: "user", content: "Let's see, write a single paragraph-long poem for me." },
 ];
 const options = {
-    provider: g4f.providers.ChatBase,
+    provider: g4f.providers.Bing,
     stream: true,
     chunkSize: 15,
     retry: {
@@ -360,7 +360,7 @@ your heart feel
 | ------  | -------  | ------- | ----- | ------ | ------ |
 | [GPT.ai](https://chatgpt.ai) | `g4f.providers.GPT` | ✔️ | ✔️ | ❌ | ![Active](https://img.shields.io/badge/Active-brightgreen) |
 | [chatbase.co](https://www.chatbase.co) | `g4f.providers.ChatBase` | ✔️ | ❌ | ✔️ | ![Active](https://img.shields.io/badge/Active-brightgreen) |
-| [bing.com](https://bing.com/chat) | `g4f.providers.Bing` | ❌ | ✔️ | ✔️ | ![Inactive](https://img.shields.io/badge/Inactive-red) |
+| [bing.com](https://bing.com/chat) | `g4f.providers.Bing` | ❌ | ✔️ | ✔️ | ![Active](https://img.shields.io/badge/Inactive-red) |
 
 <a id="models"></a>
 
@@ -450,6 +450,7 @@ this will be solved with AI, and you wouldn't need to specify it.
 With the imageGeneration function, you will be able to generate images from a text input and optional parameters that will provide you with millions of combinations to stylize each of the images.
 
 <a id="cartoon-style-example"></a>
+<br>
 
 ## Cartoon style example
 ```js
@@ -471,6 +472,7 @@ const g4f = new G4F();
 ![An squirrel cartoon style from the Emi provider](https://i.imgur.com/6tdGNys.jpeg)
 
 <a id="paint-style-example"></a>
+<br>
 
 ## Paint style example
 ```js
@@ -497,6 +499,7 @@ const g4f = new G4F();
 ![A village paint from the Pixart provider](https://i.imgur.com/pNor1oU.jpg)
 
 <a id="realistic-style-example"></a>
+<br>
 
 ## Realistic style example
 ```js
@@ -547,7 +550,7 @@ const g4f = new G4F();
 | samplingMethod    | string  | Choose a sampling method to control the diversity, quality, and coherence of images. | [✒️ Check lists](#image-generation-sampling-methods) | `Pixart`, `Prodia`, `ProdiaStableDiffusion`, `ProdiaStableDiffusionXL` |
 | cfgScale          | number  | Specify the Classifier-Free Guidance to control how closely the generated image adheres to the given text prompt. | [🧮 Check lists](#image-generation-number-type-options) | `Pixart` `Prodia`, `ProdiaStableDiffusion`, `ProdiaStableDiffusionXL` |
 | dpmInferenceSteps | number  | Specify the DPM Inference Steps for refining object detection accuracy  | [🧮 Check lists](#image-generation-number-type-options) | `Pixart` |
-| saGuidanceScale   | number  | Specify the Style-Aware Guidance Scale for fine-tuning style and composition | [🧮 Check lists](#image-generation-number-type-options) | `Pixart` |
+| saGuidanceScale   | number  | Specify the Style-Aware Guidance Scale for fine-tuning style and composition | [🧮 Check lists](#image-generation-number-type-options) | `Pixart` `StableDiffusionPlus` |
 | saInferenceSteps  | number  | Specify the Style-Aware Inference Steps for refining or adjusting the generated image during style transfer or style-based image synthesis. |  [🧮 Check lists](#image-generation-number-type-options) | `Pixart` |
 | lcmInferenceSteps | number  | Specify the LCM Inference Steps for enhancing the generation of images with AI by leveraging latent consistency models | [🧮 Check lists](#image-generation-number-type-options) | `PixartLCM` |
 | useGpu            | boolean | Determine whether to use the GPU for generation | None | `Dalle2` |
@@ -590,21 +593,24 @@ const g4f = new G4F();
 | `Prodia`                  | <table><tr>    <th>Option</th>    <th style="text-align: center;">Default</th>    <th style="text-align: center;">Min</th>    <th style="text-align: center;">Max</th></tr><tr>    <td>samplingSteps</td>    <td style="text-align: center;">7</td>    <td style="text-align: center;">0</td>    <td style="text-align: center;">20</td></tr><tr>    <td>cfgScale</td>    <td style="text-align: center;">25</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">30</td></tr></table> |
 | `ProdiaStableDiffusion`   | <table><tr>    <th>Option</th>    <th style="text-align: center;">Default</th>    <th style="text-align: center;">Min</th>    <th style="text-align: center;">Max</th></tr><tr>    <td>height</td>    <td style="text-align: center;">512</td>    <td style="text-align: center;">50</td>    <td style="text-align: center;">1024</td></tr><tr>    <td>width</td>    <td style="text-align: center;">512</td>    <td style="text-align: center;">50</td>    <td style="text-align: center;">1024</td></tr><tr>    <td>samplingSteps</td>    <td style="text-align: center;">25</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">30</td></tr><tr>    <td>cfgScale</td>    <td style="text-align: center;">7</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">20</td></tr></table> |
 | `ProdiaStableDiffusionXL` | <table><tr>    <th>Option</th>    <th style="text-align: center;">Default</th>    <th style="text-align: center;">Min</th>    <th style="text-align: center;">Max</th></tr><tr>    <td>height</td>    <td style="text-align: center;">1024</td>    <td style="text-align: center;">512</td>    <td style="text-align: center;">1536</td></tr><tr>    <td>width</td>    <td style="text-align: center;">1024</td>    <td style="text-align: center;">512</td>    <td style="text-align: center;">1536</td></tr><tr>    <td>samplingSteps</td>    <td style="text-align: center;">25</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">30</td></tr><tr>    <td>cfgScale</td>    <td style="text-align: center;">7</td>    <td style="text-align: center;">1</td>    <td style="text-align: center;">20</td></tr></table> |
+| `StableDiffusionPlus` | <table><tr>    <th>Option</th>    <th style="text-align: center;">Default</th>    <th style="text-align: center;">Min</th>    <th style="text-align: center;">Max</th></tr>    <td>saGuidanceScale</td>    <td style="text-align: center;">9</td>    <td style="text-align: center;">0</td>    <td style="text-align: center;">50</td></tr></table> |
 
 <a id="list-providers-image-generation"></a>
 
 ## 🖼️ Image generation providers
 | Provider                               | Status   | Default style |
 | -------------------------------------- | :------: | ------------- |
-| `Pixart`                  | ![Active](https://img.shields.io/badge/Active-brightgreen) | Realistic with a touch of exaggeration, characterized by detailed textures, vibrant colors, and enhanced features. | 
-| `PixartLCM`               | ![Active](https://img.shields.io/badge/Active-brightgreen) | Exhibits a detailed and vibrant use of color, creating a visually rich and textured representation. It’s a blend of realism with a touch of artistic interpretation. |
+| `Pixart`                  | ![Inactive](https://img.shields.io/badge/Inactive-red) | Realistic with a touch of exaggeration, characterized by detailed textures, vibrant colors, and enhanced features. | 
+| `PixartLCM`               | ![Inactive](https://img.shields.io/badge/Inactive-red) | Exhibits a detailed and vibrant use of color, creating a visually rich and textured representation. It’s a blend of realism with a touch of artistic interpretation. |
 | `Emi`                     | ![Active](https://img.shields.io/badge/Active-brightgreen) | Characterized by a colorful and whimsical animation, reminiscent of a children’s storybook illustration. |
 | `Dalle`                   | ![Active](https://img.shields.io/badge/Active-brightgreen) | Realistic, capturing intricate details and textures to depict a lifelike representation. |
 | `DalleMini`               | ![Active](https://img.shields.io/badge/Active-brightgreen) | Leans towards the abstract, with a digital artistry touch that emphasizes detailed textures and vibrant colors. It captures the essence of the subject through the use of shape, color, and form rather than attempting to represent it accurately. |
-| `Dalle2`                  | ![Active](https://img.shields.io/badge/Active-brightgreen) | Characterized by its semi-realism, with a focus on fine details, vivid colors, and natural lighting. |
+| `Dalle2`                  | ![Inactive](https://img.shields.io/badge/Inactive-red) | Characterized by its semi-realism, with a focus on fine details, vivid colors, and natural lighting. |
 | `Prodia`                  | ![Active](https://img.shields.io/badge/Active-brightgreen) | Can be described as “photorealistic”. This term refers to artwork that is extremely detailed and lifelike, closely resembling a high-resolution photograph. |
 | `ProdiaStableDiffusion`   | ![Active](https://img.shields.io/badge/Active-brightgreen) | Photorealistic, capturing intricate details and textures to mimic the appearance of a real-life scene. |
-| `ProdiaStableDiffusionXL` | ![Active](https://img.shields.io/badge/Active-brightgreen) | Semi-realistic, meticulously incorporating fine details and textures to emulate the semblance of a real-world scenario. |
+| `ProdiaStableDiffusionXL` | ![Inactive](https://img.shields.io/badge/Inactive-red) | Semi-realistic, meticulously incorporating fine details and textures to emulate the semblance of a real-world scenario. |
+| `StableDiffusionLite`     | ![Active](https://img.shields.io/badge/Active-brightgreen) | Can be described as folk art. It exhibits a naive perspective, lacks realistic proportions, and evokes simplicity. |
+| `StableDiffusionPlus`     | ![Active](https://img.shields.io/badge/Active-brightgreen) | Impressionism, characterized by visible brushstrokes, open composition, emphasis on light in its changing qualities, and ordinary subject matter. |
 
 <a id="image-generation-advice"></a>
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { IImageGenerationProviderOptions } from '../../interfaces/IImageGenerationProviderOptions';
 
-class PixartLCM {
+class ProdiaStableDiffusionLite {
     name: string;
     type: string;
     url: string;
@@ -10,40 +10,26 @@ class PixartLCM {
     working: boolean;
 
     constructor() {
-        this.name = "PixartLCM",
+        this.name = "ProdiaStableDiffusionLite",
         this.type = "ImageGeneration";
         this.url = "https://nexra.aryahcr.cc/api/image/complements";
-        this.default_options = {
-            negativePrompt: "",
-            imageStyle: "(No style)",
-            width: 1024,
-            height: 1024,            
-            lcmInferenceSteps: 9
-        }
+        this.default_options = {}
         this.need_slice_text = false;
-        this.working = false;
+        this.working = true;
     }
 
     /**
      * Generate an image with a determinate style.
      * @param {string} prompt - Prompt that indicates what kind of image to generate.
-     * @param {IImageGenerationProviderOptions} options - Provider Option's necessary to generate an image.
      * @returns {Promise} - Promise that resolves with the image result.
      * @throws {Error} - Throws an error if fetching data fails.
      */
-    async fetchData(prompt: string, options?:IImageGenerationProviderOptions): Promise<object> {
-        const headers = { 'Content-Type': 'application/json' }        
-
+    async fetchData(prompt: string): Promise<object> {
+        const headers = { 'Content-Type': 'application/json' }
+        
         const data = {
             prompt,
-            model: "pixart-lcm",
-            data: {
-                prompt_negative: options?.negativePrompt || this.default_options.negativePrompt,
-                image_style: options?.imageStyle || this.default_options.imageStyle,
-                width: options?.width || this.default_options.width,
-                height: options?.height || this.default_options.height,
-                lcm_inference_steps: options?.lcmInferenceSteps || this.default_options.lcmInferenceSteps
-            }
+            model: "stablediffusion-1.5"
         }
 
         return axios.post(this.url, data, { headers: headers })
@@ -59,8 +45,8 @@ class PixartLCM {
         text = text.substring(text.indexOf('{'), text.length);
         let img = JSON.parse(text);
         img = img.images[0].split(';base64,').pop();
-        return img; 
+        return img;
     }
 }
 
-export default PixartLCM;
+export default ProdiaStableDiffusionLite;

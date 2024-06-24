@@ -11,6 +11,8 @@ import Dalle2 from "./ImageGeneration/Dalle2";
 import Prodia from "./ImageGeneration/Prodia";
 import ProdiaStableDiffusion from "./ImageGeneration/ProdiaStableDiffusion";
 import ProdiaStableDiffusionXL from "./ImageGeneration/ProdiaStableDiffusionXL";
+import StableDiffusionLite from "./ImageGeneration/StableDiffusionLite";
+import StableDiffusionPlus from "./ImageGeneration/StableDiffusionPlus";
 
 interface Providers {
     [key: string]: GPT | ChatBase | Bing | TranslateAI | Pixart | PixartLCM | Emi | Dalle | DalleMini | Dalle2 | Prodia | ProdiaStableDiffusion | ProdiaStableDiffusionXL ;
@@ -29,7 +31,9 @@ const providers: Providers = {
     Dalle2: new Dalle2(),
     Prodia: new Prodia(),
     ProdiaStableDiffusion: new ProdiaStableDiffusion(),
-    ProdiaStableDiffusionXL: new ProdiaStableDiffusionXL()
+    ProdiaStableDiffusionXL: new ProdiaStableDiffusionXL(),
+    StableDiffusionLite: new StableDiffusionLite(),
+    StableDiffusionPlus: new StableDiffusionPlus()
 };
 
 const models: { [key in keyof Providers]: string[] } = {

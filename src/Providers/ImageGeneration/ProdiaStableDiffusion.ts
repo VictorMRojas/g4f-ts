@@ -50,8 +50,6 @@ class ProdiaStableDiffusion {
             }
         }
 
-        console.log(data);
-
         return axios.post(this.url, data, { headers: headers })
         .then(async response => {
             return this.handleResponse(response.data);       

@@ -18,7 +18,7 @@ class Dalle2 {
             promptImprovement: false
         }
         this.need_slice_text = false;
-        this.working = true;
+        this.working = false;
     }
 
     /**
