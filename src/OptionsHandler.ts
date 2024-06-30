@@ -15,7 +15,7 @@ class OptionsHandler {
         if (typeof options !== 'object') throw new Error("Options must be a valid object.");
         if (options.provider && !Object.keys(providers).some(key => options.provider instanceof providers[key].constructor)) throw new Error("Provider option must be valid. Try { provider: (new G4F()).providers.GPT, ... }");
         if (options.provider && options.provider.type != "ChatCompletion") throw new Error("The provider type should be 'ChatCompletion'")
-        if (options.provider && options.model && !models[options.provider.name].some(model => model == options.model)) throw new Error("You need to include a model that is compatible with the selected provider.");
+        if (options.provider && options.model && !models[options.provider.name].some(model => model == options.model)) throw new Error("You need to include a model that is compatible with the selected provider.");        
         if (options.retry && typeof options.retry != "object") throw new Error("Retry option must be a object.");
         if (options.retry) {
             if (!options.retry.times) throw new Error("Times option must be provided.");
@@ -30,6 +30,13 @@ class OptionsHandler {
             if (typeof options.output !== 'function') throw new Error("Output option must be a function.");        
             if (typeof options.output("") !== 'string') throw new Error("Output option option must be a function returning a string.");
         }
+        if (options.conversationStyle) {
+            if (options.provider && options.provider.name != "Bing") throw new Error("Conversation style option is only supported by Bing provider.");
+            if (typeof options.conversationStyle !== 'string') throw new Error("Conversation style option must be a string.");
+            if (["creative", "balanced", "precise"].indexOf(options.conversationStyle) == -1) throw new Error("Conversation style option must be one of 'creative', 'balanced', or 'precise'.");
+        }
+        if (options.markdown && typeof options.markdown !== 'boolean') throw new Error("Markdown option must be a boolean.");
+        
         return true;
     }
 

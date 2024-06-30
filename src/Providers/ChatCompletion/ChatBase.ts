@@ -22,7 +22,7 @@ class ChatBase {
         this.supports_message_history = true;
         this.need_slice_text = true;
         this.wrong_responses = ["support@chatbase.co"];
-        this.working = true;
+        this.working = false;
     }
 
     /**

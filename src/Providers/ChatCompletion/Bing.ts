@@ -37,8 +37,8 @@ class Bing {
           
         const data = {
             messages,
-            "conversation_style": "Balanced",
-            "markdown": false,
+            "conversation_style": options?.conversationStyle || "Balanced",
+            "markdown": options?.markdown || false,
             "stream": options?.stream || false,
             "model": "Bing"
         };

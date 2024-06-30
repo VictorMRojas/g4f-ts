@@ -350,6 +350,8 @@ your heart feel
 | `retry.times` | number | Specify the number of times the fetch operation will execute as a limit. |
 | `retry.condition` | function: boolean | Callback function that receives a string as the text for each instance the fetch operation is running. This function should return a boolean. |
 | `output`      | function: string | Callback function that receives a string as the final text response so you can edit it. This function executes after the retry fetch operations. This function should return a string. |
+| `conversationStyle` | string | Choose the conversation style to use. This option is only supported by the Bing provider. |
+| `markdown` | boolean | Determine if the response should be in markdown format or not. |
 | `stream` | boolean | Determine if the data should be streamed in parts or not. |
 | `chunkSize` | number | Determine the size of chunks streamed. This only works if the stream option is true and if using retry or condition. |
 
@@ -359,8 +361,8 @@ your heart feel
 | Website | Provider | GPT-3.5 | GPT-4 | Stream | Status |
 | ------  | -------  | ------- | ----- | ------ | ------ |
 | [GPT.ai](https://chatgpt.ai) | `g4f.providers.GPT` | ✔️ | ✔️ | ❌ | ![Active](https://img.shields.io/badge/Active-brightgreen) |
-| [chatbase.co](https://www.chatbase.co) | `g4f.providers.ChatBase` | ✔️ | ❌ | ✔️ | ![Active](https://img.shields.io/badge/Active-brightgreen) |
-| [bing.com](https://bing.com/chat) | `g4f.providers.Bing` | ❌ | ✔️ | ✔️ | ![Active](https://img.shields.io/badge/Inactive-red) |
+| [chatbase.co](https://www.chatbase.co) | `g4f.providers.ChatBase` | ✔️ | ❌ | ✔️ | ![Inactive](https://img.shields.io/badge/Inactive-red) |
+| [bing.com](https://bing.com/chat) | `g4f.providers.Bing` | ❌ | ✔️ | ✔️ | ![Active](https://img.shields.io/badge/Active-brightgreen) |
 
 <a id="models"></a>
 
